@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109303937-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', 'UA-109303937-1');
+  </script>
+	<title>Speeder - The fastest multiplayer Game !</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Get to the finish line">
+	<meta property="og:title" content="Speeder - The fastest multiplayer Game !">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:image" content="">
+	<meta property="og:description" content="Get to the finish line">
+	<meta property="og:site_name" content="Speeder - The fastest multiplayer Game !">
+	<meta property="og:locale" content="fr_FR">
+	<link rel="shortcut icon" href="">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>Speeder - The fastest multiplayer Game !</h1>
+  <div class="mainGame">
+    <canvas id="game" width="1400" height="800"></canvas>
+  </div>
+  <form class="seedForm">
+    <div id="seedInput">
+      <label for="seed">Seed :</label>
+      <input type="text" value = "This is a seed" placeholder="This is a seed"id="seed" name="seed">
+    </div>
+    <div id="spacingInput">
+      <label for="spacing">Starting point :</label>
+      <input type="text" value="200" placeholder="Exemple: 200" id="spacing" name="spacing">
+    </div>
+    <div id="numberInput">
+      <label for="numberElements">Nb elements :</label>
+      <input type="text" value="200" placeholder="Exemple: 200" id="numberElements" name="numberElements">
+    </div>
+    <div id="numberSpacingInput">
+      <label for="numberSpacing">Nb spacing :</label>
+      <input type="text" value="500" placeholder="Exemple: 500" id="numberSpacing" name="numberSpacing">
+    </div>
+    <div id="seedButton">
+      <span>Generate !</span>
+    </div>
+  </form>
+  <div id="autoScroll">
+    <span>AUTO SCROLL</span>
+  </div>
+  <script src="js/trapGenerator.js"></script>
+  <script src="js/seedGenerator.js"></script>
+  <script src="js/test.js"></script>
+</body>
+</html>
