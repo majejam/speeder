@@ -9,28 +9,27 @@
   gtag('js', new Date());
   gtag('config', 'UA-109303937-1');
   </script>
-	<title>Speeder - The fastest multiplayer Game !</title>
+	<title>Speeder </title>
 	<meta charset="utf-8">
 	<meta name="description" content="Get to the finish line">
-	<meta property="og:title" content="Speeder - The fastest multiplayer Game !">
+	<meta property="og:title" content="Speeder ">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="">
 	<meta property="og:image" content="">
 	<meta property="og:description" content="Get to the finish line">
-	<meta property="og:site_name" content="Speeder - The fastest multiplayer Game !">
+	<meta property="og:site_name" content="Speeder">
 	<meta property="og:locale" content="fr_FR">
 	<link rel="shortcut icon" href="">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1>Speeder - The fastest multiplayer Game !</h1>
   <div class="mainGame">
-    <canvas id="game" width="1400" height="800"></canvas>
+    <canvas id="game"></canvas>
   </div>
   <form class="seedForm">
     <div id="seedInput">
-      <label for="seed">Seed :</label>
+      <label for="seed">Seed : (enter your seed here)</label>
       <input type="text" value = "This is a seed" placeholder="This is a seed"id="seed" name="seed">
     </div>
     <div id="spacingInput">
@@ -49,11 +48,24 @@
       <span>Generate !</span>
     </div>
   </form>
-  <div id="autoScroll">
-    <span>AUTO SCROLL</span>
+  <div class="option">
+    <div id="autoScroll">
+      <span>AUTO SCROLL</span>
+    </div>
+    <form class="velocityForm">
+      <div id="seedInput">
+        <label id="velocityOutput" for="velocity">Speed :</label>
+        <input type="range" id="velocity" name="velocity" min="-50" max="50" value="10">
+      </div>
+    </form>
+    <div id="fpsInput">
+      <label for="fps">FPS :</label>
+      <input type="text" value="60" placeholder="Exemple: 60" id="fps" name="fps">
+    </div>
   </div>
   <script src="js/trapGenerator.js"></script>
   <script src="js/seedGenerator.js"></script>
-  <script src="js/test.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

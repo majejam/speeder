@@ -1,14 +1,17 @@
 let NUMBER_OF_TRAPS = parseInt(document.getElementById('numberElements').value);
 let autoRun = false;
+let VELOCITY = parseInt(document.getElementById('velocity').value);
+let FPS = 60;
 let traps = generateTraps();
 window.onload = function() {
 	game = document.getElementById('game');
 	ctx = game.getContext('2d');
+	initCanvasSize()
   document.getElementById('seedButton').addEventListener('click', function() {
-    traps = generateTraps();
+	resetCanvas();
+	traps = generateTraps();
   }, false);
   document.getElementById('autoScroll').addEventListener('click', function() {
-    console.log(autoRun)
     if(autoRun == false){
       autoRun = true;
       document.getElementById('autoScroll').style.borderColor = "#12fa21"
@@ -19,13 +22,33 @@ window.onload = function() {
     }
   }, false);
   setInterval(function(){
-    drawTraps();
-    if(autoRun == true){
-        trapsMouvement(-10,NUMBER_OF_TRAPS)
-    }
-
-},5);
-window.addEventListener("keydown", changeSpeed, true);
+	gameLoop();
+},1000 / FPS);
+window.addEventListener("keydown", keyManagement, true);
+window.addEventListener("keyup", resetVelocity, true);
+}
+function gameLoop(){
+	FPS = getFPS();
+	drawTraps();
+	velocityManager()
+	if(autoRun == true){
+			trapsMouvement(-VELOCITY,NUMBER_OF_TRAPS)
+	}
+}
+function initCanvasSize(){
+	game.width = screen.width;
+  game.height = screen.height;
+}
+function updateLevelSize(width,heigth){
+	initCanvasSize();
+}
+function velocityManager(){
+  VELOCITY = document.getElementById('velocity').value;
+  document.getElementById('velocityOutput').innerHTML = "Speed : "+ VELOCITY;
+}
+function getFPS(){
+  let fps = parseInt(document.getElementById('fps').value);
+	return fps;
 }
 function getSeedLevel(){
   let seed = document.getElementById('seed').value;
@@ -56,63 +79,57 @@ function generateTraps(){
   }
   return array;
 }
-
-function changeSpeed(e) {
+function resetCanvas(){
+	ctx.fillStyle =  'rgba(23, 41, 58,1)';
+	ctx.fillRect(0, 0, game.width, game.height);
+}
+function playerMouvement(acceleration){
+	if(player.posY+player.size < (game.heigth) || player.posY > 0){
+			player.velocity -=  acceleration;
+			player.posY = player.posY + player.velocity;
+		}
+}
+function resetVelocity(e){
+	e = e || window.event;
+	switch (e.keyCode) {
+			case 38:   // arrow up key
+			case 90: //z key
+					break;
+			case 40: // arrow down key
+			case 83:
+					break;
+	}
+}
+function keyManagement(e) {
     e = e || window.event;
     switch (e.keyCode) {
         case 38:   // arrow up key
 				case 90: //z key
-          trapsMouvement(-10,NUMBER_OF_TRAPS)
+						playerMouvement(1);
+
             break;
         case 40: // arrow down key
 				case 83:
-          trapsMouvement(10,NUMBER_OF_TRAPS)
+						playerMouvement(-1);
             break;
         case 37:
            autoRun = true;
-            console.log(traps)
            break;
         case 39:
           autoRun = false;
           break;
-        default: return;
+				case 13:
+	        traps = generateTraps();
+	        break;
+        default:
+				  break;
     }
 }
-function drawTraps(){
-  ctx.clearRect(0, 0, game.width, game.height);
-  ctx.fillStyle =  "#09046a";
-  ctx.fillRect(0, 0, game.width, game.height);
+function drawTraps(width,heigth){
+	ctx.fillStyle = 'rgba(23, 41, 58, 0.12)';
+	ctx.fillRect(0, 0, game.width, game.height);
   for(let i = 0; i < traps.length; i++){
     ctx.fillStyle =  traps[i].color;
     ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size);
-  }
-}
-
-
-function Trap(startingPoint,spacing){
-  this.type = Math.floor(Math.random()*4);
-  this.posX = startingPoint +  parseInt(Math.random()*(spacing))
-  this.posY = parseInt(Math.random()*(game.height - 100));
-  //if bonus
-  if(this.type == 0){
-    this.size = parseInt(20 + Math.random()*50);
-    this.width = this.size;
-    this.color = "#ff6501";
-  }
-  if(this.type == 1){
-    this.size = parseInt(20 + Math.random()*500);
-    this.width = parseInt(10 + Math.random()*10);
-    this.color = "#ff5041";
-  }
-  if(this.type == 2){
-    this.size = parseInt(20 + Math.random()*500);
-    this.width = parseInt(10 + Math.random()*10);
-    this.color = "#12fa21";
-  }
-
-}
-function trapsMouvement(direction, elements){
-  for(let i = 0; i < traps.length;i++){
-     traps[i].posX = traps[i].posX + direction;
   }
 }
