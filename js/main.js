@@ -25,14 +25,22 @@ window.onload = function() {
 	gameLoop();
 },1000 / FPS);
 window.addEventListener("keydown", keyManagement, true);
-window.addEventListener("keyup", resetVelocity, true);
+window.addEventListener("keydown", function (e) {
+    Player.keys[e.keyCode] = true;
+});
+window.addEventListener("keyup", function (e) {
+    Player.keys[e.keyCode] = false;
+});
 }
 function gameLoop(){
 	FPS = getFPS();
 	drawTraps();
-	velocityManager()
+	playerMouvement();
+	drawPlayer();
+	detectTrap();
+	velocityManager();
 	if(autoRun == true){
-			trapsMouvement(-VELOCITY,NUMBER_OF_TRAPS)
+			trapsMouvement(-VELOCITY,NUMBER_OF_TRAPS);
 	}
 }
 function initCanvasSize(){
@@ -83,12 +91,13 @@ function resetCanvas(){
 	ctx.fillStyle =  'rgba(23, 41, 58,1)';
 	ctx.fillRect(0, 0, game.width, game.height);
 }
+/*
 function playerMouvement(acceleration){
 	if(player.posY+player.size < (game.heigth) || player.posY > 0){
 			player.velocity -=  acceleration;
 			player.posY = player.posY + player.velocity;
 		}
-}
+}*/
 function resetVelocity(e){
 	e = e || window.event;
 	switch (e.keyCode) {
@@ -105,12 +114,9 @@ function keyManagement(e) {
     switch (e.keyCode) {
         case 38:   // arrow up key
 				case 90: //z key
-						playerMouvement(1);
-
             break;
         case 40: // arrow down key
 				case 83:
-						playerMouvement(-1);
             break;
         case 37:
            autoRun = true;
@@ -124,6 +130,17 @@ function keyManagement(e) {
         default:
 				  break;
     }
+}
+function detectTrap(){
+	for(let i = 0; i < traps.length; i++){
+		if( ( ( (Player.posX + Player.size) == (traps[i].posX)) &&((Player.posX + Player.size)<(traps[i].posX + traps[i].width)) ) && ((Player.posY + Player.size)<(traps[i].posY +traps[i].size)) && (Player.posY>traps[i].posY)){
+			if(traps[i].type == 2){
+				 VELOCITY = VELOCITY + 5
+
+				 console.log(VELOCITY)
+			}
+		}
+	}
 }
 function drawTraps(width,heigth){
 	ctx.fillStyle = 'rgba(23, 41, 58, 0.12)';
