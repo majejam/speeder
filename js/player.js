@@ -1,53 +1,44 @@
-let Player = {
-  posX: 150,
-  posY: 500,
-  width: 25,
-  size: 25,
-  color: '#FAF523',
-  velY: 0,
-  velX: 0,
-  speed: 8,
-  friction: 0.98,
-  keys: [],
-  mouvement: false,
+const Player = {}
+  Player.posX= 500;
+  Player.posY= 500;
+  Player.width= 25;
+  Player.size= 25;
+  Player.color= '#FAF523';
+  Player.velY= 0;
+  Player.velX= 0;
+  Player.speed= 0;
+  Player.friction= 0.95;
+  Player.keys= [];
+  Player.mouvement= true;
+  Player.life = 1
+  Player.isFinished = false
 
-
-}
 
 function playerMouvement(){
-  if (Player.keys[38]) {
-     if (Player.velY > -Player.speed) {
-         Player.velY--;
-     }
+  Player.speed *= Player.friction
+  Player.posY += Player.speed
+  if(VELOCITY > 10){
+    VELOCITY *= 0.98
+  }
+  if (Player.keys[38]  && Player.mouvement ) {
+    Player.speed += -0.5*1.2
  }
 
- if (Player.keys[40]) {
-     if (Player.velY < Player.speed) {
-         Player.velY++;
-     }
+ if (Player.keys[40] && Player.mouvement) {
+   Player.speed += 0.5*1.2
  }
 
-  Player.velY *= Player.friction;
-  Player.posY += Player.velY;
-
-  Player.velX *= Player.friction;
-  Player.posX += Player.velX;
-  if (Player.posX >= screen.width) {
-      Player.posX = screen.width;
-  } else if (Player.posX <= 5) {
-      Player.posX = 5;
+  if (Player.posY + 170 > screen.height) {
+    Player.posY = 0
   }
-  if ( Player.posY > screen.heigth) {
-        Player.posY =  screen.heigth;
-  } else if (  Player.posY <= 5) {
-        Player.posY = 5;
+  if (Player.posY  < 0) {
+    Player.posY = windowHeight - Player.size
   }
-
 }
 
  function drawPlayer(){
   ctx.fillStyle =  Player.color;
-	ctx.fillRect(500, Player.posY, Player.width, Player.size);
+	ctx.fillRect(Player.posX, Player.posY, Player.width, Player.size);
 }
 /* currently working on this
 function playerTrail(){

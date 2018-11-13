@@ -9,7 +9,7 @@
   gtag('js', new Date());
   gtag('config', 'UA-109303937-1');
   </script>
-	<title>Speeder </title>
+	<title>Speeder</title>
 	<meta charset="utf-8">
 	<meta name="description" content="Get to the finish line">
 	<meta property="og:title" content="Speeder ">
@@ -25,32 +25,37 @@
 </head>
 <body>
   <div class="mainGame">
-    <canvas id="game"></canvas>
+    <canvas id="game" class="js-canvas"></canvas>
   </div>
   <form class="seedForm">
     <div id="seedInput">
       <label for="seed">Seed : (enter your seed here)</label>
-      <input type="text" value = "This is a seed" placeholder="This is a seed"id="seed" name="seed">
+      <input type="text" value = "test" placeholder="test"id="seed" name="seed">
     </div>
-    <div id="spacingInput">
-      <label for="spacing">Starting point :</label>
-      <input type="text" value="200" placeholder="Exemple: 200" id="spacing" name="spacing">
+    <div id="sizeInput">
+      <label for="size">Starting point :</label>
+      <input type="text" value="1" placeholder="Exemple: 1,2,3" id="size" name="size">
     </div>
     <div id="numberInput">
       <label for="numberElements">Nb elements :</label>
-      <input type="text" value="200" placeholder="Exemple: 200" id="numberElements" name="numberElements">
+      <input type="text" value="10" placeholder="Exemple: 10" id="numberElements" name="numberElements">
     </div>
     <div id="numberSpacingInput">
       <label for="numberSpacing">Nb spacing :</label>
       <input type="text" value="500" placeholder="Exemple: 500" id="numberSpacing" name="numberSpacing">
     </div>
-    <div id="seedButton">
-      <span>Generate !</span>
+    <div class="containerSelection">
+      <div id="manualGenerate">
+        <span>Generate !</span>
+      </div>
+      <div id="autoGenerate" class="unselected">
+        <span>auto</span>
+      </div>
     </div>
   </form>
   <div class="option">
-    <div id="autoScroll">
-      <span>AUTO SCROLL</span>
+    <div id="Play">
+      <span>Play</span>
     </div>
     <form class="velocityForm">
       <div id="seedInput">

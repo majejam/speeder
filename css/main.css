@@ -29,15 +29,21 @@ canvas{
 input{
   width:100%;
 }
-#seedButton{
+#manualGenerate{
   padding-left: 5px;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 auto;
+}
+#Play{
+  padding: 15px;
   cursor: pointer;
   user-select: none;
   margin: 0 auto;
 }
 .option{
   position: fixed;
-  top:320px;
+  top:350px;
   left:10px;
   display: flex;
   justify-content: space-between;
@@ -46,8 +52,16 @@ input{
   border-radius: 5px;
   padding: 10px 5px 10px 5px;
   background-color: white;
+
 }
-#autoScroll{
+.containerSelection{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 50px;
+}
+#manualGenerate{
   border: 1px solid black;
   padding: 10px 5px 10px 5px;
   background-color: white;
@@ -55,6 +69,21 @@ input{
   user-select: none;
   width: 30%;
   text-align: center;
+}
+#autoGenerate{
+  padding: 10px 5px 10px 5px;
+  background-color: white;
+  cursor: pointer;
+  user-select: none;
+  width: 30%;
+  text-align: center;
+  transition: 1s linear;
+}
+.unselected{
+  border: 2px solid red;
+}
+.selected{
+  border: 2px solid green;
 }
 .velocityForm{
   width: 65%;;
