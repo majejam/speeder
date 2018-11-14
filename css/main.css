@@ -1,10 +1,207 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600');
+@font-face {
+  font-family: "Borg";
+  src: url("../font/Borg.ttf") format("truetype");
+}
+
 body{
   font-family: 'Poppins', sans-serif;
   margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
+
+/* MENU CSS*/
+.option-menu-button{
+  position: fixed;
+  z-index: 12;
+  top:30px;
+  right: 50px;
+  width: 40px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: nowrap column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu-bar{
+  width: 32px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  transform-origin: center;
+}
+.button-open-animation .menu-bar-1{animation-name: cross-animation-top;}
+.button-open-animation .menu-bar-2{animation-name: cross-animation-middle;}
+.button-open-animation .menu-bar-3{animation-name: cross-animation-bottom;}
+.button-close-animation .menu-bar-1{animation-name: cross-animation-top-close;}
+.button-close-animation .menu-bar-2{animation-name: cross-animation-middle-close;}
+.button-close-animation .menu-bar-3{animation-name: cross-animation-bottom-close;}
+@keyframes cross-animation-top-close{
+  0% {transform: rotate(45deg) translate(0px, 15px);}
+  100% {transform: rotate(0deg) translate(0px, 0px);}
+}
+@keyframes cross-animation-middle-close{
+  0% {
+    transform:  translate(-40px, 0px);
+    opacity: 0;
+  }
+  100% {
+    transform:  translate(0px, 0px);
+    opacity: 1;
+  }
+}
+@keyframes cross-animation-bottom-close{
+  0% {transform: rotate(-45deg) translate(0, -15px);}
+  100% {transform: rotate(0deg) translate(0, 0px);}
+}
+
+@keyframes cross-animation-top{
+  0% {transform: rotate(0deg) translate(0px, 0px);}
+  100% {transform: rotate(45deg) translate(0px, 15px);}
+}
+@keyframes cross-animation-middle{
+  0% {
+    transform:  translate(0px, 0px);
+    opacity: 1;
+  }
+  100% {
+    transform:  translate(-40px, 0px);
+    opacity: 0;
+  }
+}
+@keyframes cross-animation-bottom{
+  0% {transform: rotate(0deg) translate(0, 0);}
+  100% {transform: rotate(-45deg) translate(0, -15px);}
+}
+
+.option-menu-container{
+  position: absolute;
+  z-index: 10;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(23, 41, 48, 1);
+  transition-timing-function: ease-in;
+  transition-duration: 0.5s;
+  transition-property: transform;
+  transform: translateY(-100vh);
+  will-change: transform;
+  overflow: hidden;
+}
+
+.hidding-bar-effect{
+  position: absolute;
+  top:0;
+  width: 25%;
+  height: 100%;
+  background-color: rgba(23, 41, 48, 1);
+  z-index: 11;
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.menu-container-bar-1{left:0;}
+.menu-container-bar-2{left:25%;}
+.menu-container-bar-3{left:50%;}
+.menu-container-bar-4{left:75%;}
+@keyframes bar-hide{
+  0% {transform: scaleX(1);}
+  50% {transform: scaleX(1);}
+  100% {transform: scaleX(0);}
+}
+.option-menu-container-selected{
+  transform: translateY(0);
+}
+.hidding-bar-effect-show{
+  animation-name: bar-hide;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.menu-main-image{
+  background-image: url('../img/astronaut.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  width: 50%;
+  height: 200%;
+  left:-200px;
+  bottom: -1150px;
+}
+.inner-menu-option-container{
+  position: absolute;
+  top:5%;
+  right: 10%;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 80%;
+  background-color: rgba(23, 41, 48, 0.5);
+}
+.option-menu-container span{
+  color: white;
+  font-family: "Borg";
+  font-size: 8vw;
+}
+
+.star-container{
+  width: 100%;
+  height: 100%;
+}
+.single-star-element{
+  border-radius: 100%;
+}
+
+.single-star-element{
+  position: absolute;
+  border-radius: 100%;
+  background-color: rgb(255,255,229);
+  transition-property: transform;
+  transform: scale(0);
+  transition-duration: 3s;
+  transition-delay: 0s;
+  transition-timing-function: ease-in;
+  will-change: transform;
+}
+
+.single-star-element-show{
+  transform: scale(1);
+}
+
+.shining-star{
+  animation-name: shining-star-animation;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-duration: 8s;
+}
+
+@keyframes  shining-star-animation{
+  0% {transform: scale(1);}
+  33% {transform: scale(0.5);}
+  66% {transform: scale(1.1);}
+  100% {transform: scale(1);}
+}
+
+
+
+/*Revise css*/
+
 .mainGame{
-    position: relative;
+    position: absolute;
+    z-index: -1;
+    top:0;
+    left:0;
     overflow: hidden;
     width: 100%;
     height: 100vh;

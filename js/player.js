@@ -12,6 +12,7 @@ const Player = {}
   Player.mouvement= true;
   Player.life = 1
   Player.isFinished = false
+  Player.score = 0 
 
 
 function playerMouvement(){
