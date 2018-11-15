@@ -12,14 +12,15 @@ const Player = {}
   Player.mouvement= true;
   Player.life = 1
   Player.isFinished = false
-  Player.score = 0 
-
+  Player.score = 0
+  Player.trail_color = '#341093'
+  Player.trail_size = 20
 
 function playerMouvement(){
   Player.speed *= Player.friction
   Player.posY += Player.speed
   if(VELOCITY > 10){
-    VELOCITY *= 0.98
+    VELOCITY *= 0.99
   }
   if (Player.keys[38]  && Player.mouvement ) {
     Player.speed += -0.5*1.2
@@ -37,10 +38,23 @@ function playerMouvement(){
   }
 }
 
- function drawPlayer(){
+ function drawPlayer(curve,curve_speed){
+  curve_speed = -Player.speed * 3
+  curve += curve_speed + (Player.posY+Player.size/2)
+  console.log(VELOCITY)
   ctx.fillStyle =  Player.color;
 	ctx.fillRect(Player.posX, Player.posY, Player.width, Player.size);
+  ctx.beginPath();
+  ctx.lineWidth   = 20       // Largeur de la ligne
+  const gradient = ctx.createLinearGradient(Player.posX - ((Player.trail_size*VELOCITY)/1.5), 2000, 500, 2000) // x1, y1, x2, y2
+  gradient.addColorStop(0, 'rgba(105, 206, 205,0)')    // Couleur de départ
+  gradient.addColorStop(1, 'rgba(105, 206, 205,1)') // Couleur de arrivée
+  ctx.strokeStyle = gradient
+  ctx.moveTo(Player.posX, (Player.posY+Player.size/2) )
+  ctx.quadraticCurveTo(Player.posX -((Player.trail_size*VELOCITY)/4), (Player.posY+Player.size/2) , Player.posX - ((Player.trail_size*VELOCITY)/1.5), curve);
+  ctx.stroke();
 }
+
 /* currently working on this
 function playerTrail(){
 	let playerClone = new Array()

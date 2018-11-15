@@ -1,6 +1,6 @@
 let NUMBER_OF_TRAPS = parseInt(document.getElementById('numberElements').value)
 let autoRun = false
-let VELOCITY = parseInt(document.getElementById('velocity').value)
+let VELOCITY = 0
 let FPS = 60
 let numberTrap = 0
 const $canvas = document.querySelector('.js-canvas')
@@ -10,6 +10,8 @@ let windowWidth = $canvas.width
 let windowHeight = $canvas.height
 let autoGenerate = false
 let debug = false
+let curve = 0
+let curve_speed = 0
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
@@ -54,7 +56,6 @@ window.addEventListener("keyup", function (e) {
 function resetLevel(){
 	resetCanvas()
 	traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
-	VELOCITY = 10
 }
 
 function resetPlayer(){
@@ -62,12 +63,12 @@ function resetPlayer(){
 	Player.life = 1
 	Player.isFinished = false
 	Player.score = 0
+	VELOCITY = 10
 }
 
 
 function gameLoop(){
-	FPS = getFPS()
-	drawAllElements()
+	drawAllElements(curve, curve_speed)
   trapDetection()
 	playerMouvement()
   playerLifeHandler()
@@ -86,14 +87,6 @@ function initCanvasSize(){
 
 function updateLevelSize(width,heigth){
 	initCanvasSize()
-}
-function velocityManager(){
-  VELOCITY = document.getElementById('velocity').value
-  document.getElementById('velocityOutput').innerHTML = "Speed : "+ VELOCITY
-}
-function getFPS(){
-  let fps = parseInt(document.getElementById('fps').value)
-	return fps
 }
 function getSeedLevel(){
   let seed = document.getElementById('seed').value
@@ -233,10 +226,10 @@ function drawPoints(){
 	ctx.fillText('Score : ' + Player.score, game.width-500,100)
 }
 
-function drawAllElements(){
+function drawAllElements(curve, curve_speed){
 	 drawTraps()
 	 drawPoints()
-	 drawPlayer()
+	 drawPlayer(curve,curve_speed)
 	 drawPlayerDebug()
 }
 
