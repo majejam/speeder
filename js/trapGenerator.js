@@ -38,7 +38,8 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
     this.width = 50;
     this.color = "#fffa21";
   }
-  this.posX = startingPoint + this.width +  parseInt(Math.random()*(spacing))
+  this.posX = startingPoint + this.width + parseInt(-spacing/2 + Math.random()*(spacing))
+  console.log('x : ' + this.posX)
 }
 function trapsMouvement(direction, speed){
   for(let i = 0; i < traps.length;i++){

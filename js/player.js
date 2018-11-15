@@ -50,7 +50,7 @@ function playerMouvement(){
   gradient.addColorStop(1, 'rgba(105, 206, 205,1)') // Couleur de arrivée
   ctx.strokeStyle = gradient
   ctx.moveTo(Player.posX, (Player.posY+Player.size/2) )
-  ctx.quadraticCurveTo(Player.posX -((Player.trail_size*VELOCITY)/4), (Player.posY+Player.size/2) , Player.posX - ((Player.trail_size*VELOCITY)/1.5), curve);
+  ctx.quadraticCurveTo(Player.posX -((Player.trail_size*VELOCITY)/4), (Player.posY+Player.size/2) , Player.posX - ((Player.trail_size*VELOCITY)/1.3), curve);
   ctx.stroke();
 }
 

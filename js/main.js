@@ -11,8 +11,7 @@ let autoGenerate = false
 let debug = false
 let curve = 0
 let curve_speed = 0
-let attractionSpeedY = 1;
-let attractionSpeedX = 1;
+
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
@@ -25,9 +24,13 @@ function Particle(x,y){
   this.posY= y;
   this.radius= 5;
   this.color= '#FAF523';
+	this.originX = x
+	this.originY = y
+	this.attractionSpeedX = 1
+	this.attractionSpeedY = 1
+	this.pointsToGive = Math.ceil(Math.random()*20)
 }
 let particlesArray = new Array()
-particlesArray.push(new Particle(500, 0))
 window.addEventListener('resize', resize)
 resize()
 
@@ -169,13 +172,15 @@ function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
   let numberElements = nbTraps
   let spacing = spacingTrap
   let array = new Array()
-  startingPoint += 1000
   array.push(new Trap(500, 0, numberElements+1, 0, true, false))
   for(let i = 0;  i < numberElements; i++){
+		 startingPoint += 500
+		console.log(startingPoint)
     array.push(new Trap(startingPoint, spacing, i,sizeOfTraps, false, false))
     startingPoint = startingPoint + spacing
   }
-  array.push(new Trap(startingPoint+500,spacing,numberElements+1, 0, false,true))
+
+  array.push(new Trap(startingPoint+1000,spacing,numberElements+1, 0, false,true))
   return array
 }
 
@@ -239,41 +244,42 @@ function drawAllElements(curve, curve_speed){
 	 drawPoints()
 	 drawPlayer(curve,curve_speed)
 	 drawPlayerDebug()
-	 drawParticle(Particle, game.width-500, 100)
+	 drawParticle(particlesArray, game.width - 500, 100)
 }
 
-function drawParticle(Particle, posx, posy){
-  if(Particle.posY > posy){
-    if(Particle.posY > (posy + 200)){
-      attractionSpeedY *=  1.1
-      Particle.posY += -attractionSpeedY
-    }
-    else{
-      attractionSpeedY *=  0.965
-      Particle.posY += -attractionSpeedY
-      if(attractionSpeedY < 1){
-        attractionSpeedY = 1
-      }
-    }
-  }
-  if(Particle.posX < posx){
-    if(Particle.posX < (posx  - 200)){
-      attractionSpeedX *=  1.2
-      Particle.posX += attractionSpeedX
-    }
-    else{
-      attractionSpeedX *=  0.965
-      Particle.posX += attractionSpeedX
-      if(attractionSpeedX < 1){
-        attractionSpeedX = 1
-      }
-    }
-		console.log(attractionSpeedX, attractionSpeedY)
-  }
-  ctx.beginPath();
-  ctx.arc(Particle.posX, Particle.posY, Particle.radius, 0, 2 * Math.PI, false);
-  ctx.fillStyle = Particle.color;
-  ctx.fill();
+function drawParticle(Particles, posx, posy){
+	for(let i = 0; i < Particles.length; i++){
+		if(Particles[i].attractionSpeedY > 0.2 && Particles[i].attractionSpeedX > 0.2){
+			if( Particles[i].posY > posy - (posy - Particles[i].originY)/2){
+					Particles[i].attractionSpeedY *=  1.05
+					Particles[i].posY += -Particles[i].attractionSpeedY
+			}
+			else{
+				Particles[i].attractionSpeedY *=  0.95
+				Particles[i].posY += -Particles[i].attractionSpeedY
+			}
+			if( Particles[i].posX < posx - (posx -Particles[i].originX)/2){
+					Particles[i].attractionSpeedX *=  1.05
+					Particles[i].posX += Particles[i].attractionSpeedX
+				}
+				else{
+					Particles[i].attractionSpeedX *=  0.95
+					Particles[i].posX += Particles[i].attractionSpeedX
+				}
+			ctx.beginPath();
+			ctx.arc( Particles[i].posX,  Particles[i].posY,  Particles[i].radius, 0, 2 * Math.PI, false);
+			ctx.fillStyle =  Particles[i].color;
+			ctx.fill();
+		}
+		else{
+			if(Particles[i].pointsToGive > 0){
+				console.log(Particles[i].pointsToGive)
+				Particles[i].pointsToGive--
+				Player.score++
+			}
+		}
+	}
+
 }
 //Calculate the overall difficulty of the level
 function getDifficulty(){
@@ -346,7 +352,7 @@ function trapDetection(){
           Player.isFinished = true
         }
 				if(traps[i].type == 0){
-					Player.score++
+					particlesArray.push(new Particle(traps[i].posX,traps[i].posY))
 					traps[i].posY = 10000
 				}
         console.log('contact with : ' + traps[i].number)
