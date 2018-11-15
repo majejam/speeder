@@ -1,7 +1,6 @@
 let NUMBER_OF_TRAPS = parseInt(document.getElementById('numberElements').value)
 let autoRun = false
 let VELOCITY = 0
-let FPS = 60
 let numberTrap = 0
 const $canvas = document.querySelector('.js-canvas')
 const ctx = $canvas.getContext('2d')
@@ -12,6 +11,8 @@ let autoGenerate = false
 let debug = false
 let curve = 0
 let curve_speed = 0
+let attractionSpeedY = 1;
+let attractionSpeedX = 1;
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
@@ -19,7 +20,14 @@ const resize = () => {
   $canvas.width = windowWidth
   $canvas.height = windowHeight
 }
-
+function Particle(x,y){
+  this.posX= x;
+  this.posY= y;
+  this.radius= 5;
+  this.color= '#FAF523';
+}
+let particlesArray = new Array()
+particlesArray.push(new Particle(500, 0))
 window.addEventListener('resize', resize)
 resize()
 
@@ -231,9 +239,42 @@ function drawAllElements(curve, curve_speed){
 	 drawPoints()
 	 drawPlayer(curve,curve_speed)
 	 drawPlayerDebug()
+	 drawParticle(Particle, game.width-500, 100)
 }
 
-
+function drawParticle(Particle, posx, posy){
+  if(Particle.posY > posy){
+    if(Particle.posY > (posy + 200)){
+      attractionSpeedY *=  1.1
+      Particle.posY += -attractionSpeedY
+    }
+    else{
+      attractionSpeedY *=  0.965
+      Particle.posY += -attractionSpeedY
+      if(attractionSpeedY < 1){
+        attractionSpeedY = 1
+      }
+    }
+  }
+  if(Particle.posX < posx){
+    if(Particle.posX < (posx  - 200)){
+      attractionSpeedX *=  1.2
+      Particle.posX += attractionSpeedX
+    }
+    else{
+      attractionSpeedX *=  0.965
+      Particle.posX += attractionSpeedX
+      if(attractionSpeedX < 1){
+        attractionSpeedX = 1
+      }
+    }
+		console.log(attractionSpeedX, attractionSpeedY)
+  }
+  ctx.beginPath();
+  ctx.arc(Particle.posX, Particle.posY, Particle.radius, 0, 2 * Math.PI, false);
+  ctx.fillStyle = Particle.color;
+  ctx.fill();
+}
 //Calculate the overall difficulty of the level
 function getDifficulty(){
   let difficulty = (difficultyOfSize() + difficultyNumberOfElements() + difficultySpacingAverage())
@@ -314,7 +355,6 @@ function trapDetection(){
     }
   }
 }
-
 
 function playerLifeHandler(){
   if(Player.life <= 0){

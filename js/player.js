@@ -41,7 +41,6 @@ function playerMouvement(){
  function drawPlayer(curve,curve_speed){
   curve_speed = -Player.speed * 3
   curve += curve_speed + (Player.posY+Player.size/2)
-  console.log(VELOCITY)
   ctx.fillStyle =  Player.color;
 	ctx.fillRect(Player.posX, Player.posY, Player.width, Player.size);
   ctx.beginPath();
