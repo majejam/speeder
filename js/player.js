@@ -1,6 +1,6 @@
 const Player = {}
   Player.posX= 500;
-  Player.posY= 500;
+  Player.posY= 400;
   Player.width= 25;
   Player.size= 25;
   Player.color= '#454554';
@@ -12,11 +12,14 @@ const Player = {}
   Player.mouvement= true;
   Player.life = 1
   Player.isFinished = false
-  Player.score = 0
+  Player.xp = 0
   Player.trail_color = '#341093'
   Player.trail_size = 20
   Player.bonus = 2
   Player.bonusNumber = 6
+  Player.rotation = 1
+  Player.directionPlayer = true
+  Player.directionDeath = 0
 
 function playerMouvement(){
   Player.speed *= Player.friction
@@ -32,7 +35,7 @@ function playerMouvement(){
    Player.speed += 0.5*1.2
  }
  if (Player.keys[32] ) {
-   if(!keyPressed && Player.bonus != 2){
+   if(!keyPressed && Player.bonus != 2 ){
       playerShoot(Player,0)
       keyPressed = true
    }
@@ -40,13 +43,13 @@ function playerMouvement(){
      for(let i = 0; i <Player.bonusNumber; i++){
       playerShoot(Player, (Player.bonusNumber/2 - i))
      }
-      keyPressed = false
+      keyPressed = true
    }
 }
-  if (Player.posY + Player.size > game.height) {
+  if (Player.posY + Player.size > game.height && Player.life != 0) {
     Player.posY = 1
   }
-  if (Player.posY  < 0) {
+  if (Player.posY  < 0 && Player.life != 0) {
     Player.posY =  game.height - Player.size-1
   }
 }
@@ -68,8 +71,8 @@ function playerMouvement(){
   ctx.fillStyle =  Player.color;
   ctx.strokeStyle =  "#aa7870";
   ctx.translate(Player.posX + Player.size /2, Player.posY + Player.size /2);
-  ctx.rotate(Player.speed*1.5/180);
-  ctx.translate( -Player.posX-Player.size/2, -Player.posY-Player.size/2  );
+  ctx.rotate(Player.rotation*Player.speed*1.5/180);
+  ctx.translate( -Player.posX-Player.size/2, -Player.posY-Player.size/2);
   //ctx.fillRect(Player.posX, Player.posY, Player.width, Player.size);
   ctx.lineWidth   = 2
   ctx.moveTo(Player.posX, Player.posY);

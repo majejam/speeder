@@ -11,7 +11,55 @@ body{
   height: 100vh;
   overflow: hidden;
 }
-
+.menu-container{
+  position: absolute;
+  z-index: 15;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(23, 41, 48, 1);
+  transition-timing-function: ease-in;
+  transition-duration: 0.6s;
+  transition-property: transform;
+  transform: translateX(0%);
+  will-change: transform;
+  overflow: hidden;
+}
+.menu-container-selected{
+  transform: translateX(0);
+}
+.menu-container-unselected{
+  transform: translateX(-100%);
+}
+.inner-menu-container{
+  position: absolute;
+  top:5%;
+  right: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 80%;
+  background-color: rgba(23, 41, 48, 0.5);
+}
+.menu-main-image{
+  background-image: url('../img/astronaut.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  width: 50%;
+  height: 200%;
+  left:-200px;
+  bottom: -1150px;
+}
+.play-button{
+  color: white;
+  font-family: "Borg";
+  font-size: 8vw;
+  cursor: pointer;
+}
 /* MENU CSS*/
 .option-menu-button{
   position: fixed;
@@ -128,7 +176,7 @@ body{
   animation-fill-mode: forwards;
 }
 
-.menu-main-image{
+.option-main-image{
   background-image: url('../img/astronaut.png');
   background-repeat: no-repeat;
   background-position: center;
@@ -144,7 +192,9 @@ body{
   top:5%;
   right: 10%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: column nowrap;
   width: 50%;
   height: 80%;
   background-color: rgba(23, 41, 48, 0.5);
@@ -154,7 +204,12 @@ body{
   font-family: "Borg";
   font-size: 8vw;
 }
-
+.return-home{
+  color: white;
+  font-family: "Borg";
+  font-size: 5vw;
+  cursor: pointer;
+}
 .star-container{
   width: 100%;
   height: 100%;

@@ -14,6 +14,7 @@ let curve_speed = 0
 let arrayLaser = new Array()
 let keyPressed = false
 let cooldown = false
+let playingState = true
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
@@ -39,8 +40,10 @@ resize()
 let traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
 
 const loop = () => {
-  window.requestAnimationFrame(loop)
-	gameLoop()
+      window.requestAnimationFrame(loop)
+  if(playingState){
+    gameLoop()
+  }
 }
 loop()
 
@@ -75,14 +78,18 @@ function resetPlayer(){
 	Player.mouvement = true
 	Player.life = 1
 	Player.isFinished = false
-	Player.score = 0
+  Player.directionDeath = 0
+  Player.directionPlayer = true
+  Player.posX= 500;
+  Player.posY= 400;
 	VELOCITY = 10
 }
 
 
 function gameLoop(){
 	drawAllElements(curve, curve_speed)
-  trapDetection()
+  trapDetectionPlayer()
+  trapDetectionLaser(traps, arrayLaser)
 	playerMouvement()
   playerLifeHandler()
   if(Player.isFinished){
@@ -111,6 +118,16 @@ function getSizeElement(){
 }
 function getNumberOfElement(){
   let numberElements = parseInt(document.getElementById('numberElements').value)
+  if(numberElements > 1000){
+    numberElements = 1000
+  }
+  if(numberElements < 0){
+    numberElements = 1
+  }
+  if( isNaN(numberElements) ){
+    numberElements = 1
+  }
+  setNumberOfElement(numberElements)
   return numberElements
 }
 function getNumberOfSpacing(){
@@ -266,14 +283,13 @@ function drawAsteroid(traps){
 	ctx.lineTo(traps.posX, traps.posY);
 	ctx.stroke();
 	ctx.fill();
-
 	ctx.restore()
 }
 function drawPoints(){
 	ctx.fillStyle =  traps[traps.length-1].color
 	ctx.fillText("FINISH",traps[traps.length-1].posX+50,game.height/2)
 	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,100)
-	ctx.fillText('Score : ' + Player.score, game.width-500,100)
+	ctx.fillText('xp : ' + Player.xp, game.width-500,100)
 }
 
 function drawAllElements(curve, curve_speed){
@@ -311,9 +327,8 @@ function drawParticle(Particles, posx, posy){
 		}
 		else{
 			if(Particles[i].pointsToGive > 0){
-				console.log(Particles[i].pointsToGive)
 				Particles[i].pointsToGive--
-				Player.score++
+				Player.xp++
 			}
 		}
 	}
@@ -376,7 +391,7 @@ function difficultyOfSize(){
 
 
 
-function trapDetection(){
+function trapDetectionPlayer(){
   for(let i = 1;  i < traps.length;  i++){
     if((traps[i].posX < Player.posX + Player.size) &&(traps[i].posX + traps[i].width > Player.posX + Player.size) && Player.life >= 0 ){
       if(((traps[i].posY + traps[i].size > (Player.posY)) && ((Player.posY) > traps[i].posY)) ||
@@ -386,6 +401,9 @@ function trapDetection(){
         }
         if(traps[i].type == 1){
           Player.life -= 1
+        }
+        if(Player.life == 0){
+          traps[i].posY = 9000
         }
         if(traps[i].type == 3){
           Player.isFinished = true
@@ -401,20 +419,18 @@ function trapDetection(){
 
 function playerLifeHandler(){
   if(Player.life <= 0){
-    VELOCITY = 0
-    Player.mouvement = false
-    Player.speed = 0
-    playerDeathHandler()
+    VELOCITY = 0.1
+    if(Player.speed && Player.directionPlayer){
+      Player.directionDeath = Player.speed
+      Player.directionPlayer = false
+    }
+    playerDeathHandler(Player.directionDeath)
   }
 }
 
-function playerDeathHandler(){
-  resetCanvas()
-  ctx.save()
-  ctx.font = "50px Poppins"
-  ctx.fillStyle = "#ffffff"
-  ctx.fillText("UR DEAD",600,game.height/2)
-  ctx.restore()
+function playerDeathHandler(directionDeath){
+  Player.speed = Player.directionDeath/2
+  Player.posX += 5
 }
 
 function finishLineHandler(){
