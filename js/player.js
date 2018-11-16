@@ -15,6 +15,8 @@ const Player = {}
   Player.score = 0
   Player.trail_color = '#341093'
   Player.trail_size = 20
+  Player.bonus = 2
+  Player.bonusNumber = 6
 
 function playerMouvement(){
   Player.speed *= Player.friction
@@ -29,7 +31,18 @@ function playerMouvement(){
  if (Player.keys[40] && Player.mouvement) {
    Player.speed += 0.5*1.2
  }
-
+ if (Player.keys[32] ) {
+   if(!keyPressed && Player.bonus != 2){
+      playerShoot(Player,0)
+      keyPressed = true
+   }
+   if(!keyPressed && Player.bonus == 2){
+     for(let i = 0; i <Player.bonusNumber; i++){
+      playerShoot(Player, (Player.bonusNumber/2 - i))
+     }
+      keyPressed = false
+   }
+}
   if (Player.posY + Player.size > game.height) {
     Player.posY = 1
   }

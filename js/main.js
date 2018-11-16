@@ -11,7 +11,9 @@ let autoGenerate = false
 let debug = false
 let curve = 0
 let curve_speed = 0
-
+let arrayLaser = new Array()
+let keyPressed = false
+let cooldown = false
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
@@ -175,7 +177,6 @@ function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
   array.push(new Trap(500, 0, numberElements+1, 0, true, false))
   for(let i = 0;  i < numberElements; i++){
 		 startingPoint += 500
-		console.log(startingPoint)
     array.push(new Trap(startingPoint, spacing, i,sizeOfTraps, false, false))
     startingPoint = startingPoint + spacing
   }
@@ -199,11 +200,14 @@ function keyManagement(e) {
         case 40: // arrow down key
 				case 83:
             break
-        case 37:
+        case 37: //left
            autoRun = true
            break
-        case 39:
+        case 39: //right
           autoRun = false
+          break
+        case 32: //space
+
           break
 				case 13:
 	        traps = generateTraps()
@@ -223,34 +227,11 @@ function drawTraps(width,heigth){
 			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
 		}
 		else{
-			ctx.save()
-			ctx.beginPath();
-			ctx.fillStyle =  '#bbbbbb';
-			ctx.strokeStyle =  "#454545";
-			ctx.lineWidth   = 3
-			ctx.translate( traps[i].posX +  traps[i].width /2,  traps[i].posY +  traps[i].size /2);
-			ctx.rotate(traps[i].rotation*Math.PI/180);
-			ctx.translate( - traps[i].posX- traps[i].width/2, - traps[i].posY- traps[i].size/2  );
-			ctx.moveTo(traps[i].posX, traps[i].posY);
-			ctx.lineTo(traps[i].posX+traps[i].size, traps[i].posY-10);
-			ctx.lineTo(traps[i].posX+traps[i].size*1.5, traps[i].posY+traps[i].size/3);
-			ctx.lineTo(traps[i].posX+traps[i].size*1.4, traps[i].posY+traps[i].size/2.8);
-			ctx.lineTo(traps[i].posX+traps[i].size*1.2, traps[i].posY+traps[i].size/2.5);
-			ctx.lineTo(traps[i].posX+traps[i].size*1.4, traps[i].posY+traps[i].size/2);
-			ctx.lineTo(traps[i].posX+traps[i].size, traps[i].posY+traps[i].size);
-			ctx.lineTo(traps[i].posX+traps[i].size/2, traps[i].posY+traps[i].size/1.5);
-			ctx.lineTo(traps[i].posX+traps[i].size/3, traps[i].posY+traps[i].size/1.2);
-			ctx.lineTo(traps[i].posX, traps[i].posY+traps[i].size);
-			ctx.lineTo(traps[i].posX-traps[i].size/2, traps[i].posY+traps[i].size/2);
-			ctx.lineTo(traps[i].posX, traps[i].posY);
-			ctx.stroke();
-			ctx.fill();
-			ctx.restore()
-			ctx.fillStyle =  traps[i].color
-			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
+ 			drawAsteroid(traps[i])
+			//ctx.fillStyle =  "#ffffff"
+			//ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
 		}
 		if(debug){
-
 			ctx.fillText(traps[i].number,traps[i].posX,traps[i].posY-10)
 			ctx.fillText(Math.round(traps[i].posX),traps[i].posX+50,traps[i].posY-10)
 		}
@@ -261,7 +242,33 @@ function drawPlayerDebug(){
 		ctx.fillText(Math.round(Player.posY),Player.posX,Player.posY-10)
 	}
 }
+function drawAsteroid(traps){
+	ctx.save()
+	//ASTEROID
+	ctx.beginPath();
+	ctx.fillStyle =  '#bbbbbb';
+	ctx.strokeStyle =  "#454545";
+	ctx.lineWidth   = 3
+	ctx.translate( traps.posX +  traps.width /2,  traps.posY +  traps.size /2);
+	ctx.rotate(traps.rotation*Math.PI/180);
+	ctx.translate( - traps.posX- traps.width/2, - traps.posY- traps.size/2  );
+	ctx.moveTo(traps.posX, traps.posY);
+	ctx.lineTo(traps.posX+traps.size, traps.posY-10);
+	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_1, traps.posY+traps.size/3);
+	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_2, traps.posY+traps.size/2.8);
+	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_3, traps.posY+traps.size/2.5);
+	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_4, traps.posY+traps.size/2);
+	ctx.lineTo(traps.posX+traps.size, traps.posY+traps.size);
+	ctx.lineTo(traps.posX+traps.size/2, traps.posY+traps.size/1.5);
+	ctx.lineTo(traps.posX+traps.size/3, traps.posY+traps.size/1.2);
+	ctx.lineTo(traps.posX, traps.posY+traps.size);
+	ctx.lineTo(traps.posX-traps.size/2, traps.posY+traps.size/2);
+	ctx.lineTo(traps.posX, traps.posY);
+	ctx.stroke();
+	ctx.fill();
 
+	ctx.restore()
+}
 function drawPoints(){
 	ctx.fillStyle =  traps[traps.length-1].color
 	ctx.fillText("FINISH",traps[traps.length-1].posX+50,game.height/2)
@@ -275,6 +282,7 @@ function drawAllElements(curve, curve_speed){
 	 drawPlayer(curve,curve_speed)
 	 drawPlayerDebug()
 	 drawParticle(particlesArray, game.width - 500, 100)
+   drawLaser(arrayLaser);
 }
 
 function drawParticle(Particles, posx, posy){
@@ -386,8 +394,6 @@ function trapDetection(){
 					particlesArray.push(new Particle(traps[i].posX,traps[i].posY))
 					traps[i].posY = 10000
 				}
-        console.log('contact with : ' + traps[i].number)
-        console.log('Augmenting speed by one, velocity is at :  ' + VELOCITY)
       }
     }
   }
