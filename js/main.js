@@ -22,13 +22,13 @@ const resize = () => {
 function Particle(x,y){
   this.posX= x;
   this.posY= y;
-  this.radius= 5;
+	this.pointsToGive = Math.ceil(Math.random()*20)
+  this.radius= 1 + this.pointsToGive /4 ;
   this.color= '#FAF523';
 	this.originX = x
 	this.originY = y
 	this.attractionSpeedX = 1
 	this.attractionSpeedY = 1
-	this.pointsToGive = Math.ceil(Math.random()*20)
 }
 let particlesArray = new Array()
 window.addEventListener('resize', resize)
@@ -217,10 +217,40 @@ function drawTraps(width,heigth){
 	ctx.fillStyle = 'rgba(23, 41, 58, 0.5)'
 	ctx.fillRect(0, 0, game.width, game.height)
   for(let i = 0;  i < traps.length;  i++){
-    ctx.fillStyle =  traps[i].color
-    ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
-    ctx.font = "30px Arial"
+		ctx.font = "50px Borg"
+		if(traps[i].type !=1){
+			ctx.fillStyle =  traps[i].color
+			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
+		}
+		else{
+			ctx.save()
+			ctx.beginPath();
+			ctx.fillStyle =  '#bbbbbb';
+			ctx.strokeStyle =  "#454545";
+			ctx.lineWidth   = 3
+			ctx.translate( traps[i].posX +  traps[i].width /2,  traps[i].posY +  traps[i].size /2);
+			ctx.rotate(traps[i].rotation*Math.PI/180);
+			ctx.translate( - traps[i].posX- traps[i].width/2, - traps[i].posY- traps[i].size/2  );
+			ctx.moveTo(traps[i].posX, traps[i].posY);
+			ctx.lineTo(traps[i].posX+traps[i].size, traps[i].posY-10);
+			ctx.lineTo(traps[i].posX+traps[i].size*1.5, traps[i].posY+traps[i].size/3);
+			ctx.lineTo(traps[i].posX+traps[i].size*1.4, traps[i].posY+traps[i].size/2.8);
+			ctx.lineTo(traps[i].posX+traps[i].size*1.2, traps[i].posY+traps[i].size/2.5);
+			ctx.lineTo(traps[i].posX+traps[i].size*1.4, traps[i].posY+traps[i].size/2);
+			ctx.lineTo(traps[i].posX+traps[i].size, traps[i].posY+traps[i].size);
+			ctx.lineTo(traps[i].posX+traps[i].size/2, traps[i].posY+traps[i].size/1.5);
+			ctx.lineTo(traps[i].posX+traps[i].size/3, traps[i].posY+traps[i].size/1.2);
+			ctx.lineTo(traps[i].posX, traps[i].posY+traps[i].size);
+			ctx.lineTo(traps[i].posX-traps[i].size/2, traps[i].posY+traps[i].size/2);
+			ctx.lineTo(traps[i].posX, traps[i].posY);
+			ctx.stroke();
+			ctx.fill();
+			ctx.restore()
+			ctx.fillStyle =  traps[i].color
+			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
+		}
 		if(debug){
+
 			ctx.fillText(traps[i].number,traps[i].posX,traps[i].posY-10)
 			ctx.fillText(Math.round(traps[i].posX),traps[i].posX+50,traps[i].posY-10)
 		}
@@ -341,8 +371,9 @@ function difficultyOfSize(){
 function trapDetection(){
   for(let i = 1;  i < traps.length;  i++){
     if((traps[i].posX < Player.posX + Player.size) &&(traps[i].posX + traps[i].width > Player.posX + Player.size) && Player.life >= 0 ){
-      if(((traps[i].posY + traps[i].size > (Player.posY+Player.size/2)) && ((Player.posY+Player.size/2) > traps[i].posY))){
-        if(VELOCITY < 40 && traps[i].type == 2){
+      if(((traps[i].posY + traps[i].size > (Player.posY)) && ((Player.posY) > traps[i].posY)) ||
+				((traps[i].posY + traps[i].size > (Player.posY+Player.size)) && ((Player.posY+Player.size) > traps[i].posY))){
+        if(VELOCITY < 40 && traps[i].type == 2 ){
           VELOCITY += 5
         }
         if(traps[i].type == 1){

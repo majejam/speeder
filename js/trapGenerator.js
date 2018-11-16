@@ -15,10 +15,11 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
     this.color = "#ff6501";
   }
   if(this.type == 1){
-    this.size = parseInt(20 + Math.random()*500* sizeOfTraps);
+    this.size = parseInt(20 + Math.random()*50* sizeOfTraps);
     this.posY = parseInt(Math.random()*(game.height - this.size));
     this.width = parseInt(10 + Math.random()*50);
     this.color = "#ff5041";
+    this.rotation = Math.ceil(Math.random()*360)
   }
   if(this.type == 2){
     this.size = parseInt(20 + Math.random()*200*sizeOfTraps);
@@ -39,7 +40,6 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
     this.color = "#fffa21";
   }
   this.posX = startingPoint + this.width + parseInt(-spacing/2 + Math.random()*(spacing))
-  console.log('x : ' + this.posX)
 }
 function trapsMouvement(direction, speed){
   for(let i = 0; i < traps.length;i++){

@@ -3,7 +3,7 @@ const Player = {}
   Player.posY= 500;
   Player.width= 25;
   Player.size= 25;
-  Player.color= '#FAF523';
+  Player.color= '#454554';
   Player.velY= 0;
   Player.velX= 0;
   Player.speed= 0;
@@ -30,19 +30,18 @@ function playerMouvement(){
    Player.speed += 0.5*1.2
  }
 
-  if (Player.posY + 170 > screen.height) {
-    Player.posY = 0
+  if (Player.posY + Player.size > game.height) {
+    Player.posY = 1
   }
   if (Player.posY  < 0) {
-    Player.posY = windowHeight - Player.size
+    Player.posY =  game.height - Player.size-1
   }
 }
 
  function drawPlayer(curve,curve_speed){
   curve_speed = -Player.speed * 3
   curve += curve_speed + (Player.posY+Player.size/2)
-  ctx.fillStyle =  Player.color;
-	ctx.fillRect(Player.posX, Player.posY, Player.width, Player.size);
+  ctx.save()
   ctx.beginPath();
   ctx.lineWidth   = 20       // Largeur de la ligne
   const gradient = ctx.createLinearGradient(Player.posX - ((Player.trail_size*VELOCITY)/1.5), 2000, 500, 2000) // x1, y1, x2, y2
@@ -52,6 +51,21 @@ function playerMouvement(){
   ctx.moveTo(Player.posX, (Player.posY+Player.size/2) )
   ctx.quadraticCurveTo(Player.posX -((Player.trail_size*VELOCITY)/4), (Player.posY+Player.size/2) , Player.posX - ((Player.trail_size*VELOCITY)/1.3), curve);
   ctx.stroke();
+  ctx.beginPath();
+  ctx.fillStyle =  Player.color;
+  ctx.strokeStyle =  "#aa7870";
+  ctx.translate(Player.posX + Player.size /2, Player.posY + Player.size /2);
+  ctx.rotate(Player.speed*1.5/180);
+  ctx.translate( -Player.posX-Player.size/2, -Player.posY-Player.size/2  );
+  //ctx.fillRect(Player.posX, Player.posY, Player.width, Player.size);
+  ctx.lineWidth   = 2
+  ctx.moveTo(Player.posX, Player.posY);
+  ctx.lineTo(Player.posX + Player.size, Player.posY+Player.size/2);
+  ctx.lineTo(Player.posX, Player.posY+Player.size);
+  ctx.lineTo(Player.posX, Player.posY);
+  ctx.stroke();
+  ctx.fill();
+  ctx.restore()
 }
 
 /* currently working on this
