@@ -1,3 +1,15 @@
+function Particle(x,y){
+  this.posX= x;
+  this.posY= y;
+	this.pointsToGive = Math.ceil(Math.random()*20)
+  this.radius= 1 + this.pointsToGive /4 ;
+  this.color= '#FAF523';
+	this.originX = x
+	this.originY = y
+	this.attractionSpeedX = 1
+	this.attractionSpeedY = 1
+}
+
 function Laser(Player, nb){
   this.posX= Player.posX + Player.size ;
   this.posY= Player.posY + Player.size/2;
@@ -23,7 +35,38 @@ function drawLaser(Laser){
     }
   }
 }
-
+function drawParticle(Particles, posx, posy){
+	for(let i = 0; i < Particles.length; i++){
+		if(Particles[i].attractionSpeedY > 0.2 && Particles[i].attractionSpeedX > 0.2){
+			if( Particles[i].posY > posy - (posy - Particles[i].originY)/2){
+					Particles[i].attractionSpeedY *=  1.05
+					Particles[i].posY += -Particles[i].attractionSpeedY
+			}
+			else{
+				Particles[i].attractionSpeedY *=  0.95
+				Particles[i].posY += -Particles[i].attractionSpeedY
+			}
+			if( Particles[i].posX < posx - (posx -Particles[i].originX)/2){
+					Particles[i].attractionSpeedX *=  1.05
+					Particles[i].posX += Particles[i].attractionSpeedX
+				}
+				else{
+					Particles[i].attractionSpeedX *=  0.95
+					Particles[i].posX += Particles[i].attractionSpeedX
+				}
+			ctx.beginPath();
+			ctx.arc( Particles[i].posX,  Particles[i].posY,  Particles[i].radius, 0, 2 * Math.PI, false);
+			ctx.fillStyle =  Particles[i].color;
+			ctx.fill();
+		}
+		else{
+			if(Particles[i].pointsToGive > 0){
+				Particles[i].pointsToGive--
+				Player.xp++
+			}
+		}
+	}
+}
 
 function playerShoot(Player,nb){
   arrayLaser.push(new Laser(Player,nb))
