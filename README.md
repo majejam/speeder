@@ -17,4 +17,4 @@ This is speeder, a js spaceship game made with de HTML5 canvas.
 See on [github](https://github.com/majejam/speeder/)
 
 ## Ressources
-* Coming soon
+* Coming soon, very soon
