@@ -12,9 +12,12 @@ let debug = false
 let curve = 0
 let curve_speed = 0
 let arrayLaser = new Array()
+let particlesArray = new Array()
+let explosionParticlesArray = new Array()
 let keyPressed = false
 let cooldown = false
 let playingState = true
+
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
@@ -22,18 +25,7 @@ const resize = () => {
   $canvas.width = windowWidth
   $canvas.height = windowHeight
 }
-function Particle(x,y){
-  this.posX= x;
-  this.posY= y;
-	this.pointsToGive = Math.ceil(Math.random()*20)
-  this.radius= 1 + this.pointsToGive /4 ;
-  this.color= '#FAF523';
-	this.originX = x
-	this.originY = y
-	this.attractionSpeedX = 1
-	this.attractionSpeedY = 1
-}
-let particlesArray = new Array()
+
 window.addEventListener('resize', resize)
 resize()
 
@@ -47,18 +39,6 @@ const loop = () => {
 }
 loop()
 
-document.getElementById('Play').addEventListener('click', function() {
-	resetLevel()
-	resetPlayer()
-	if(autoRun == false){
-		autoRun = true
-		document.getElementById('Play').style.borderColor = "#12fa21"
-	}
-	else{
-		autoRun = false
-		document.getElementById('Play').style.borderColor = "black"
-	}
-}, false)
 
 window.addEventListener("keydown", keyManagement, true)
 window.addEventListener("keydown", function (e) {
@@ -71,6 +51,7 @@ window.addEventListener("keyup", function (e) {
 
 function resetLevel(){
 	resetCanvas()
+  explosionParticlesArray.splice(0,explosionParticlesArray.length+1)
 	traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
 }
 
@@ -82,7 +63,7 @@ function resetPlayer(){
   Player.directionPlayer = true
   Player.posX= 500;
   Player.posY= 400;
-	VELOCITY = 10
+	VELOCITY = 0.1
 }
 
 
@@ -92,12 +73,12 @@ function gameLoop(){
   trapDetectionLaser(traps, arrayLaser)
 	playerMouvement()
   playerLifeHandler()
+  if(autoRun){
+    trapsMouvement(-1,VELOCITY)
+  }
   if(Player.isFinished){
     finishLineHandler()
   }
-	if(autoRun == true){
-			trapsMouvement(-1,VELOCITY)
-	}
 }
 
 function initCanvasSize(){
@@ -108,84 +89,11 @@ function initCanvasSize(){
 function updateLevelSize(width,heigth){
 	initCanvasSize()
 }
-function getSeedLevel(){
-  let seed = document.getElementById('seed').value
-  return seed
-}
-function getSizeElement(){
-  let size = parseInt(document.getElementById('size').value)
-  return size
-}
-function getNumberOfElement(){
-  let numberElements = parseInt(document.getElementById('numberElements').value)
-  if(numberElements > 1000){
-    numberElements = 1000
-  }
-  if(numberElements < 0){
-    numberElements = 1
-  }
-  if( isNaN(numberElements) ){
-    numberElements = 1
-  }
-  setNumberOfElement(numberElements)
-  return numberElements
-}
-function getNumberOfSpacing(){
-  let numberSpacing = parseInt(document.getElementById('numberSpacing').value)
-  return numberSpacing
-}
-function setNumberOfSpacing(element){
-  document.getElementById('numberSpacing').value = element
-  console.log("Spacing set succesfully")
-}
-function setNumberOfElement(element){
-  document.getElementById('numberElements').value = element
-  console.log("Number set succesfully")
-}
-function setSizeElement(element){
-  document.getElementById('size').value = element
-  console.log("Size set succesfully")
-}
-function setSeedLevel(element){
-  document.getElementById('seed').value = element
-  console.log("Seed set succesfully")
-}
-document.getElementById('manualGenerate').addEventListener('click', function() {
-  resetCanvas()
-  if(autoGenerate == true){
-    console.clear()
-    setElementInDOM()
-  }
-  console.log('difficulty of the level is : ' + Math.abs(Math.round(getDifficulty())))
-  traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
-}, false)
 
-
-
-document.getElementById('autoGenerate').addEventListener('click', function() {
-  if(autoGenerate == true){
-    document.getElementById('autoGenerate').classList.toggle('unselected')
-    document.getElementById('autoGenerate').classList.toggle('selected')
-      console.log("Generation is manual")
-    autoGenerate = false
-  }else{
-    autoGenerate = true
-    document.getElementById('autoGenerate').classList.toggle('unselected')
-    document.getElementById('autoGenerate').classList.toggle('selected')
-      console.log("Generation is automatic")
-  }
-}, false)
-
-function setElementInDOM(){
-  setSeedLevel(Math.ceil(Math.random()*10000))
-  setSizeElement(0.5 + Math.ceil(Math.random()*200)/100)
-  setNumberOfElement(Math.ceil(Math.random()*200))
-  setNumberOfSpacing(50 + Math.ceil(Math.random()*2000))
-}
 
 function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
   let seedLevel = getSeedLevel()
-  let startingPoint = 600
+  let startingPoint = 1000
   Math.seedrandom(seedLevel)
   let sizeOfTraps = sizeTrap
   let numberElements = nbTraps
@@ -261,7 +169,6 @@ function drawPlayerDebug(){
 }
 function drawAsteroid(traps){
 	ctx.save()
-	//ASTEROID
 	ctx.beginPath();
 	ctx.fillStyle =  '#bbbbbb';
 	ctx.strokeStyle =  "#454545";
@@ -295,101 +202,13 @@ function drawPoints(){
 function drawAllElements(curve, curve_speed){
 	 drawTraps()
 	 drawPoints()
-	 drawPlayer(curve,curve_speed)
+   if(Player.life >= 1){
+     drawPlayer(curve,curve_speed)
+   }
 	 drawPlayerDebug()
 	 drawParticle(particlesArray, game.width - 500, 100)
    drawLaser(arrayLaser);
 }
-
-function drawParticle(Particles, posx, posy){
-	for(let i = 0; i < Particles.length; i++){
-		if(Particles[i].attractionSpeedY > 0.2 && Particles[i].attractionSpeedX > 0.2){
-			if( Particles[i].posY > posy - (posy - Particles[i].originY)/2){
-					Particles[i].attractionSpeedY *=  1.05
-					Particles[i].posY += -Particles[i].attractionSpeedY
-			}
-			else{
-				Particles[i].attractionSpeedY *=  0.95
-				Particles[i].posY += -Particles[i].attractionSpeedY
-			}
-			if( Particles[i].posX < posx - (posx -Particles[i].originX)/2){
-					Particles[i].attractionSpeedX *=  1.05
-					Particles[i].posX += Particles[i].attractionSpeedX
-				}
-				else{
-					Particles[i].attractionSpeedX *=  0.95
-					Particles[i].posX += Particles[i].attractionSpeedX
-				}
-			ctx.beginPath();
-			ctx.arc( Particles[i].posX,  Particles[i].posY,  Particles[i].radius, 0, 2 * Math.PI, false);
-			ctx.fillStyle =  Particles[i].color;
-			ctx.fill();
-		}
-		else{
-			if(Particles[i].pointsToGive > 0){
-				Particles[i].pointsToGive--
-				Player.xp++
-			}
-		}
-	}
-
-}
-//Calculate the overall difficulty of the level
-function getDifficulty(){
-  let difficulty = (difficultyOfSize() + difficultyNumberOfElements() + difficultySpacingAverage())
-  return difficulty
-}
-
-function difficultyNumberOfElements(){
-  if(getNumberOfElement()<10000){
-    difficultyOfElements =  5
-  }
-  if(getNumberOfElement()<200){
-    difficultyOfElements =  4
-  }
-  if(getNumberOfElement()<100){
-    difficultyOfElements =  3
-  }
-  if(getNumberOfElement()<50){
-    difficultyOfElements =  2
-  }
-  if(getNumberOfElement()<30){
-    difficultyOfElements = 1
-  }
-  return difficultyOfElements
-}
-//Calculate de difficulty of the spacing
-function difficultySpacingAverage(){
-  let sum = 0
-  for(let i = 1;  i < traps.length-2;  i++){
-    sum = sum + (traps[i+1].posX - traps[i].posX)
-  }
-  let avg = sum/traps.length-2
-  let difficultyElement = 0
-  if(avg<1000){
-    difficultyElement = 1
-  }
-  if(avg<500){
-    difficultyElement = 2
-  }
-  if(avg<300){
-    difficultyElement = 3
-  }
-  if(avg<200){
-    difficultyElement = 4
-  }
-  if(avg<100){
-    difficultyElement = 5
-  }
-  return difficultyElement
-}
-//Calculate de difficulty of the spacing
-function difficultyOfSize(){
-  let difficultyElement = getSizeElement()
-  return difficultyElement
-}
-
-
 
 function trapDetectionPlayer(){
   for(let i = 1;  i < traps.length;  i++){
@@ -422,19 +241,54 @@ function playerLifeHandler(){
     VELOCITY = 0.1
     if(Player.speed && Player.directionPlayer){
       Player.directionDeath = Player.speed
+      for(let i = 0; i <100; i++){
+        explosionParticlesArray.push(new Explosionparticles(Player.posX,Player.posY))
+        console.log("ok")
+      }
       Player.directionPlayer = false
     }
+    drawExplosion()
     playerDeathHandler(Player.directionDeath)
   }
 }
 
-function playerDeathHandler(directionDeath){
+function playerDeathHandler(directionDeath,trap){
   Player.speed = Player.directionDeath/2
   Player.posX += 5
+
 }
 
 function finishLineHandler(){
   ctx.font = "50px Poppins"
   ctx.fillStyle = "#ffffff"
   ctx.fillText("WELL DONE YOU HAVE FINISHED THE LEVEL !!!!!",600,game.height/2)
+}
+
+
+function Explosionparticles(x,y){
+  this.posX= x;
+  this.posY= y;
+  this.speedX = -5+Math.random()*30;
+  this.speedY = -15+Math.random()*30;
+  this.radius= 1 + Math.random()*5 ;
+  this.color= 'rgba(255,165,0,1)';
+  this.opacity = 1
+	this.originX = x
+	this.originY = y
+}
+
+function drawExplosion(){
+  for(let i = 0; i < explosionParticlesArray.length; i++){
+    explosionParticlesArray[i].speedX *= 0.91 + Math.random()/10
+    explosionParticlesArray[i].speedY *= 0.91 + Math.random()/10
+    explosionParticlesArray[i].posY += explosionParticlesArray[i].speedY
+    explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
+    explosionParticlesArray[i].opacity *= 0.94
+    console.log(explosionParticlesArray[4].opacity)
+    explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
+    ctx.beginPath();
+    ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle =  explosionParticlesArray[i].color;
+    ctx.fill();
+  }
 }
