@@ -108,7 +108,7 @@ function setSeedLevel(element){
   document.getElementById('seed').value = element
 }
 document.getElementById('manualGenerate').addEventListener('click', function() {
-  resetCanvas()
+  resetLevel()
   if(autoGenerate == true){
     console.clear()
     setElementInDOM()
