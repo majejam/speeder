@@ -36,7 +36,6 @@ function optionShow(){
 }
 document.getElementById('Play').addEventListener('click', function() {
 	resetLevel()
-	resetPlayer()
 	if(autoRun == false){
 		autoRun = true
 	}
