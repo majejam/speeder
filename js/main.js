@@ -32,7 +32,7 @@ resize()
 let traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
 
 const loop = () => {
-      window.requestAnimationFrame(loop)
+  window.requestAnimationFrame(loop)
   if(playingState){
     gameLoop()
   }
@@ -51,6 +51,7 @@ window.addEventListener("keyup", function (e) {
 
 function resetLevel(){
 	resetCanvas()
+  resetPlayer()
   explosionParticlesArray.splice(0,explosionParticlesArray.length+1)
 	traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
 }
@@ -62,7 +63,6 @@ function resetPlayer(){
   Player.directionDeath = 0
   Player.directionPlayer = true
   Player.posX= 500;
-  Player.posY= 400;
 	VELOCITY = 0.1
 }
 
@@ -75,6 +75,9 @@ function gameLoop(){
   playerLifeHandler()
   if(autoRun){
     trapsMouvement(-1,VELOCITY)
+  }
+  else{
+    VELOCITY = 0
   }
   if(Player.isFinished){
     finishLineHandler()
@@ -248,11 +251,11 @@ function playerLifeHandler(){
       Player.directionPlayer = false
     }
     drawExplosion()
-    playerDeathHandler(Player.directionDeath)
+    //playerDeathHandler(Player.directionDeath)
   }
 }
 
-function playerDeathHandler(directionDeath,trap){
+function playerDeathHandler(directionDeath){
   Player.speed = Player.directionDeath/2
   Player.posX += 5
 
@@ -279,16 +282,17 @@ function Explosionparticles(x,y){
 
 function drawExplosion(){
   for(let i = 0; i < explosionParticlesArray.length; i++){
-    explosionParticlesArray[i].speedX *= 0.91 + Math.random()/10
-    explosionParticlesArray[i].speedY *= 0.91 + Math.random()/10
-    explosionParticlesArray[i].posY += explosionParticlesArray[i].speedY
-    explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
-    explosionParticlesArray[i].opacity *= 0.94
-    console.log(explosionParticlesArray[4].opacity)
-    explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
-    ctx.beginPath();
-    ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle =  explosionParticlesArray[i].color;
-    ctx.fill();
+    if(explosionParticlesArray[0].opacity > 0.05){
+      explosionParticlesArray[i].speedX *= 0.91 + Math.random()/10
+      explosionParticlesArray[i].speedY *= 0.91 + Math.random()/10
+      explosionParticlesArray[i].posY += explosionParticlesArray[i].speedY
+      explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
+      explosionParticlesArray[i].opacity *= 0.94
+      explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
+      ctx.beginPath();
+      ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle =  explosionParticlesArray[i].color;
+      ctx.fill();
+    }
   }
 }
