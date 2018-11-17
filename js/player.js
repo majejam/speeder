@@ -24,8 +24,14 @@ const Player = {}
 function playerMouvement(){
   Player.speed *= Player.friction
   Player.posY += Player.speed
-  if(VELOCITY > 10){
+  if(VELOCITY >= 10){
     VELOCITY *= 0.99
+  }
+  if(VELOCITY < 9){
+    VELOCITY *= 1.1
+  }
+  if(VELOCITY > 9 && VELOCITY < 10 ){
+    VELOCITY = 10
   }
   if (Player.keys[38]  && Player.mouvement ) {
     Player.speed += -0.5*1.2
