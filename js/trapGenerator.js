@@ -2,7 +2,7 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
   this.type = Math.floor(Math.random()*3);
   if(this.type != 1){
     if(Math.round(Math.random()) == 1){
-      this.type = 1    
+      this.type = 1
     }
 
   }
@@ -44,7 +44,7 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
     this.color = "#12faFF";
   }
   if(this.type == 4){
-    this.size = game.height
+    this.size = game.height*4
     this.posY = 0
     this.width = 50;
     this.color = "#fffa21";
