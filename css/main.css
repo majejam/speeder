@@ -10,6 +10,7 @@ body{
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  user-select: none;
 }
 .menu-container{
   position: absolute;
@@ -59,6 +60,15 @@ body{
   font-family: "Borg";
   font-size: 8vw;
   cursor: pointer;
+}
+
+.title_menu{
+  position: absolute;
+  color: white;
+  font-family: "Borg";
+  font-size: 8vw;
+  left:200px;
+  top: 50px;
 }
 /* MENU CSS*/
 .option-menu-button{
@@ -177,15 +187,15 @@ body{
 }
 
 .option-main-image{
-  background-image: url('../img/astronaut.png');
+  background-image: url('../img/options_flat.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   position: absolute;
   width: 50%;
-  height: 200%;
-  left:-200px;
-  bottom: -1150px;
+  height: 70%;
+  left:20px;
+  bottom: 50px;
 }
 .inner-menu-option-container{
   position: absolute;
