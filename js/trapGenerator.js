@@ -26,10 +26,10 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
     this.width = parseInt(50 + Math.random()*70);
     this.color = "#ff5041";
     this.rotation = Math.ceil(Math.random()*360)
-    this.asteroidPoint_1 = (Math.random())
-    this.asteroidPoint_2 = ( Math.random())
-    this.asteroidPoint_3 = ( Math.random())
-    this.asteroidPoint_4 = ( Math.random())
+    this.asteroidPoint_1 = -5+(Math.random()*7)
+    this.asteroidPoint_2 = -5+(Math.random()*7)
+    this.asteroidPoint_3 = -5+(Math.random()*7)
+    this.asteroidPoint_4 = -5+(Math.random()*7)
   }
   if(this.type == 2){
     this.size = parseInt(20 + Math.random()*20*sizeOfTraps);

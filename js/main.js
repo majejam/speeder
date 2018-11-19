@@ -132,7 +132,7 @@ function keyManagement(e) {
            autoRun = true
            break
         case 39: //right
-          autoRun = false
+          //autoRun = false
           break
         case 32: //space
 
@@ -156,7 +156,7 @@ function drawTraps(width,heigth){
 		}
 		else{
  			drawAsteroid(traps[i])
-			//ctx.fillStyle =  "#ffffff"
+      //ctx.fillStyle =  "#ffffff"
 			//ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
 		}
 		if(debug){
@@ -181,15 +181,15 @@ function drawAsteroid(traps){
 	ctx.translate( - traps.posX- traps.width/2, - traps.posY- traps.size/2  );
 	ctx.moveTo(traps.posX, traps.posY);
 	ctx.lineTo(traps.posX+traps.size, traps.posY-10);
-	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_1, traps.posY+traps.size/3);
-	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_2, traps.posY+traps.size/2.8);
-	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_3, traps.posY+traps.size/2.5);
-	ctx.lineTo(traps.posX+traps.size*traps.asteroidPoint_4, traps.posY+traps.size/2);
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_1, traps.posY+traps.size/3);
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_2, traps.posY+traps.size/2.8);
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_3, traps.posY+traps.size/2.5);
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_4, traps.posY+traps.size/2);
 	ctx.lineTo(traps.posX+traps.size, traps.posY+traps.size);
 	ctx.lineTo(traps.posX+traps.size/2, traps.posY+traps.size/1.5);
 	ctx.lineTo(traps.posX+traps.size/3, traps.posY+traps.size/1.2);
 	ctx.lineTo(traps.posX, traps.posY+traps.size);
-	ctx.lineTo(traps.posX-traps.size/2, traps.posY+traps.size/2);
+	ctx.lineTo(traps.posX+traps.size/5, traps.posY+traps.size/2);
 	ctx.lineTo(traps.posX, traps.posY);
 	ctx.stroke();
 	ctx.fill();
@@ -215,9 +215,10 @@ function drawAllElements(curve, curve_speed){
 
 function trapDetectionPlayer(){
   for(let i = 1;  i < traps.length;  i++){
-    if((traps[i].posX < Player.posX + Player.size) &&(traps[i].posX + traps[i].width > Player.posX + Player.size) && Player.life >= 0 ){
+    if((traps[i].posX < Player.posX) && (traps[i].posX + traps[i].width > Player.posX) && Player.life >= 0 ){
       if(((traps[i].posY + traps[i].size > (Player.posY)) && ((Player.posY) > traps[i].posY)) ||
-				((traps[i].posY + traps[i].size > (Player.posY+Player.size)) && ((Player.posY+Player.size) > traps[i].posY))){
+				((traps[i].posY + traps[i].size > (Player.posY+Player.size)) && ((Player.posY+Player.size) > traps[i].posY)) ||
+        ((traps[i].posY + traps[i].size/2 > (Player.posY+Player.size)) && ((Player.posY+Player.size/2) > traps[i].posY))){
         if(VELOCITY < 40 && traps[i].type == 2 ){
           VELOCITY += 5
         }
