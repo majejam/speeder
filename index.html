@@ -26,45 +26,9 @@
   <div class="mainGame">
     <canvas id="game" class="js-canvas"></canvas>
   </div>
-  <form class="seedForm">
-    <div id="seedInput">
-      <label for="seed">Seed : (enter your seed here)</label>
-      <input type="text" value = "test" placeholder="test"id="seed" name="seed">
-    </div>
-    <div id="sizeInput">
-      <label for="size">Size of Elements (ratio) :</label>
-      <input type="text" value="1" placeholder="Exemple: 1,2,3" id="size" name="size">
-    </div>
-    <div id="numberInput">
-      <label for="numberElements">Nb elements :</label>
-      <input type="text" value="10" placeholder="Exemple: 10" id="numberElements" name="numberElements">
-    </div>
-    <div id="numberSpacingInput">
-      <label for="numberSpacing">Nb spacing :</label>
-      <input type="text" value="500" placeholder="Exemple: 500" id="numberSpacing" name="numberSpacing">
-    </div>
-    <div class="containerSelection">
-      <div id="manualGenerate">
-        <span>Generate !</span>
-      </div>
-      <div id="autoGenerate" class="unselected">
-        <span>auto</span>
-      </div>
-    </div>
-  </form>
   <div class="option">
     <div id="Play">
       <span>Play</span>
-    </div>
-    <form class="velocityForm">
-      <div id="seedInput">
-        <label id="velocityOutput" for="velocity">Speed :</label>
-        <input type="range" id="velocity" name="velocity" min="-50" max="50" value="10">
-      </div>
-    </form>
-    <div id="fpsInput">
-      <label for="fps">FPS :</label>
-      <input type="text" value="60" placeholder="Exemple: 60" id="fps" name="fps">
     </div>
   </div>
   <div class="option-game-container">
@@ -80,19 +44,45 @@
       <div class="hidding-bar-effect menu-container-bar-4"></div>
       <div class="star-containers"></div>
       <div class="option-main-image"></div>
-      <div class="title_menu">Speeder</div>
+      <div class="title_menu big-font">Speeder</div>
       <div class="inner-menu-option-container">
-        <span>Options</span>
-        <div class="return-home">return home</div>
+        <span class="big-font">Options</span>
+        <form class="seedForm">
+          <div id="seedInput">
+            <label for="seed">Seed : (enter your seed here)</label>
+            <input type="text" value = "test" placeholder="test"id="seed" name="seed">
+          </div>
+          <div id="sizeInput">
+            <label for="size">Size of Elements (ratio) :</label>
+            <input type="text" value="1" placeholder="Exemple: 1,2,3" id="size" name="size">
+          </div>
+          <div id="numberInput">
+            <label for="numberElements">Nb elements :</label>
+            <input type="text" value="10" placeholder="Exemple: 10" id="numberElements" name="numberElements">
+          </div>
+          <div id="numberSpacingInput">
+            <label for="numberSpacing">Nb spacing :</label>
+            <input type="text" value="500" placeholder="Exemple: 500" id="numberSpacing" name="numberSpacing">
+          </div>
+          <div class="containerSelection">
+            <div id="manualGenerate">
+              <span>Generate !</span>
+            </div>
+            <div id="autoGenerate" class="unselected">
+              <span>auto</span>
+            </div>
+          </div>
+        </form>
+        <div class="return-home menu-button"><span>return home</span></div>
       </div>
     </div>
   </div>
   <div class="menu-container menu-container-unselected">
     <div class="star-containers"></div>
     <div class="menu-main-image"></div>
-    <div class="title_menu">Speeder</div>
+    <div class="title_menu big-font">Speeder</div>
     <div class="inner-menu-container">
-      <div class="play-button">play</div>
+      <div class="play-button menu-button"><span>play</span></div>
     </div>
   </div>
   <script src="js/particles.js"></script>

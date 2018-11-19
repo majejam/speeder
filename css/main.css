@@ -55,12 +55,6 @@ body{
   left:-200px;
   bottom: -1150px;
 }
-.play-button{
-  color: white;
-  font-family: "Borg";
-  font-size: 8vw;
-  cursor: pointer;
-}
 
 .title_menu{
   position: absolute;
@@ -209,7 +203,7 @@ body{
   height: 80%;
   background-color: rgba(23, 41, 48, 0.5);
 }
-.option-menu-container span{
+.big-font{
   color: white;
   font-family: "Borg";
   font-size: 8vw;
@@ -259,6 +253,32 @@ body{
 }
 
 
+.menu-button{
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border: 2px white solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: "Borg";
+  font-size: 5vw;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+  background-color: none;
+  width: 33%;
+  padding: 5px;
+}
+
+.menu-button span{
+  margin-top: -5%;
+}
+.menu-button:hover{
+  background-color: white;
+  color: rgba(23, 41, 48, 1);;
+}
 
 /*Revise css*/
 
@@ -278,9 +298,6 @@ canvas{
   position: relative;
 }
 .seedForm{
-  position: fixed;
-  top:50px;
-  left:10px;
   display: flex;
   flex-direction:column;
   border: 1px solid black;
@@ -305,16 +322,15 @@ input{
 }
 .option{
   position: fixed;
-  top:350px;
+  top:10px;
   left:10px;
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 70px;
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px 5px 10px 5px;
   background-color: white;
-
 }
 .containerSelection{
   display: flex;
@@ -322,6 +338,10 @@ input{
   align-items: center;
   width: 90%;
   height: 50px;
+}
+.containerSelection span{
+  font-size: 2em;
+  color: black;
 }
 #manualGenerate{
   border: 1px solid black;
@@ -331,6 +351,8 @@ input{
   user-select: none;
   width: 30%;
   text-align: center;
+  height: 30px;
+
 }
 #autoGenerate{
   padding: 10px 5px 10px 5px;
@@ -340,6 +362,9 @@ input{
   width: 30%;
   text-align: center;
   transition: 1s linear;
+  height: 30px;
+  font-size: 15px;
+  color: black;
 }
 .unselected{
   border: 2px solid red;
