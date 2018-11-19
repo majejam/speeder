@@ -40,7 +40,7 @@ function playerMouvement(){
  if ((Player.keys[40]||Player.keys[83]) && Player.mouvement) {
    Player.speed += 0.5*1.2
  }
- if ((Player.keys[32]||Player.keys[65]) && Player.life > 0 ) {
+ if ((Player.keys[32]||Player.keys[65]) && Player.life > 0 && parcouringLevel) {
    if(!keyPressed && Player.bonus != 2 ){
       playerShoot(Player,0)
       keyPressed = true
@@ -56,6 +56,9 @@ function playerMouvement(){
      }
       keyPressed = true
    }
+}
+if ((Player.keys[32]) && Player.isFinished) {
+  nextLevel()
 }
   if (Player.posY + Player.size > game.height && Player.life != 0) {
     Player.posY = 1

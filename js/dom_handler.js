@@ -7,6 +7,7 @@ const homeContainer = document.querySelector('.menu-container')
 const playButtton = document.querySelector('.play-button')
 const finishContainer = document.querySelector('.finishing-container')
 const variablesContainer = document.querySelector('.finishing-variables')
+const canvasButton = document.querySelector('.canvas-button')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -148,5 +149,22 @@ function setElementInDOM(){
 
 function finishLineHandler(){
   finishContainer.classList.add('finishing-container-show')
-  finishContainer.classList.add('finishing-variables-show')
+  variablesContainer.classList.add('finishing-variables-show')
+  canvasButton.style.backgroundColor = "rgba(23, 41, 48, 1)";
+  canvasButton.style.color = "white";
+}
+canvasButton.addEventListener('click', () => {
+  nextLevel()
+})
+
+function nextLevel(){
+  Player.isFinished = false
+  canvasButton.style.backgroundColor = "white";
+  canvasButton.style.color = "rgba(23, 41, 48, 1)";
+  finishContainer.classList.toggle('finishing-container-show')
+  variablesContainer.classList.toggle('finishing-variables-show')
+  traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
+  for(let i = 0; i<traps.length; i++){
+    traps[i].posX +=3000
+  }
 }

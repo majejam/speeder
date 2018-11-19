@@ -18,6 +18,7 @@ let finishingLinesArray = new Array()
 let keyPressed = false
 let cooldown = false
 let playingState = true
+let parcouringLevel = false
 
 //Resize
 const resize = () => {
@@ -228,7 +229,7 @@ function drawAllElements(curve, curve_speed){
 }
 
 function trapDetectionPlayer(){
-  for(let i = 1;  i < traps.length;  i++){
+  for(let i = 0;  i < traps.length;  i++){
     if((traps[i].posX < Player.posX) && (traps[i].posX + traps[i].width > Player.posX) && Player.life >= 0 ){
       if(((traps[i].posY + traps[i].size > (Player.posY)) && ((Player.posY) > traps[i].posY)) ||
 				((traps[i].posY + traps[i].size > (Player.posY+Player.size)) && ((Player.posY+Player.size) > traps[i].posY)) ||
@@ -244,6 +245,10 @@ function trapDetectionPlayer(){
         }
         if(traps[i].type == 3){
           Player.isFinished = true
+          parcouringLevel = false
+        }
+        if(traps[i].type == 4){
+          parcouringLevel = true
         }
 				if(traps[i].type == 0){
 					particlesArray.push(new Particle(traps[i].posX,traps[i].posY))
