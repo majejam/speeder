@@ -29,7 +29,7 @@ function drawLaser(Laser){
     Laser[i].posX += Laser[i].speedX
     ctx.fillStyle = Laser[i].color
     ctx.fillRect(Laser[i].posX,Laser[i].posY, Laser[i].size,  5 )
-    if(Laser[Laser.length - 1].posX > 10000){
+    if(Laser[Laser.length - 1].posX > 3000){
       keyPressed = false
       Laser.splice(0,i+1)
     }

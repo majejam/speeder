@@ -38,7 +38,7 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
     this.color = "#12fa21";
   }
   if(this.type == 3){
-    this.size = game.height
+    this.size = game.height*4
     this.posY = 0
     this.width = 50;
     this.color = "#12faFF";

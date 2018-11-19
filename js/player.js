@@ -15,8 +15,8 @@ const Player = {}
   Player.xp = 0
   Player.trail_color = '#341093'
   Player.trail_size = 20
-  Player.bonus = 2
-  Player.bonusNumber = 6
+  Player.bonus = 0
+  Player.bonusNumber = 33
   Player.rotation = 1
   Player.directionPlayer = true
   Player.directionDeath = 0
@@ -40,10 +40,15 @@ function playerMouvement(){
  if (Player.keys[40] && Player.mouvement) {
    Player.speed += 0.5*1.2
  }
- if (Player.keys[32] ) {
+ if (Player.keys[32] && Player.life > 0 ) {
    if(!keyPressed && Player.bonus != 2 ){
       playerShoot(Player,0)
       keyPressed = true
+   }
+   if(Player.bonus == 1 ){
+     for(let i = 0; i <Player.bonusNumber; i++){
+      playerShoot(Player, (Player.bonusNumber/2 - i))
+     }
    }
    if(!keyPressed && Player.bonus == 2){
      for(let i = 0; i <Player.bonusNumber; i++){
