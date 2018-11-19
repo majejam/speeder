@@ -269,7 +269,9 @@ function playerLifeHandler(){
       }
       Player.directionPlayer = false
     }
+  
     drawExplosion()
+    //finishLineHandler()
     //playerDeathHandler(Player.directionDeath)
   }
 }

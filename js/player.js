@@ -13,7 +13,7 @@ const Player = {}
   Player.life = 1
   Player.isFinished = false
   Player.xp = 0
-  Player.trail_color = '#341093'
+  Player.trail_color = 'rgba(148,0,211,1)'
   Player.trail_size = 20
   Player.bonus = 0
   Player.bonusNumber = 33
@@ -75,8 +75,8 @@ if ((Player.keys[32]) && Player.isFinished) {
   ctx.beginPath();
   ctx.lineWidth   = 20       // Largeur de la ligne
   const gradient = ctx.createLinearGradient(Player.posX - ((Player.trail_size*VELOCITY)/1.5), 2000, 500, 2000) // x1, y1, x2, y2
-  gradient.addColorStop(0, 'rgba(105, 206, 205,0)')    // Couleur de départ
-  gradient.addColorStop(1, 'rgba(105, 206, 205,1)') // Couleur de arrivée
+  gradient.addColorStop(0, 'rgba(0,0,0,0)')    // Couleur de départ
+  gradient.addColorStop(1, Player.trail_color) // Couleur de arrivée
   ctx.strokeStyle = gradient
   ctx.moveTo(Player.posX, (Player.posY+Player.size/2) )
   ctx.quadraticCurveTo(Player.posX -((Player.trail_size*VELOCITY)/4), (Player.posY+Player.size/2) , Player.posX - ((Player.trail_size*VELOCITY)/1.3), curve);
