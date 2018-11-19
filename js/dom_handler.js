@@ -5,6 +5,8 @@ const starContainers = document.querySelectorAll('.star-containers')
 const returnHome = document.querySelector('.return-home')
 const homeContainer = document.querySelector('.menu-container')
 const playButtton = document.querySelector('.play-button')
+const finishContainer = document.querySelector('.finishing-container')
+const variablesContainer = document.querySelector('.finishing-variables')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -137,4 +139,14 @@ function setElementInDOM(){
   setSizeElement(0.5 + Math.ceil(Math.random()*200)/100)
   setNumberOfElement(Math.ceil(Math.random()*200))
   setNumberOfSpacing(50 + Math.ceil(Math.random()*2000))
+}
+
+
+
+
+/// finish
+
+function finishLineHandler(){
+  finishContainer.classList.add('finishing-container-show')
+  finishContainer.classList.add('finishing-variables-show')
 }

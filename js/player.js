@@ -24,23 +24,23 @@ const Player = {}
 function playerMouvement(){
   Player.speed *= Player.friction
   Player.posY += Player.speed
-  if(VELOCITY >= 10){
+  if(VELOCITY >= 15){
     VELOCITY *= 0.99
   }
-  if(VELOCITY < 9){
+  if(VELOCITY < 14){
     VELOCITY *= 1.1
   }
-  if(VELOCITY > 9 && VELOCITY < 10 ){
-    VELOCITY = 10
+  if(VELOCITY > 13 && VELOCITY < 15 ){
+    VELOCITY = 15
   }
-  if (Player.keys[38]  && Player.mouvement ) {
+  if ((Player.keys[38]||Player.keys[90])  && Player.mouvement) {
     Player.speed += -0.5*1.2
  }
 
- if (Player.keys[40] && Player.mouvement) {
+ if ((Player.keys[40]||Player.keys[83]) && Player.mouvement) {
    Player.speed += 0.5*1.2
  }
- if (Player.keys[32] && Player.life > 0 ) {
+ if ((Player.keys[32]||Player.keys[65]) && Player.life > 0 ) {
    if(!keyPressed && Player.bonus != 2 ){
       playerShoot(Player,0)
       keyPressed = true
@@ -94,17 +94,3 @@ function playerMouvement(){
   ctx.fill();
   ctx.restore()
 }
-
-/* currently working on this
-function playerTrail(){
-	let playerClone = new Array()
-	if(VELOCITY>0 && VELOCITY<=10 ){
-			for(let i = 0; i<VELOCITY; i++){
-				playerClone.push(player)
-				playerClone[i].posX = playerClone[i].posX - i;
-				playerClone[i].color = 'rgba(250, 245, 35, 1 - i)'
-			}
-	}
-		console.log(playerClone)
-}
-*/

@@ -37,7 +37,7 @@ function drawLaser(Laser){
 }
 function drawParticle(Particles, posx, posy){
 	for(let i = 0; i < Particles.length; i++){
-		if(Particles[i].attractionSpeedY > 0.2 && Particles[i].attractionSpeedX > 0.2){
+		if(Particles[i].attractionSpeedX > 0.15){
 			if( Particles[i].posY > posy - (posy - Particles[i].originY)/2){
 					Particles[i].attractionSpeedY *=  1.05
 					Particles[i].posY += -Particles[i].attractionSpeedY
@@ -83,6 +83,35 @@ function trapDetectionLaser(trap, Laser){
           }
         }
       }
+    }
+  }
+}
+
+function Explosionparticles(x,y, color){
+  this.posX= x;
+  this.posY= y;
+  this.speedX = -5+Math.random()*30;
+  this.speedY = -15+Math.random()*30;
+  this.radius= 1 + Math.random()*5 ;
+  this.color= 'rgba(255,165,0,1)';
+  this.opacity = 1
+	this.originX = x
+	this.originY = y
+}
+
+function drawExplosion(){
+  for(let i = 0; i < explosionParticlesArray.length; i++){
+    if(explosionParticlesArray[0].opacity > 0.05){
+      explosionParticlesArray[i].speedX *= 0.91 + Math.random()/10
+      explosionParticlesArray[i].speedY *= 0.91 + Math.random()/10
+      explosionParticlesArray[i].posY += explosionParticlesArray[i].speedY
+      explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
+      explosionParticlesArray[i].opacity *= 0.94
+      explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
+      ctx.beginPath();
+      ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle =  explosionParticlesArray[i].color;
+      ctx.fill();
     }
   }
 }

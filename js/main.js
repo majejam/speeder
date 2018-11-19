@@ -14,6 +14,7 @@ let curve_speed = 0
 let arrayLaser = new Array()
 let particlesArray = new Array()
 let explosionParticlesArray = new Array()
+let finishingLinesArray = new Array()
 let keyPressed = false
 let cooldown = false
 let playingState = true
@@ -150,15 +151,21 @@ function drawTraps(width,heigth){
 	ctx.fillRect(0, 0, game.width, game.height)
   for(let i = 0;  i < traps.length;  i++){
 		ctx.font = "50px Borg"
-		if(traps[i].type !=1){
+		if(traps[i].type ==0 || traps[i].type ==2){
 			ctx.fillStyle =  traps[i].color
 			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
 		}
-		else{
+		if(traps[i].type ==1){
  			drawAsteroid(traps[i])
       //ctx.fillStyle =  "#ffffff"
 			//ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
 		}
+    if(traps[i].type ==3){
+      drawLines(traps[i])
+    }
+    if(traps[i].type ==4){
+      drawLines(traps[i])
+    }
 		if(debug){
 			ctx.fillText(traps[i].number,traps[i].posX,traps[i].posY-10)
 			ctx.fillText(Math.round(traps[i].posX),traps[i].posX+50,traps[i].posY-10)
@@ -195,9 +202,16 @@ function drawAsteroid(traps){
 	ctx.fill();
 	ctx.restore()
 }
+function drawLines(traps){
+  ctx.save()
+  ctx.fillStyle = 'white'
+  ctx.shadowColor   =  traps.color  // Couleur de l'ombre
+  ctx.shadowBlur    = 50       // Largeur du flou
+  ctx.fillRect(traps.posX+40, traps.posY, traps.width-15, traps.size)
+	ctx.restore()
+}
 function drawPoints(){
-	ctx.fillStyle =  traps[traps.length-1].color
-	ctx.fillText("FINISH",traps[traps.length-1].posX+50,game.height/2)
+	ctx.fillStyle = "white"
 	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,100)
 	ctx.fillText('xp : ' + Player.xp, game.width-500,100)
 }
@@ -218,7 +232,7 @@ function trapDetectionPlayer(){
     if((traps[i].posX < Player.posX) && (traps[i].posX + traps[i].width > Player.posX) && Player.life >= 0 ){
       if(((traps[i].posY + traps[i].size > (Player.posY)) && ((Player.posY) > traps[i].posY)) ||
 				((traps[i].posY + traps[i].size > (Player.posY+Player.size)) && ((Player.posY+Player.size) > traps[i].posY)) ||
-        ((traps[i].posY + traps[i].size/2 > (Player.posY+Player.size)) && ((Player.posY+Player.size/2) > traps[i].posY))){
+        ((traps[i].posY + traps[i].size > (Player.posY+Player.size/2)) && ((Player.posY+Player.size/2) > traps[i].posY))){
         if(VELOCITY < 40 && traps[i].type == 2 ){
           VELOCITY += 5
         }
@@ -247,7 +261,6 @@ function playerLifeHandler(){
       Player.directionDeath = Player.speed
       for(let i = 0; i <100; i++){
         explosionParticlesArray.push(new Explosionparticles(Player.posX,Player.posY))
-        console.log("ok")
       }
       Player.directionPlayer = false
     }
@@ -259,41 +272,4 @@ function playerLifeHandler(){
 function playerDeathHandler(directionDeath){
   Player.speed = Player.directionDeath/2
   Player.posX += 5
-
-}
-
-function finishLineHandler(){
-  ctx.font = "50px Poppins"
-  ctx.fillStyle = "#ffffff"
-  ctx.fillText("WELL DONE YOU HAVE FINISHED THE LEVEL !!!!!",600,game.height/2)
-}
-
-
-function Explosionparticles(x,y){
-  this.posX= x;
-  this.posY= y;
-  this.speedX = -5+Math.random()*30;
-  this.speedY = -15+Math.random()*30;
-  this.radius= 1 + Math.random()*5 ;
-  this.color= 'rgba(255,165,0,1)';
-  this.opacity = 1
-	this.originX = x
-	this.originY = y
-}
-
-function drawExplosion(){
-  for(let i = 0; i < explosionParticlesArray.length; i++){
-    if(explosionParticlesArray[0].opacity > 0.05){
-      explosionParticlesArray[i].speedX *= 0.91 + Math.random()/10
-      explosionParticlesArray[i].speedY *= 0.91 + Math.random()/10
-      explosionParticlesArray[i].posY += explosionParticlesArray[i].speedY
-      explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
-      explosionParticlesArray[i].opacity *= 0.94
-      explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
-      ctx.beginPath();
-      ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false);
-      ctx.fillStyle =  explosionParticlesArray[i].color;
-      ctx.fill();
-    }
-  }
 }

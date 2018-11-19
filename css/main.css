@@ -280,6 +280,56 @@ body{
   color: rgba(23, 41, 48, 1);;
 }
 
+.version{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 2%;
+  right: 2%;
+  font-family: 'Borg';
+  color:white;
+  font-size: 2vw;
+}
+
+.finishing-container{
+  position: absolute;
+  top: 30%;
+  left:50%;
+  height: 40%;
+  width: 2px;
+  background-color: white;
+  transform: scaleY(0);
+  transition-duration: 1s;
+  transition-property: transform;
+  will-change: transform;
+  transition-timing-function: ease-in;
+}
+
+.finishing-container-show{
+  transform: scaleY(1);
+}
+.finishing-variables{
+  position: absolute;
+  top: 30%;
+  left:51%;
+  height: 40%;
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: column;
+  background-color: white;
+  transform: scaleX(0);
+  transition-duration: 1s;
+  transition-property: transform;
+  will-change: transform;
+  transition-timing-function: ease-in;
+}
+
+.finishing-variables-show{
+  transform: scaleX(1);
+}
 /*Revise css*/
 
 .mainGame{
