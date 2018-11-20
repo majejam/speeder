@@ -17,7 +17,7 @@ let explosionParticlesArray = new Array()
 let finishingLinesArray = new Array()
 let keyPressed = false
 let cooldown = false
-let playingState = true
+let playingState = false
 let parcouringLevel = false
 
 //Resize
@@ -75,7 +75,6 @@ function gameLoop(){
   trapDetectionLaser(traps, arrayLaser)
 	playerMouvement()
   playerLifeHandler()
-
   if(autoRun){
     trapsMouvement(-1,VELOCITY)
   }
