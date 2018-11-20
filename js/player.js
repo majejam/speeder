@@ -1,6 +1,6 @@
 const Player = {}
   Player.posX= 500;
-  Player.posY= 400;
+  Player.posY= game.height/2;;
   Player.width= 25;
   Player.size= 25;
   Player.color= '#454554';

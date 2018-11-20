@@ -1,9 +1,9 @@
 function Particle(x,y){
-  this.posX= x;
-  this.posY= y;
+  this.posX= x
+  this.posY= y
 	this.pointsToGive = Math.ceil(Math.random()*20)
-  this.radius= 1 + this.pointsToGive /4 ;
-  this.color= '#FAF523';
+  this.radius= 1 + this.pointsToGive /4
+  this.color= '#FAF523'
 	this.originX = x
 	this.originY = y
 	this.attractionSpeedX = 1
@@ -11,12 +11,12 @@ function Particle(x,y){
 }
 
 function Laser(Player, nb){
-  this.posX= Player.posX + Player.size ;
-  this.posY= Player.posY + Player.size/2;
-  this.speedX = 10 ;
-  this.speedY = Player.speed*1.5/18 + nb ;
+  this.posX= Player.posX + Player.size
+  this.posY= Player.posY + Player.size/2
+  this.speedX = 10
+  this.speedY = Player.speed*1.5/18 + nb
   this.velocity = 1.01
-	this.size = 20;
+	this.size = 20
   this.color = '#ef4545'
 }
 
@@ -54,10 +54,10 @@ function drawParticle(Particles, posx, posy){
 					Particles[i].attractionSpeedX *=  0.95
 					Particles[i].posX += Particles[i].attractionSpeedX
 				}
-			ctx.beginPath();
-			ctx.arc( Particles[i].posX,  Particles[i].posY,  Particles[i].radius, 0, 2 * Math.PI, false);
-			ctx.fillStyle =  Particles[i].color;
-			ctx.fill();
+			ctx.beginPath()
+			ctx.arc( Particles[i].posX,  Particles[i].posY,  Particles[i].radius, 0, 2 * Math.PI, false)
+			ctx.fillStyle =  Particles[i].color
+			ctx.fill()
 		}
 		else{
 			if(Particles[i].pointsToGive > 0){
@@ -88,12 +88,12 @@ function trapDetectionLaser(trap, Laser){
 }
 
 function Explosionparticles(x,y, color){
-  this.posX= x;
-  this.posY= y;
-  this.speedX = -5+Math.random()*30;
-  this.speedY = -15+Math.random()*30;
-  this.radius= 1 + Math.random()*5 ;
-  this.color= 'rgba(255,165,0,1)';
+  this.posX= x
+  this.posY= y
+  this.speedX = -5+Math.random()*30
+  this.speedY = -15+Math.random()*30
+  this.radius= 1 + Math.random()*5
+  this.color= 'rgba(255,165,0,1)'
   this.opacity = 1
 	this.originX = x
 	this.originY = y
@@ -108,10 +108,10 @@ function drawExplosion(){
       explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
       explosionParticlesArray[i].opacity *= 0.94
       explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
-      ctx.beginPath();
-      ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false);
-      ctx.fillStyle =  explosionParticlesArray[i].color;
-      ctx.fill();
+      ctx.beginPath()
+      ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false)
+      ctx.fillStyle =  explosionParticlesArray[i].color
+      ctx.fill()
     }
   }
 }

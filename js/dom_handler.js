@@ -70,16 +70,16 @@ playButtton.addEventListener('click', () => {
 function generateStarsMenu(starContainer) {
   let starElement = document.createElement('div')
   let random = 3000 + Math.ceil(Math.random() * 1000)
-  starElement.classList.add('single-star-element');
-  starElement.classList.add('single-star-element-show');
-  starElement.classList.add('shining-star');
-  starElement.style.left = `${Math.ceil(Math.random() * 100)}%`;
-  starElement.style.top = `${Math.ceil(Math.random() * 100)}%`;
-  starElement.style.width = `${Math.ceil(Math.random() * 10)}px`;
-  starElement.style.opacity = 50+ Math.ceil(Math.random() * 49)/100 ;
-  starElement.style.height = starElement.style.width ;
-  starElement.style.animationDelay =`${random}ms`;
-  starElement.innerHTML = ' ';
+  starElement.classList.add('single-star-element')
+  starElement.classList.add('single-star-element-show')
+  starElement.classList.add('shining-star')
+  starElement.style.left = `${Math.ceil(Math.random() * 100)}%`
+  starElement.style.top = `${Math.ceil(Math.random() * 100)}%`
+  starElement.style.width = `${Math.ceil(Math.random() * 10)}px`
+  starElement.style.opacity = 50+ Math.ceil(Math.random() * 49)/100
+  starElement.style.height = starElement.style.width
+  starElement.style.animationDelay =`${random}ms`
+  starElement.innerHTML = ' '
   starContainer.appendChild(starElement)
 }
 
@@ -164,8 +164,8 @@ function setElementInDOM(){
 function finishLineHandler(){
   finishContainer.classList.add('finishing-container-show')
   variablesContainer.classList.add('finishing-variables-show')
-  canvasButton.style.backgroundColor = "rgba(23, 41, 48, 1)";
-  canvasButton.style.color = "white";
+  canvasButton.style.backgroundColor = "rgba(23, 41, 48, 1)"
+  canvasButton.style.color = "white"
 }
 canvasButton.addEventListener('click', () => {
   nextLevel()
@@ -175,12 +175,12 @@ function nextLevel(){
   Player.isFinished = false
   resetLevel()
   resetPlayer()
-  canvasButton.style.backgroundColor = "white";
-  canvasButton.style.color = "rgba(23, 41, 48, 1)";
+  canvasButton.style.backgroundColor = "white"
+  canvasButton.style.color = "rgba(23, 41, 48, 1)"
   finishContainer.classList.remove('finishing-container-show')
   variablesContainer.classList.remove('finishing-variables-show')
   traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
   for(let i = 0; i<traps.length; i++){
-    traps[i].posX +=6000
+    traps[i].posX +=2000
   }
 }

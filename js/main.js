@@ -64,7 +64,8 @@ function resetPlayer(){
 	Player.isFinished = false
   Player.directionDeath = 0
   Player.directionPlayer = true
-  Player.posX= 500;
+  Player.posX= 500
+  Player.posY= game.height/2
 	VELOCITY = 0.1
 }
 
@@ -108,7 +109,7 @@ function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
   let spacing = spacingTrap
   let array = new Array()
   array.push(new Trap(500, 0, numberElements+1, 0, true, false))
-  for(let i = 0;  i < numberElements; i++){
+  for(let i = 0;   i < numberElements; i++){
 		 startingPoint += 500
     array.push(new Trap(startingPoint, spacing, i,sizeOfTraps, false, false))
     startingPoint = startingPoint + spacing
@@ -182,27 +183,27 @@ function drawPlayerDebug(){
 }
 function drawAsteroid(traps){
 	ctx.save()
-	ctx.beginPath();
-	ctx.fillStyle =  '#bbbbbb';
-	ctx.strokeStyle =  "#454545";
+	ctx.beginPath()
+	ctx.fillStyle =  '#bbbbbb'
+	ctx.strokeStyle =  "#454545"
 	ctx.lineWidth   = 3
-	ctx.translate( traps.posX +  traps.width /2,  traps.posY +  traps.size /2);
-	ctx.rotate(traps.rotation*Math.PI/180);
-	ctx.translate( - traps.posX- traps.width/2, - traps.posY- traps.size/2  );
-	ctx.moveTo(traps.posX, traps.posY);
-	ctx.lineTo(traps.posX+traps.size, traps.posY-10);
-	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_1, traps.posY+traps.size/3);
-	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_2, traps.posY+traps.size/2.8);
-	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_3, traps.posY+traps.size/2.5);
-	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_4, traps.posY+traps.size/2);
-	ctx.lineTo(traps.posX+traps.size, traps.posY+traps.size);
-	ctx.lineTo(traps.posX+traps.size/2, traps.posY+traps.size/1.5);
-	ctx.lineTo(traps.posX+traps.size/3, traps.posY+traps.size/1.2);
-	ctx.lineTo(traps.posX, traps.posY+traps.size);
-	ctx.lineTo(traps.posX+traps.size/5, traps.posY+traps.size/2);
-	ctx.lineTo(traps.posX, traps.posY);
-	ctx.stroke();
-	ctx.fill();
+	ctx.translate( traps.posX +  traps.width /2,  traps.posY +  traps.size /2)
+	ctx.rotate(traps.rotation*Math.PI/180)
+	ctx.translate( - traps.posX- traps.width/2, - traps.posY- traps.size/2  )
+	ctx.moveTo(traps.posX, traps.posY)
+	ctx.lineTo(traps.posX+traps.size, traps.posY-10)
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_1, traps.posY+traps.size/3)
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_2, traps.posY+traps.size/2.8)
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_3, traps.posY+traps.size/2.5)
+	ctx.lineTo(traps.posX+traps.size+traps.asteroidPoint_4, traps.posY+traps.size/2)
+	ctx.lineTo(traps.posX+traps.size, traps.posY+traps.size)
+	ctx.lineTo(traps.posX+traps.size/2, traps.posY+traps.size/1.5)
+	ctx.lineTo(traps.posX+traps.size/3, traps.posY+traps.size/1.2)
+	ctx.lineTo(traps.posX, traps.posY+traps.size)
+	ctx.lineTo(traps.posX+traps.size/5, traps.posY+traps.size/2)
+	ctx.lineTo(traps.posX, traps.posY)
+	ctx.stroke()
+	ctx.fill()
 	ctx.restore()
 }
 function drawLines(traps){
@@ -227,7 +228,7 @@ function drawAllElements(curve, curve_speed){
    }
 	 drawPlayerDebug()
 	 drawParticle(particlesArray, game.width - 500, 100)
-   drawLaser(arrayLaser);
+   drawLaser(arrayLaser)
 }
 
 function trapDetectionPlayer(){
@@ -266,7 +267,7 @@ function playerLifeHandler(){
     VELOCITY = 0.1
     if(Player.speed && Player.directionPlayer){
       Player.directionDeath = Player.speed
-      for(let i = 0; i <100; i++){
+      for(let i =0;  i <100;  i++){
         explosionParticlesArray.push(new Explosionparticles(Player.posX,Player.posY))
       }
       Player.directionPlayer = false
