@@ -75,6 +75,7 @@ function gameLoop(){
   trapDetectionLaser(traps, arrayLaser)
 	playerMouvement()
   playerLifeHandler()
+
   if(autoRun){
     trapsMouvement(-1,VELOCITY)
   }
@@ -135,8 +136,8 @@ function keyManagement(e) {
         case 39: //right
           //autoRun = false
           break
-        case 32: //space
-
+        case 27: //space
+        optionShow()
           break
 				case 13:
 	        traps = generateTraps()

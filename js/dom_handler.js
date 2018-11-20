@@ -8,6 +8,9 @@ const playButtton = document.querySelector('.play-button')
 const finishContainer = document.querySelector('.finishing-container')
 const variablesContainer = document.querySelector('.finishing-variables')
 const canvasButton = document.querySelector('.canvas-button')
+const mainOptionButton = document.querySelector('.principal-option-button')
+const mainOptionInnerButton = document.querySelector('.principal-option-inner-button')
+const mainOptionContainer = document.querySelector('.option-main-container')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -17,6 +20,15 @@ const starSingleElement = document.querySelectorAll('.single-star-element')
 menuButton.addEventListener('click', () => {
   optionShow()
 })
+
+
+mainOptionButton.addEventListener('click', function() {
+  mainOptionContainer.classList.toggle('option-main-container-unselected')
+}, false)
+
+mainOptionInnerButton.addEventListener('click', function() {
+  mainOptionContainer.classList.toggle('option-main-container-unselected')
+}, false)
 
 function optionShow(){
   menuButton.classList.toggle('button-open-animation')
@@ -58,6 +70,8 @@ function generateStarsMenu(starContainer) {
   let starElement = document.createElement('div')
   let random = 3000 + Math.ceil(Math.random() * 1000)
   starElement.classList.add('single-star-element');
+  starElement.classList.add('single-star-element-show');
+  starElement.classList.add('shining-star');
   starElement.style.left = `${Math.ceil(Math.random() * 100)}%`;
   starElement.style.top = `${Math.ceil(Math.random() * 100)}%`;
   starElement.style.width = `${Math.ceil(Math.random() * 10)}px`;
