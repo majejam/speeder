@@ -111,7 +111,7 @@ function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
     startingPoint = startingPoint + spacing
   }
 
-  array.push(new Trap(startingPoint+1000,spacing,numberElements+1, 0, false,true))
+  array.push(new Trap(startingPoint+2000,spacing,numberElements+1, 0, false,true))
   return array
 }
 
@@ -269,7 +269,7 @@ function playerLifeHandler(){
       }
       Player.directionPlayer = false
     }
-  
+
     drawExplosion()
     //finishLineHandler()
     //playerDeathHandler(Player.directionDeath)

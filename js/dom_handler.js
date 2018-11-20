@@ -111,6 +111,7 @@ function setSeedLevel(element){
   document.getElementById('seed').value = element
 }
 document.getElementById('manualGenerate').addEventListener('click', function() {
+  nextLevel()
   resetLevel()
   if(autoGenerate == true){
     console.clear()
@@ -161,10 +162,12 @@ function nextLevel(){
   Player.isFinished = false
   canvasButton.style.backgroundColor = "white";
   canvasButton.style.color = "rgba(23, 41, 48, 1)";
-  finishContainer.classList.toggle('finishing-container-show')
-  variablesContainer.classList.toggle('finishing-variables-show')
+  finishContainer.classList.remove('finishing-container-show')
+  console.log('ok')
+  variablesContainer.classList.remove('finishing-variables-show')
+  console.log('ok')
   traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
   for(let i = 0; i<traps.length; i++){
-    traps[i].posX +=3000
+    traps[i].posX +=6000
   }
 }
