@@ -32,16 +32,16 @@
     </div>
   </div>
   <div class="option-game-container">
-    <div class="option-menu-button button-close-animation">
+    <div class="option-menu-button button-open-animation">
       <div class="menu-bar-1 menu-bar"></div>
       <div class="menu-bar-2 menu-bar"></div>
       <div class="menu-bar-3 menu-bar"></div>
     </div>
-    <div class="option-menu-container">
-      <div class="hidding-bar-effect menu-container-bar-1"></div>
-      <div class="hidding-bar-effect menu-container-bar-2"></div>
-      <div class="hidding-bar-effect menu-container-bar-3"></div>
-      <div class="hidding-bar-effect menu-container-bar-4"></div>
+    <div class="option-menu-container option-menu-container-selected menu-container-close">
+      <div class="hidding-bar-effect menu-container-bar-1 hidding-bar-effect-show"></div>
+      <div class="hidding-bar-effect menu-container-bar-2 hidding-bar-effect-show"></div>
+      <div class="hidding-bar-effect menu-container-bar-3 hidding-bar-effect-show"></div>
+      <div class="hidding-bar-effect menu-container-bar-4 hidding-bar-effect-show"></div>
       <div class="star-containers"></div>
       <div class="option-main-image"></div>
       <div class="title_menu big-font">Speeder</div>
@@ -77,13 +77,24 @@
       </div>
     </div>
   </div>
-  <div class="menu-container menu-container-unselected">
+  <div class="menu-container menu-container-selected">
     <div class="star-containers"></div>
     <div class="menu-main-image"></div>
     <div class="title_menu big-font">Speeder</div>
     <div class="inner-menu-container">
       <div class="play-button menu-button"><span>play</span></div>
-      <div class="principal-option-button menu-button"><span>options</span></div>
+      <div class="principal-option-inner-button menu-button"><span>options</span></div>
+      <div class="play-button menu-button"><span>Customize</span></div>
+    </div>
+  </div>
+  <div class="option-main-container ">
+    <div class="star-containers"></div>
+    <div class="menu-main-image"></div>
+    <div class="title_menu big-font">Speeder</div>
+    <div class="inner-menu-container">
+      <div class="play-button menu-button"><span>Motion blur</span></div>
+      <div class="play-button menu-button"><span>Generate</span></div>
+      <div class="principal-option-button menu-button"><span>Return home</span></div>
     </div>
   </div>
   <div class="finishing-container">
@@ -96,7 +107,7 @@
     <div class="canvas-button"><span>continue</span></div>
     <span></span>
   </div>
-  <div class="version"><span>0.90a</span></div>
+  <div class="version"><span>0.95a</span></div>
   <script src="js/particles.js"></script>
   <script src="js/dom_handler.js"></script>
   <script src="js/trapGenerator.js"></script>
