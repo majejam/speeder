@@ -57,7 +57,7 @@ function playerMouvement(){
       keyPressed = true
    }
 }
-if ((Player.keys[32]) && Player.isFinished) {
+if ((Player.keys[32]) &&  (Player.isFinished || Player.life < 1)) {
   nextLevel()
 }
   if (Player.posY + Player.size > game.height && Player.life != 0) {

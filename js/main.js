@@ -84,6 +84,9 @@ function gameLoop(){
   if(Player.isFinished){
     finishLineHandler()
   }
+  if(Player.life < 1){
+    finishLineHandler()
+  }
 }
 
 function initCanvasSize(){
@@ -268,7 +271,7 @@ function playerLifeHandler(){
       }
       Player.directionPlayer = false
     }
-
+    parcouringLevel = false
     drawExplosion()
     //finishLineHandler()
     //playerDeathHandler(Player.directionDeath)

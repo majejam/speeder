@@ -172,6 +172,8 @@ canvasButton.addEventListener('click', () => {
 
 function nextLevel(){
   Player.isFinished = false
+  resetLevel()
+  resetPlayer()
   canvasButton.style.backgroundColor = "white";
   canvasButton.style.color = "rgba(23, 41, 48, 1)";
   finishContainer.classList.remove('finishing-container-show')
