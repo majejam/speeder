@@ -50,7 +50,8 @@ function optionShow(){
   }
 }
 document.getElementById('Play').addEventListener('click', function() {
-	resetLevel()
+  nextLevel()
+  resetLevel()
 	if(autoRun == false){
 		autoRun = true
 	}

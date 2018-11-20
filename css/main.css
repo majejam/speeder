@@ -51,10 +51,11 @@ body{
   background-position: center;
   background-size: contain;
   position: absolute;
-  width: 50%;
+  width: 700px;
   height: 200%;
   left:-200px;
-  bottom: -1150px;
+  bottom: -120%;
+  z-index: 19;
 }
 
 .title_menu{
