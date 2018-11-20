@@ -126,13 +126,11 @@ document.getElementById('autoGenerate').addEventListener('click', function() {
   if(autoGenerate == true){
     document.getElementById('autoGenerate').classList.toggle('unselected')
     document.getElementById('autoGenerate').classList.toggle('selected')
-      console.log("Generation is manual")
     autoGenerate = false
   }else{
     autoGenerate = true
     document.getElementById('autoGenerate').classList.toggle('unselected')
     document.getElementById('autoGenerate').classList.toggle('selected')
-      console.log("Generation is automatic")
   }
 }, false)
 
@@ -163,9 +161,7 @@ function nextLevel(){
   canvasButton.style.backgroundColor = "white";
   canvasButton.style.color = "rgba(23, 41, 48, 1)";
   finishContainer.classList.remove('finishing-container-show')
-  console.log('ok')
   variablesContainer.classList.remove('finishing-variables-show')
-  console.log('ok')
   traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
   for(let i = 0; i<traps.length; i++){
     traps[i].posX +=6000

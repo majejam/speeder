@@ -118,7 +118,6 @@ function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
 function resetCanvas(){
 	ctx.fillStyle =  'rgba(23, 41, 58,1)'
 	ctx.fillRect(0, 0, game.width, game.height)
-	console.log("reset of the canvas")
 }
 
 function keyManagement(e) {
