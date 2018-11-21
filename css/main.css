@@ -310,6 +310,20 @@ body{
   transform-origin:top;
 }
 
+.finishing-container-top{
+  position: absolute;
+  top: 15%;
+  left:51%;
+  height: 30%;
+  width: 2px;
+  background-color: rgba(23, 41, 48, 1);
+  transform: scaleY(0);
+  transition-duration: 1s;
+  transition-property: transform;
+  will-change: transform;
+  transition-timing-function: ease-in;
+  transform-origin:top;
+}
 .finishing-container-show{
   transform: scaleY(1);
 }

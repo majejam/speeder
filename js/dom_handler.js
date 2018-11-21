@@ -75,6 +75,11 @@ playButtton.addEventListener('click', () => {
   resetLevel()
   optionShow()
   chronoStop()
+  chronoReset()
+  if(!autoRun){
+    autoRun = true
+  }
+
 })
 function generateStarsMenu(starContainer) {
   let starElement = document.createElement('div')

@@ -158,7 +158,7 @@ function drawTraps(width,heigth){
 	ctx.fillRect(0, 0, game.width, game.height)
   for(let i = 0;  i < traps.length;  i++){
 		ctx.font = "30px Poppins"
-		if(traps[i].type ==0 || traps[i].type ==2){
+		if(traps[i].type ==0){
 			ctx.fillStyle =  traps[i].color
 			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
 		}
@@ -169,6 +169,9 @@ function drawTraps(width,heigth){
   			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
       }
 		}
+    if(traps[i].type ==2){
+      drawBoost(traps[i])
+    }
     if(traps[i].type ==3){
       drawLines(traps[i])
     }
@@ -210,6 +213,15 @@ function drawAsteroid(traps){
 	ctx.stroke()
 	ctx.fill()
 	ctx.restore()
+}
+
+function drawBoost(boost){
+  ctx.save()
+  ctx.fillStyle =  'white'
+  ctx.shadowColor   =  boost.color  // Couleur de l'ombre
+  ctx.shadowBlur    = boost.size
+  ctx.fillRect(boost.posX, boost.posY + boost.size/1.5, boost.width, boost.size - boost.size/1.5)
+  ctx.restore()
 }
 function drawLines(traps){
   ctx.save()
