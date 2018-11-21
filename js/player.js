@@ -25,7 +25,7 @@ function playerMouvement(){
   Player.speed *= Player.friction
   Player.posY += Player.speed
   if(VELOCITY >= 15){
-    VELOCITY *= 0.99
+    VELOCITY *= 0.995
   }
   if(VELOCITY < 14){
     VELOCITY *= 1.1

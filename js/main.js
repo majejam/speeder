@@ -113,7 +113,7 @@ function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
   let numberElements = nbTraps
   let spacing = spacingTrap
   let array = new Array()
-  array.push(new Trap(500, 0, numberElements+1, 0, true, false))
+  array.push(new Trap(1000, 0, numberElements+1, 0, true, false))
   for(let i = 0;   i < numberElements; i++){
 		 startingPoint += 500
     array.push(new Trap(startingPoint, spacing, i,sizeOfTraps, false, false))
@@ -138,8 +138,9 @@ function keyManagement(e) {
         case 40: // arrow down key
 				case 83:
             break
-        case 37: //left
-           autoRun = true
+        case 82: //left
+          chronoStop()
+           resetLevel()
            break
         case 39: //right
           //autoRun = false
@@ -147,9 +148,6 @@ function keyManagement(e) {
         case 27: //space
         optionShow()
           break
-				case 13:
-	        traps = generateTraps()
-	        break
         default:
 				  break
     }
@@ -166,8 +164,10 @@ function drawTraps(width,heigth){
 		}
 		if(traps[i].type ==1){
  			drawAsteroid(traps[i])
-      //ctx.fillStyle =  "#ffffff"
-			//ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
+      if(debug){
+        ctx.fillStyle =  "#ffffff"
+  			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
+      }
 		}
     if(traps[i].type ==3){
       drawLines(traps[i])

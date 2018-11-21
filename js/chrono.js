@@ -24,10 +24,10 @@ function chrono(){
 		msec = "00" +msec
 	}
 	else if(msec < 100){
-		msec = "0"
+		msec = "0"+msec
 	}
 
-	timerID = setTimeout("chrono()", 10)
+	timerID = setTimeout("chrono()", 16)
 }
 function chronoStart(){
 	start = new Date()
