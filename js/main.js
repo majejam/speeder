@@ -19,6 +19,7 @@ let keyPressed = false
 let cooldown = false
 let playingState = false
 let parcouringLevel = false
+window.onload = chronoStart;
 
 //Resize
 const resize = () => {
@@ -32,7 +33,9 @@ window.addEventListener('resize', resize)
 resize()
 
 let traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
-
+if(parcouringLevel){
+  chronoContinue()
+}
 const loop = () => {
   window.requestAnimationFrame(loop)
   if(playingState){
@@ -65,7 +68,6 @@ function resetPlayer(){
   Player.directionDeath = 0
   Player.directionPlayer = true
   Player.posX= 500
-  Player.posY= game.height/2
 	VELOCITY = 0.1
 }
 
@@ -154,7 +156,7 @@ function drawTraps(width,heigth){
 	ctx.fillStyle = 'rgba(23, 41, 58, 0.5)'
 	ctx.fillRect(0, 0, game.width, game.height)
   for(let i = 0;  i < traps.length;  i++){
-		ctx.font = "50px Borg"
+		ctx.font = "30px Poppins"
 		if(traps[i].type ==0 || traps[i].type ==2){
 			ctx.fillStyle =  traps[i].color
 			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
@@ -218,8 +220,8 @@ function drawPoints(){
 	ctx.fillStyle = "white"
 	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,100)
 	ctx.fillText('xp : ' + Player.xp, game.width-500,100)
+  ctx.fillText(min + ' : ' + sec + ' : ' + Math.ceil(msec/10) , game.width-700,100)
 }
-
 function drawAllElements(curve, curve_speed){
 	 drawTraps()
 	 drawPoints()
@@ -252,6 +254,8 @@ function trapDetectionPlayer(){
         }
         if(traps[i].type == 4){
           parcouringLevel = true
+          chronoReset()
+          chronoStart()
         }
 				if(traps[i].type == 0){
 					particlesArray.push(new Particle(traps[i].posX,traps[i].posY))
@@ -274,6 +278,7 @@ function playerLifeHandler(){
     }
     parcouringLevel = false
     drawExplosion()
+    chronoStop()
     //finishLineHandler()
     //playerDeathHandler(Player.directionDeath)
   }
