@@ -3,9 +3,9 @@ var start = 0
 var end = 0
 var diff = 0
 var timerID = 0
-let msec = 0
-let sec = 0
-let min = 0
+let msec = 00
+let sec = 00
+let min = 00
 function chrono(){
 	end = new Date()
 	diff = end - start
@@ -44,5 +44,9 @@ function chronoReset(){
 
 function chronoStop(){
 	clearTimeout(timerID)
-  console.log('stop')
+}
+function chronoResetVar(){
+  msec = 0
+  sec = 0
+  min = 0
 }
