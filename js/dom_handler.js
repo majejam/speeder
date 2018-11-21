@@ -166,7 +166,9 @@ function finishLineHandler(){
   variablesContainer.classList.add('finishing-variables-show')
   canvasButton.style.backgroundColor = "rgba(23, 41, 48, 1)"
   canvasButton.style.color = "white"
+  chronoStop()
 }
+
 canvasButton.addEventListener('click', () => {
   nextLevel()
 })
