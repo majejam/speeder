@@ -62,7 +62,8 @@ function drawParticle(Particles, posx, posy){
 		else{
 			if(Particles[i].pointsToGive > 0){
 				Particles[i].pointsToGive--
-				Player.xp++
+        levelxp++
+				//Player.xp++
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 const Player = {}
   Player.posX= 500;
-  Player.posY= game.height/2;;
+  Player.posY= 500;
   Player.width= 25;
   Player.size= 25;
   Player.color= '#454554';
@@ -61,10 +61,12 @@ if ((Player.keys[32]) &&  (Player.isFinished || Player.life < 1)) {
   nextLevel()
 }
   if (Player.posY + Player.size > game.height && Player.life != 0) {
-    Player.posY = 1
+    Player.posY =  game.height - Player.size - 1
+    Player.speed = 0
   }
   if (Player.posY  < 0 && Player.life != 0) {
-    Player.posY =  game.height - Player.size-1
+    Player.posY =  1
+    Player.speed = 0
   }
 }
 

@@ -19,7 +19,8 @@ let keyPressed = false
 let cooldown = false
 let playingState = false
 let parcouringLevel = false
-window.onload = chronoStart;
+let levelxp = 0
+
 
 //Resize
 const resize = () => {
@@ -33,13 +34,14 @@ window.addEventListener('resize', resize)
 resize()
 
 let traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
-if(parcouringLevel){
-  chronoContinue()
-}
+
 const loop = () => {
   window.requestAnimationFrame(loop)
   if(playingState){
     gameLoop()
+  }
+  if(!playingState){
+    chronoStop()
   }
 }
 loop()
@@ -68,6 +70,7 @@ function resetPlayer(){
   Player.directionDeath = 0
   Player.directionPlayer = true
   Player.posX= 500
+  levelxp = 0
 	VELOCITY = 0.1
 }
 
@@ -218,9 +221,9 @@ function drawLines(traps){
 }
 function drawPoints(){
 	ctx.fillStyle = "white"
-	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,100)
-	ctx.fillText('xp : ' + Player.xp, game.width-500,100)
-  ctx.fillText(min + ' : ' + sec + ' : ' + Math.ceil(msec/10) , game.width-700,100)
+	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,75)
+	ctx.fillText('xp : ' + levelxp, game.width-470,75)
+  ctx.fillText(min + ' : ' + sec + ' : ' + msec , game.width-700,75)
 }
 function drawAllElements(curve, curve_speed){
 	 drawTraps()
@@ -276,6 +279,7 @@ function playerLifeHandler(){
       }
       Player.directionPlayer = false
     }
+    levelxp = 0
     parcouringLevel = false
     drawExplosion()
     chronoStop()

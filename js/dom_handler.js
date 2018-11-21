@@ -11,6 +11,9 @@ const canvasButton = document.querySelector('.canvas-button')
 const mainOptionButton = document.querySelector('.principal-option-button')
 const mainOptionInnerButton = document.querySelector('.principal-option-inner-button')
 const mainOptionContainer = document.querySelector('.option-main-container')
+const timerContaier = document.querySelector('.timer-container')
+const xpContainer = document.querySelector('.xp-container')
+const totalXpContainer = document.querySelector('.total-xp-container')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -35,6 +38,7 @@ function optionShow(){
   menuButton.classList.toggle('button-close-animation')
   menuContainer.classList.toggle('option-menu-container-selected')
   menuContainer.classList.toggle('menu-container-close')
+
   for (let i = 0; i < starSingleElement.length; i++) {
     starSingleElement[i].classList.toggle('single-star-element-show')
     starSingleElement[i].classList.toggle('shining-star')
@@ -47,11 +51,14 @@ function optionShow(){
   }
   else{
     playingState = true
+    chronoContinue()
   }
 }
 document.getElementById('Play').addEventListener('click', function() {
   nextLevel()
   resetLevel()
+  chronoStop()
+  chronoReset()
 	if(autoRun == false){
 		autoRun = true
 	}
@@ -65,7 +72,9 @@ returnHome.addEventListener('click', () => {
 playButtton.addEventListener('click', () => {
   homeContainer.classList.toggle('menu-container-unselected')
   homeContainer.classList.toggle('menu-container-selected')
+  resetLevel()
   optionShow()
+  chronoStop()
 })
 function generateStarsMenu(starContainer) {
   let starElement = document.createElement('div')
@@ -162,8 +171,15 @@ function setElementInDOM(){
 /// finish
 
 function finishLineHandler(){
+  if(levelxp != 0 && Player.life > 0){
+    xpContainer.innerHTML = `xp gained : ${levelxp}`
+    Player.xp += levelxp
+    levelxp = 0
+  }
   finishContainer.classList.add('finishing-container-show')
   variablesContainer.classList.add('finishing-variables-show')
+  timerContaier.innerHTML = `Timer taken : ${min}:${sec}:${msec}`
+  totalXpContainer.innerHTML = `Total xp : ${Player.xp}`
   canvasButton.style.backgroundColor = "rgba(23, 41, 48, 1)"
   canvasButton.style.color = "white"
   chronoStop()
@@ -177,6 +193,8 @@ function nextLevel(){
   Player.isFinished = false
   resetLevel()
   resetPlayer()
+  VELOCITY = 10
+  chronoResetVar()
   canvasButton.style.backgroundColor = "white"
   canvasButton.style.color = "rgba(23, 41, 48, 1)"
   finishContainer.classList.remove('finishing-container-show')
