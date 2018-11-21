@@ -40,7 +40,7 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
   if(this.type == 3){
     this.size = game.height*4
     this.posY = 0
-    this.width = 20;
+    this.width = 40;
     this.color = "red";
   }
   if(this.type == 4){
