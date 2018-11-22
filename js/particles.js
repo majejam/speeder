@@ -116,3 +116,29 @@ function drawExplosion(){
     }
   }
 }
+
+function drawShield(){
+  ctx.save()
+  ctx.beginPath()
+  ctx.strokeStyle =  "white"
+  ctx.shadowColor   =  "blue"
+  ctx.shadowBlur    = 20
+  ctx.lineWidth   = 3
+  //ctx.rotate(0.5*Math.PI/180)
+  ctx.arc(Player.posX + Player.size/2,Player.posY + Player.size/2,50,0,2*Math.PI);
+  ctx.stroke()
+  ctx.restore()
+
+}
+function drawBG(x,y,size){
+  ctx.save()
+  ctx.beginPath()
+  ctx.fillStyle =  "white"
+  ctx.shadowColor   =  "rgb(255,255,224)"
+  ctx.shadowBlur    = 10
+  ctx.lineWidth   = 3
+  ctx.arc(x+size/2, y+size/2,size,0,2*Math.PI);
+  ctx.fill()
+  ctx.restore()
+
+}

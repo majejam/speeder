@@ -238,9 +238,11 @@ function drawPoints(){
   ctx.fillText(min + ' : ' + sec + ' : ' + msec , game.width-700,75)
 }
 function drawAllElements(curve, curve_speed){
+   drawBG(Math.random()*game.width, Math.random()*game.height, Math.random()*5) 
 	 drawTraps()
 	 drawPoints()
    if(Player.life >= 1){
+     drawShield()
      drawPlayer(curve,curve_speed)
    }
 	 drawPlayerDebug()
