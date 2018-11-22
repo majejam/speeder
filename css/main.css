@@ -341,15 +341,17 @@ body{
   transform: scaleX(0);
   transition-duration: 1s;
   transition-delay: 1s;
-  transition-property: transform;
+  transition-property: transform opacity;
   transform-origin: left;
   will-change: transform;
   transition-timing-function: ease-in;
   font-size: 2vw;
+  opacity: 0;
 }
 
 .finishing-variables-show{
   transform: scaleX(1);
+  opacity: 1;
 }
 
 .divide-container{
@@ -399,6 +401,11 @@ body{
   transform: translateY(0%);
 }
 
+.motion-blur-on{
+  background-color: white;
+  color: rgba(23, 41, 48, 1);
+}
+
 /*Revise css*/
 
 .mainGame{
@@ -419,13 +426,23 @@ canvas{
 .seedForm{
   display: flex;
   flex-direction:column;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 5px;
-  padding: 10px 5px 10px 5px;
-  background-color: white;
+  padding: 10px 13px 10px 10px;
+  color:white;
 }
 input{
   width:100%;
+  border-color: white;
+  background-color: rgb(23, 41, 58);
+  color:white;
+  font-family: 'Poppins';
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  padding-left: 3px;
+  margin-bottom: 10px;
 }
 #manualGenerate{
   padding-left: 5px;
@@ -441,7 +458,7 @@ input{
 }
 .option{
   position: fixed;
-  top:10px;
+  top:-1000px;
   left:10px;
   display: flex;
   justify-content: space-between;
@@ -457,25 +474,30 @@ input{
   align-items: center;
   width: 90%;
   height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .containerSelection span{
-  font-size: 2em;
-  color: black;
+  font-family: 'Poppins';
+  font-size: 20px;
+  color: white;
+}
+label{
+  margin-top: 5px;
 }
 #manualGenerate{
-  border: 1px solid black;
+  border: 1px solid white;
   padding: 10px 5px 10px 5px;
-  background-color: white;
   cursor: pointer;
   user-select: none;
   width: 30%;
   text-align: center;
   height: 30px;
-
+  color:white;
+  border-radius: 10px;
 }
 #autoGenerate{
   padding: 10px 5px 10px 5px;
-  background-color: white;
   cursor: pointer;
   user-select: none;
   width: 30%;
@@ -483,7 +505,8 @@ input{
   transition: 1s linear;
   height: 30px;
   font-size: 15px;
-  color: black;
+  color: white;
+  border-radius: 10px;
 }
 .unselected{
   border: 2px solid red;
