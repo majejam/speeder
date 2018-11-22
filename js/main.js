@@ -15,11 +15,13 @@ let arrayLaser = new Array()
 let particlesArray = new Array()
 let explosionParticlesArray = new Array()
 let finishingLinesArray = new Array()
+let bgArray = new Array()
 let keyPressed = false
 let cooldown = false
 let playingState = false
 let parcouringLevel = false
 let levelxp = 0
+let canvas_color = 'rgba(23, 41, 48, 0.5)';
 
 
 //Resize
@@ -58,6 +60,7 @@ window.addEventListener("keyup", function (e) {
 
 function resetLevel(){
 	resetCanvas()
+  initBG()
   resetPlayer()
   explosionParticlesArray.splice(0,explosionParticlesArray.length+1)
 	traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
@@ -76,6 +79,7 @@ function resetPlayer(){
 
 
 function gameLoop(){
+  redrawCanvas()
 	drawAllElements(curve, curve_speed)
   trapDetectionPlayer()
   trapDetectionLaser(traps, arrayLaser)
@@ -153,14 +157,16 @@ function keyManagement(e) {
     }
 }
 
+function redrawCanvas(){
+  ctx.fillStyle = canvas_color
+  ctx.fillRect(0, 0, game.width, game.height)
+}
+
 function drawTraps(width,heigth){
-	ctx.fillStyle = 'rgba(23, 41, 58, 0.5)'
-	ctx.fillRect(0, 0, game.width, game.height)
   for(let i = 0;  i < traps.length;  i++){
 		ctx.font = "30px Poppins"
 		if(traps[i].type ==0){
-			ctx.fillStyle =  traps[i].color
-			ctx.fillRect(traps[i].posX, traps[i].posY, traps[i].width, traps[i].size)
+			drawXP(traps[i])
 		}
 		if(traps[i].type ==1){
  			drawAsteroid(traps[i])
@@ -238,11 +244,11 @@ function drawPoints(){
   ctx.fillText(min + ' : ' + sec + ' : ' + msec , game.width-700,75)
 }
 function drawAllElements(curve, curve_speed){
-   drawBG(Math.random()*game.width, Math.random()*game.height, Math.random()*5) 
+   drawBG()
 	 drawTraps()
 	 drawPoints()
    if(Player.life >= 1){
-     drawShield()
+     //drawShield()
      drawPlayer(curve,curve_speed)
    }
 	 drawPlayerDebug()
