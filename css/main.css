@@ -227,7 +227,7 @@ body{
 .single-star-element{
   position: absolute;
   border-radius: 100%;
-  background-color: rgb(255,255,229);
+  background-color: rgb(255,255,255);
   transition-property: transform;
   transform: scale(0);
   transition-duration: 3s;
