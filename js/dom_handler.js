@@ -14,6 +14,7 @@ const mainOptionContainer = document.querySelector('.option-main-container')
 const timerContaier = document.querySelector('.timer-container')
 const xpContainer = document.querySelector('.xp-container')
 const totalXpContainer = document.querySelector('.total-xp-container')
+const motionBlurButton = document.querySelector('.motion-blur-button')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -66,6 +67,18 @@ document.getElementById('Play').addEventListener('click', function() {
 		autoRun = false
 	}
 }, false)
+
+motionBlurButton.addEventListener('click', () => {
+  if(canvas_color == 'rgba(23, 41, 48, 1)'){
+    canvas_color = 'rgba(23, 41, 48, 0.5)'
+    motionBlurButton.classList.add('motion-blur-on')
+  }
+  else{
+      canvas_color = 'rgba(23, 41, 48, 1)'
+      motionBlurButton.classList.remove('motion-blur-on')
+  }
+})
+
 returnHome.addEventListener('click', () => {
   homeContainer.classList.toggle('menu-container-unselected')
 })

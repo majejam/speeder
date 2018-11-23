@@ -2,7 +2,7 @@ function Particle(x,y){
   this.posX= x
   this.posY= y
 	this.pointsToGive = Math.ceil(Math.random()*20)
-  this.radius= 1 + this.pointsToGive /4
+  this.size= 1 + this.pointsToGive /4
   this.color= '#FAF523'
 	this.originX = x
 	this.originY = y
@@ -18,6 +18,12 @@ function Laser(Player, nb){
   this.velocity = 1.01
 	this.size = 20
   this.color = '#ef4545'
+}
+
+function Star(){
+  this.posX= Math.random()* game.width
+  this.posY= Math.random()* game.height
+	this.size = Math.random()*2
 }
 
 
@@ -54,10 +60,7 @@ function drawParticle(Particles, posx, posy){
 					Particles[i].attractionSpeedX *=  0.95
 					Particles[i].posX += Particles[i].attractionSpeedX
 				}
-			ctx.beginPath()
-			ctx.arc( Particles[i].posX,  Particles[i].posY,  Particles[i].radius, 0, 2 * Math.PI, false)
-			ctx.fillStyle =  Particles[i].color
-			ctx.fill()
+      drawXP(Particles[i])
 		}
 		else{
 			if(Particles[i].pointsToGive > 0){
@@ -109,10 +112,15 @@ function drawExplosion(){
       explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
       explosionParticlesArray[i].opacity *= 0.94
       explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
+      ctx.save()
       ctx.beginPath()
+      ctx.shadowColor   =  explosionParticlesArray[i].color
+      ctx.shadowBlur    = 1
       ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false)
       ctx.fillStyle =  explosionParticlesArray[i].color
+      ctx.stroke()
       ctx.fill()
+      ctx.restore()
     }
   }
 }
@@ -124,21 +132,40 @@ function drawShield(){
   ctx.shadowColor   =  "blue"
   ctx.shadowBlur    = 20
   ctx.lineWidth   = 3
-  //ctx.rotate(0.5*Math.PI/180)
   ctx.arc(Player.posX + Player.size/2,Player.posY + Player.size/2,50,0,2*Math.PI);
   ctx.stroke()
   ctx.restore()
-
 }
-function drawBG(x,y,size){
+
+function drawXP(traps){
   ctx.save()
   ctx.beginPath()
-  ctx.fillStyle =  "white"
-  ctx.shadowColor   =  "rgb(255,255,224)"
-  ctx.shadowBlur    = 10
+  ctx.strokeStyle =  "white"
+  ctx.fillStyle = 'white'
+  ctx.shadowColor   =  "rgb(255,223,0)"
+  ctx.shadowBlur    = traps.size/2
   ctx.lineWidth   = 3
-  ctx.arc(x+size/2, y+size/2,size,0,2*Math.PI);
+  ctx.arc(traps.posX + traps.size/2,traps.posY + traps.size/2,traps.size/4,0,2*Math.PI);
+  ctx.stroke()
   ctx.fill()
   ctx.restore()
+}
 
+function initBG(){
+  bgArray.splice(0,bgArray.length)
+  for(let i = 0; i <100; i++){
+    bgArray.push(new Star())
+  }
+}
+function drawBG(){
+  for(let i = 0; i < bgArray.length; i++){
+    ctx.save()
+    ctx.beginPath()
+    ctx.fillStyle =  "white"
+    //ctx.shadowColor   =  "rgb(255,255,224)"
+    //ctx.shadowBlur    = 10
+    ctx.arc(bgArray[i].posX+bgArray[i].size/2, bgArray[i].posY+bgArray[i].size/2, bgArray[i].size,0,2*Math.PI);
+    ctx.fill()
+    ctx.restore()
+  }
 }
