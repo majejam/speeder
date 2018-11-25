@@ -401,7 +401,6 @@ function setSizeElement(element) {
 
 function setSeedLevel(element) {
   document.getElementById('seed').value = element
-  console.log(element)
 }
 //if click on generate button, reset everything
 document.getElementById('manualGenerate').addEventListener('click', function() {
