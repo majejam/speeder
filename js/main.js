@@ -24,7 +24,10 @@ let levelxp = 0
 let canvas_color = 'rgba(23, 41, 48, 0.5)';
 let particles_display = true
 let soundPlay = true
-
+let story = false;
+let numberElementStory = 2
+let sizeElementStory = 1
+let spacinElementStory = 20
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
@@ -62,9 +65,20 @@ window.addEventListener("keyup", function (e) {
 function resetLevel(){
 	resetCanvas()
   initBG()
-  resetPlayer()
   explosionParticlesArray.splice(0,explosionParticlesArray.length+1)
-	traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
+  if(story){
+    if(Player.life>0){
+      setSeedLevel(Math.ceil(Math.random()*10000))
+      numberElementStory = 5 + Math.ceil(Math.random()*100)
+      sizeElementStory = 0.2+Math.random()*1.5
+      spacinElementStory = 0+Math.random()*50
+    }
+    traps = generateTraps(autoGenerate, numberElementStory,sizeElementStory,spacinElementStory)
+  }
+  else{
+    traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
+  }
+  resetPlayer()
 }
 
 function resetPlayer(){
@@ -74,6 +88,8 @@ function resetPlayer(){
   Player.directionDeath = 0
   Player.directionPlayer = true
   Player.posX= 500
+  Player.boostNumberOfTime = 1
+  Player.numberOfLaserGame = Player.numberOfLaser
   levelxp = 0
 	VELOCITY = 0.1
 }
@@ -153,11 +169,14 @@ function keyManagement(e) {
 				case 83:
             break
         case 82: //left
+        if(parcouringLevel){
           chronoStop()
-           resetLevel()
+          resetLevel()
+        }
            break
-        case 39: //right
-          //autoRun = false
+        case 39:
+        case 69:
+          boost()
           break
         case 27: //space
         optionShow()
@@ -250,7 +269,7 @@ function drawLines(traps){
 function drawPoints(){
 	ctx.fillStyle = "white"
 	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,75)
-	ctx.fillText('xp : ' + levelxp, game.width-470,75)
+	ctx.fillText('xp : ' + Player.xp, game.width-500,75)
   ctx.fillText(min + ' : ' + sec + ' : ' + msec , game.width-700,75)
 }
 function drawAllElements(curve, curve_speed){

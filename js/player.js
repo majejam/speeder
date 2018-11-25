@@ -12,16 +12,29 @@ const Player = {}
   Player.mouvement= true;
   Player.life = 1
   Player.isFinished = false
-  Player.xp = 0
-  Player.trail_color = 'rgba(233,167,250,1)'
+  Player.xp = 1555200
+  Player.trail_color = 'rgb(66, 223, 244)'
+  Player.trail_color_number = 0
   Player.trail_size = 20
-  Player.bonus = 1
-  Player.numberOfLaser = 6
+  Player.bonus = 0
+  Player.laserBonus = 0
+  Player.numberOfLaser = 1
+  Player.numberOfLaserGame = 1
   Player.bonusNumber = 3
+  Player.boost = 0
+  Player.boostPower = 0
+  Player.boostNumberOfTime = 0
   Player.rotation = 1
   Player.directionPlayer = true
   Player.directionDeath = 0
 
+function boost(){
+  if(Player.boost > 0 && Player.boostNumberOfTime > 0){
+    VELOCITY += Player.boostPower
+    Player.boostNumberOfTime--
+    console.log('ok')
+  }
+}
 function playerMouvement(){
   Player.speed *= Player.friction
   Player.posY += Player.speed
@@ -84,8 +97,7 @@ if ((Player.keys[32]) &&  (Player.isFinished || Player.life < 1)) {
   ctx.strokeStyle =  "#aa7870";
   ctx.translate(Player.posX + Player.size /2, Player.posY + Player.size /2);
   ctx.rotate(Player.rotation*Player.speed*1.5/180);
-  ctx.translate( -Player.posX-Player.size/2, -Player.posY-Player.size/2);
-  //ctx.fillRect(Player.posX, Player.posY, Player.width, Player.size);
+  ctx.translate(-Player.posX-Player.size/2, -Player.posY-Player.size/2);
   ctx.lineWidth   = 2
   ctx.moveTo(Player.posX, Player.posY);
   ctx.lineTo(Player.posX + Player.size, Player.posY+Player.size/2);

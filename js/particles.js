@@ -77,7 +77,7 @@ function playerShoot(Player,nb){
     laserSound.play()
   }
   arrayLaser.push(new Laser(Player,nb))
-  Player.numberOfLaser--
+  Player.numberOfLaserGame--
 }
 
 function drawLaserCount(){
@@ -85,7 +85,7 @@ function drawLaserCount(){
     ctx.fillStyle =  'white'
     ctx.shadowColor   =  'red' // Couleur de l'ombre
     ctx.shadowBlur    = 10       // Largeur du flou
-    ctx.fillRect(70, 70, Player.numberOfLaser*15, 5)
+    ctx.fillRect(70, 70, Player.numberOfLaserGame*15, 5)
     ctx.restore()
 }
 function trapDetectionLaser(trap, Laser){

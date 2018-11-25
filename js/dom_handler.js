@@ -24,11 +24,177 @@ const totalXpContainer = document.querySelector('.total-xp-container')
 const motionBlurButtons = document.querySelectorAll('.motion-blur-button')
 const particlesButtons = document.querySelectorAll('.particles-button')
 const soundButtons = document.querySelectorAll('.sound-button')
+const customButton = document.querySelector('.custom-button')
+const customContainer = document.querySelector('.custom-main-container')
+const returnCustomButton = document.querySelector('.custom-return-button')
+const laserCustomButton = document.querySelectorAll('.laser-bonus')
+const boostCustomButton = document.querySelectorAll('.boost-bonus')
+const trailCustomButton = document.querySelectorAll('.trail-bonus')
+const laserPrices = document.querySelectorAll('.laser-bonus-price')
+const boostPrices = document.querySelectorAll('.boost-bonus-price')
+const trailPrices = document.querySelectorAll('.trail-bonus-price')
+const playerXPContainer = document.querySelector('.custom-xp-span')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
   }
 }
+
+function clearButtons(elements, type) {
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].classList.remove(type);
+  }
+}
+
+function clearButtonsColor(elements) {
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].classList.remove('selected-color-blue');
+    elements[i].classList.remove('selected-color-red');
+    elements[i].classList.remove('selected-color-rose');
+    elements[i].classList.remove('selected-color-yelow');
+  }
+}
+
+for (let i = 0; i < laserCustomButton.length; i++) {
+  laserCustomButton[i].addEventListener('click', () => {
+    if (i == 0) {
+        clearButtons(laserCustomButton, 'bonus-button-selected')
+      Player.numberOfLaser = 1
+      Player.bonus = 0
+      laserCustomButton[i].classList.toggle('bonus-button-selected')
+    }
+    if(i == 1 && (Player.xp >= 5000 || Player.laserBonus > 0)) {
+      clearButtons(laserCustomButton, 'bonus-button-selected')
+      Player.numberOfLaser = 3
+      Player.bonus = 0
+      laserCustomButton[i].classList.toggle('bonus-button-selected')
+      if(Player.laserBonus < 1){
+          laserPrices[i].innerHTML = '0 xp'
+          Player.laserBonus = 1
+          Player.xp = Player.xp - 5000
+      }
+    }
+    if(i == 2 && (Player.xp >= 50000 || Player.laserBonus > 1)){
+        clearButtons(laserCustomButton, 'bonus-button-selected')
+      Player.numberOfLaser = 6
+      Player.bonus = 1
+      laserCustomButton[i].classList.toggle('bonus-button-selected')
+      if(Player.laserBonus < 2){
+          laserPrices[i].innerHTML = '0 xp'
+          Player.laserBonus = 2
+          Player.xp = Player.xp - 50000
+      }
+    }
+    if(i == 3 && (Player.xp >= 500000 || Player.laserBonus > 2)) {
+        clearButtons(laserCustomButton, 'bonus-button-selected')
+      Player.numberOfLaser = 12
+      Player.bonus = 1
+      laserCustomButton[i].classList.toggle('bonus-button-selected')
+      if(Player.laserBonus < 3){
+          laserPrices[i].innerHTML = '0 xp'
+          Player.laserBonus = 3
+          Player.xp = Player.xp - 500000
+      }
+    }
+    playerXPContainer.innerHTML = 'xp : '+ Player.xp
+  });
+}
+
+for (let i = 0; i < boostCustomButton.length; i++) {
+  boostCustomButton[i].addEventListener('click', () => {
+    if (i == 0) {
+      clearButtons(boostCustomButton, 'bonus-button-selected')
+      Player.boostPower = 0
+      Player.boostNumberOfTime = 0
+      boostCustomButton[i].classList.toggle('bonus-button-selected')
+    }
+    if(i == 1 && (Player.xp >= 5000 || Player.boost > 0)) {
+      clearButtons(boostCustomButton, 'bonus-button-selected')
+      Player.boostPower = 10
+      Player.boostNumberOfTime = 1
+      boostCustomButton[i].classList.toggle('bonus-button-selected')
+      if(Player.boost < 1){
+          boostPrices[i].innerHTML = '0 xp'
+          Player.boost = 1
+          Player.xp = Player.xp - 5000
+      }
+    }
+    if(i == 2 && (Player.xp >= 50000 || Player.boost > 1)){
+      clearButtons(boostCustomButton, 'bonus-button-selected')
+      Player.boostPower = 20
+      Player.boostNumberOfTime = 1
+      boostCustomButton[i].classList.toggle('bonus-button-selected')
+      if(Player.boost < 2){
+          boostPrices[i].innerHTML = '0 xp'
+          Player.boost = 2
+          Player.xp = Player.xp - 50000
+      }
+    }
+    if(i == 3 && (Player.xp >= 500000 || Player.boost > 2)) {
+      clearButtons(boostCustomButton, 'bonus-button-selected')
+      Player.boostPower = 40
+      Player.boostNumberOfTime = 1
+      laserCustomButton[i].classList.toggle('bonus-button-selected')
+      if(Player.boost < 3){
+          boostPrices[i].innerHTML = '0 xp'
+          Player.boost = 3
+          Player.xp = Player.xp - 500000
+      }
+    }
+    playerXPContainer.innerHTML = 'xp : '+ Player.xp
+  });
+}
+
+
+for (let i = 0; i < trailCustomButton.length; i++) {
+  trailCustomButton[i].addEventListener('click', () => {
+    if (i == 0) {
+      clearButtonsColor(trailCustomButton)
+      Player.trail_color = 'rgb(66, 223, 244)'
+      trailCustomButton[i].classList.toggle('selected-color-blue')
+    }
+    if(i == 1 && (Player.xp >= 5000 || Player.trail_color_number > 0)) {
+      clearButtonsColor(trailCustomButton)
+      Player.trail_color = 'rgb(255, 56, 81)'
+      trailCustomButton[i].classList.toggle('selected-color-red')
+      if(Player.trail_color_number < 1){
+          trailPrices[i].innerHTML = '0 xp'
+          Player.trail_color_number = 1
+          Player.xp = Player.xp - 5000
+      }
+    }
+    if(i == 2 && (Player.xp >= 50000 || Player.trail_color_number > 1)){
+      clearButtonsColor(trailCustomButton)
+      Player.trail_color = 'rgb(233, 113, 255)'
+      trailCustomButton[i].classList.toggle('selected-color-rose')
+      if(Player.trail_color_number < 2){
+          trailPrices[i].innerHTML = '0 xp'
+          Player.trail_color_number = 2
+          Player.xp = Player.xp - 50000
+      }
+    }
+    if(i == 3 && (Player.xp >= 500000 || Player.trail_color_number > 2)) {
+      clearButtonsColor(trailCustomButton)
+      Player.trail_color = 'rgb(255, 250, 114)'
+      trailCustomButton[i].classList.toggle('selected-color-yellow')
+      if(Player.trail_color_number < 3){
+          trailPrices[i].innerHTML = '0 xp'
+          Player.trail_color_number = 3
+          Player.xp = Player.xp - 500000
+      }
+    }
+    playerXPContainer.innerHTML = 'xp : '+ Player.xp
+  });
+}
+
+customButton.addEventListener('click', function() {
+  customContainer.classList.toggle('custom-main-container-selected')
+  playerXPContainer.innerHTML = 'xp : '+ Player.xp
+}, false)
+
+returnCustomButton.addEventListener('click', function() {
+  customContainer.classList.toggle('custom-main-container-selected')
+}, false)
 
 controlsButton.addEventListener('click', function() {
   controlsContainer.classList.toggle('controls-main-container-selected')
@@ -77,6 +243,7 @@ for(let i = 0; i < particlesButtons.length; i++){
   })
 }
 playGenerateButtton.addEventListener('click', () => {
+  story = false
   homeContainer.classList.toggle('menu-container-unselected')
   homeContainer.classList.toggle('menu-container-selected')
   mainOptionContainer.classList.toggle('option-main-container-unselected')
@@ -164,6 +331,7 @@ returnHome.addEventListener('click', () => {
   homeContainer.classList.toggle('menu-container-unselected')
 })
 playButtton.addEventListener('click', () => {
+  story = true
   homeContainer.classList.toggle('menu-container-unselected')
   homeContainer.classList.toggle('menu-container-selected')
   resetLevel()
@@ -232,8 +400,10 @@ function setSizeElement(element){
 }
 function setSeedLevel(element){
   document.getElementById('seed').value = element
+  console.log(element)
 }
 document.getElementById('manualGenerate').addEventListener('click', function() {
+  story = false
   nextLevel()
   resetLevel()
   if(autoGenerate == true){
@@ -246,6 +416,7 @@ document.getElementById('manualGenerate').addEventListener('click', function() {
 
 
 document.getElementById('autoGenerate').addEventListener('click', function() {
+  story = false
   if(autoGenerate == true){
     document.getElementById('autoGenerate').classList.toggle('unselected')
     document.getElementById('autoGenerate').classList.toggle('selected')
@@ -298,7 +469,7 @@ function nextLevel(){
   canvasButton.style.color = "rgba(23, 41, 48, 1)"
   finishContainer.classList.remove('finishing-container-show')
   variablesContainer.classList.remove('finishing-variables-show')
-  traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
+  //traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
   for(let i = 0; i<traps.length; i++){
     traps[i].posX +=2000
   }
