@@ -53,7 +53,7 @@ function clearButtonsColor(elements) {
     elements[i].classList.remove('selected-color-blue');
     elements[i].classList.remove('selected-color-red');
     elements[i].classList.remove('selected-color-rose');
-    elements[i].classList.remove('selected-color-yelow');
+    elements[i].classList.remove('selected-color-yellow');
   }
 }
 //Handler of the laser bonus
