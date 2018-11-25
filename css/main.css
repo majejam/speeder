@@ -440,6 +440,13 @@ body{
   color: rgba(23, 41, 48, 1);
 }
 
+.generate-buttons-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: auto;
+}
 /*Revise css*/
 
 .mainGame{
