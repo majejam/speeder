@@ -5,6 +5,7 @@ const starContainers = document.querySelectorAll('.star-containers')
 const returnHome = document.querySelector('.return-home')
 const homeContainer = document.querySelector('.menu-container')
 const playButtton = document.querySelector('.play-button')
+const playGenerateButtton = document.querySelector('.play-generate-button')
 const finishContainer = document.querySelector('.finishing-container')
 const variablesContainer = document.querySelector('.finishing-variables')
 const canvasButton = document.querySelector('.canvas-button')
@@ -17,8 +18,8 @@ const generateMenu = document.querySelector('.generate-button')
 const timerContaier = document.querySelector('.timer-container')
 const xpContainer = document.querySelector('.xp-container')
 const totalXpContainer = document.querySelector('.total-xp-container')
-const motionBlurButton = document.querySelector('.motion-blur-button')
-const particlesButton = document.querySelector('.particles-button')
+const motionBlurButtons = document.querySelectorAll('.motion-blur-button')
+const particlesButtons = document.querySelectorAll('.particles-button')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -28,15 +29,33 @@ const starSingleElement = document.querySelectorAll('.single-star-element')
 menuButton.addEventListener('click', () => {
   optionShow()
 })
-
-particlesButton.addEventListener('click', () => {
-  if(!particles_display){
-    particles_display = true
-    particlesButton.classList.add('particles-on')
-  }
-  else{
-      particles_display = false
-      particlesButton.classList.remove('particles-on')
+for(let i = 0; i < particlesButtons.length; i++){
+  particlesButtons[i].addEventListener('click', () => {
+    if(!particles_display){
+      for(let j = 0; j < particlesButtons.length; j++){
+        particlesButtons[j].classList.add('particles-on')
+      }
+      particles_display = true
+    }
+    else{
+        for(let j = 0; j < particlesButtons.length; j++){
+          particlesButtons[j].classList.remove('particles-on')
+        }
+          particles_display = false
+    }
+  })
+}
+playGenerateButtton.addEventListener('click', () => {
+  homeContainer.classList.toggle('menu-container-unselected')
+  homeContainer.classList.toggle('menu-container-selected')
+  mainOptionContainer.classList.toggle('option-main-container-unselected')
+  generateContainer.classList.toggle('generate-main-container-selected')
+  resetLevel()
+  optionShow()
+  chronoStop()
+  chronoReset()
+  if(!autoRun){
+    autoRun = true
   }
 })
 
@@ -91,16 +110,23 @@ document.getElementById('Play').addEventListener('click', function() {
 	}
 }, false)
 
-motionBlurButton.addEventListener('click', () => {
-  if(canvas_color == 'rgba(23, 41, 48, 1)'){
-    canvas_color = 'rgba(23, 41, 48, 0.5)'
-    motionBlurButton.classList.add('motion-blur-on')
-  }
-  else{
-      canvas_color = 'rgba(23, 41, 48, 1)'
-      motionBlurButton.classList.remove('motion-blur-on')
-  }
-})
+for(let i = 0; i < motionBlurButtons.length; i++){
+  motionBlurButtons[i].addEventListener('click', () => {
+    if(canvas_color == 'rgba(23, 41, 48, 1)'){
+      for(let j = 0; j < motionBlurButtons.length; j++){
+        motionBlurButtons[j].classList.add('motion-blur-on')
+      }
+      canvas_color = 'rgba(23, 41, 48, 0.5)'
+    }
+    else{
+        for(let j = 0; j < motionBlurButtons.length; j++){
+          motionBlurButtons[j].classList.remove('motion-blur-on')
+        }
+        canvas_color = 'rgba(23, 41, 48, 1)'
+    }
+  })
+}
+
 
 returnHome.addEventListener('click', () => {
   homeContainer.classList.toggle('menu-container-unselected')
@@ -115,8 +141,8 @@ playButtton.addEventListener('click', () => {
   if(!autoRun){
     autoRun = true
   }
-
 })
+
 function generateStarsMenu(starContainer) {
   let starElement = document.createElement('div')
   let random = 3000 + Math.ceil(Math.random() * 1000)
