@@ -28,6 +28,7 @@ let story = false;
 let numberElementStory = 2
 let sizeElementStory = 1
 let spacinElementStory = 20
+let allXp = 0
 //first traps, doesn't serve much
 let traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
 //Resize
@@ -272,9 +273,10 @@ function drawLines(traps){
 }
 //draw xp
 function drawPoints(){
+  allXp = Player.xp + levelxp
 	ctx.fillStyle = "white"
 	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,75)
-	ctx.fillText('xp : ' + Player.xp, game.width-500,75)
+	ctx.fillText('xp : ' + allXp, game.width-500,75)
   ctx.fillText(min + ' : ' + sec + ' : ' + msec , game.width-700,75)
 }
 //Draw all elements

@@ -78,7 +78,7 @@ if ((Player.keys[32]) &&  (Player.isFinished || Player.life < 1)) {
     Player.speed = 0
   }
 }
-//draw & rotate the player 
+//draw & rotate the player
  function drawPlayer(curve,curve_speed){
   curve_speed = -Player.speed * 3
   curve += curve_speed + (Player.posY+Player.size/2)
