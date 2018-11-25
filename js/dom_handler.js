@@ -12,6 +12,9 @@ const canvasButton = document.querySelector('.canvas-button')
 const mainOptionButton = document.querySelector('.principal-option-button')
 const mainOptionInnerButton = document.querySelector('.principal-option-inner-button')
 const mainOptionContainer = document.querySelector('.option-main-container')
+const controlsContainer = document.querySelector('.controls-main-container')
+const controlsButton = document.querySelector('.controls-button')
+const returnControlsButton = document.querySelector('.controls-return-button')
 const generateContainer = document.querySelector('.generate-main-container')
 const generateReturn = document.querySelector('.principal-generate-button')
 const generateMenu = document.querySelector('.generate-button')
@@ -25,6 +28,15 @@ for (let i = 0; i < 150; i++) {
       generateStarsMenu(starContainers[j])
   }
 }
+
+controlsButton.addEventListener('click', function() {
+  controlsContainer.classList.toggle('controls-main-container-selected')
+}, false)
+
+returnControlsButton.addEventListener('click', function() {
+  controlsContainer.classList.toggle('controls-main-container-selected')
+}, false)
+
 const starSingleElement = document.querySelectorAll('.single-star-element')
 menuButton.addEventListener('click', () => {
   optionShow()
