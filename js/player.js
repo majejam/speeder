@@ -12,7 +12,7 @@ const Player = {}
   Player.mouvement= true;
   Player.life = 1
   Player.isFinished = false
-  Player.xp = 1555200
+  Player.xp = 9999999
   Player.trail_color = 'rgb(66, 223, 244)'
   Player.trail_color_number = 0
   Player.trail_size = 20
@@ -27,14 +27,14 @@ const Player = {}
   Player.rotation = 1
   Player.directionPlayer = true
   Player.directionDeath = 0
-
+//player boost
 function boost(){
   if(Player.boost > 0 && Player.boostNumberOfTime > 0){
     VELOCITY += Player.boostPower
     Player.boostNumberOfTime--
-    console.log('ok')
   }
 }
+//player mouvement & key management for player
 function playerMouvement(){
   Player.speed *= Player.friction
   Player.posY += Player.speed
@@ -78,7 +78,7 @@ if ((Player.keys[32]) &&  (Player.isFinished || Player.life < 1)) {
     Player.speed = 0
   }
 }
-
+//draw & rotate the player 
  function drawPlayer(curve,curve_speed){
   curve_speed = -Player.speed * 3
   curve += curve_speed + (Player.posY+Player.size/2)

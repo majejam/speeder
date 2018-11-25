@@ -4,6 +4,7 @@ const thrustSound = new Sound('./sound/thrust.mp3')
 thrustSound.sound.volume = 0.2
 explosionSound.sound.volume = 0.5
 laserSound.sound.volume = 0.5
+//sound declaration
 function Sound(src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;

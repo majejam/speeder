@@ -4,7 +4,6 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
     if(Math.round(Math.random()) == 1){
       this.type = 1
     }
-
   }
   if(finish){
     this.type = 3
@@ -51,6 +50,7 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
   }
   this.posX = startingPoint + this.width + parseInt(-spacing/2 + Math.random()*(spacing))
 }
+//move traps
 function trapsMouvement(direction, speed){
   for(let i = 0; i < traps.length;i++){
      traps[i].posX = traps[i].posX + (speed * direction);

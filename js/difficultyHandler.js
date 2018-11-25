@@ -3,7 +3,7 @@ function getDifficulty(){
   let difficulty = (difficultyOfSize() + difficultyNumberOfElements() + difficultySpacingAverage())
   return difficulty
 }
-
+//determines w/ nb elements
 function difficultyNumberOfElements(){
   if(getNumberOfElement()<10000){
     difficultyOfElements =  5

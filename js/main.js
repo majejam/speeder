@@ -28,19 +28,31 @@ let story = false;
 let numberElementStory = 2
 let sizeElementStory = 1
 let spacinElementStory = 20
+//first traps, doesn't serve much
+let traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
 //Resize
 const resize = () => {
   windowWidth = window.innerWidth
   windowHeight = window.innerHeight
   $canvas.width = windowWidth
   $canvas.height = windowHeight
+  initBG()
 }
-
+// listen to resize
 window.addEventListener('resize', resize)
 resize()
 
-let traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
 
+function initCanvasSize(){
+	game.width = screen.width
+  game.height = screen.height
+}
+
+function updateLevelSize(width,heigth){
+	initCanvasSize()
+}
+
+//window frame loop
 const loop = () => {
   window.requestAnimationFrame(loop)
   if(playingState){
@@ -52,16 +64,12 @@ const loop = () => {
 }
 loop()
 
-
+//Keymanagement
 window.addEventListener("keydown", keyManagement, true)
-window.addEventListener("keydown", function (e) {
-    Player.keys[e.keyCode] = true
-})
-window.addEventListener("keyup", function (e) {
-    Player.keys[e.keyCode] = false
-})
+window.addEventListener("keydown", function (e) {Player.keys[e.keyCode] = true})
+window.addEventListener("keyup", function (e) {Player.keys[e.keyCode] = false})
 
-
+//reset level
 function resetLevel(){
 	resetCanvas()
   initBG()
@@ -81,6 +89,7 @@ function resetLevel(){
   resetPlayer()
 }
 
+//reset Player
 function resetPlayer(){
 	Player.mouvement = true
 	Player.life = 1
@@ -94,7 +103,7 @@ function resetPlayer(){
 	VELOCITY = 0.1
 }
 
-
+//Main gameloop
 function gameLoop(){
   redrawCanvas()
 	drawAllElements(curve, curve_speed)
@@ -124,16 +133,6 @@ function gameLoop(){
     finishLineHandler()
   }
 }
-
-function initCanvasSize(){
-	game.width = screen.width
-  game.height = screen.height
-}
-
-function updateLevelSize(width,heigth){
-	initCanvasSize()
-}
-
 
 function generateTraps(auto,nbTraps,sizeTrap,spacingTrap){
   let seedLevel = getSeedLevel()
@@ -187,12 +186,12 @@ function keyManagement(e) {
 				  break
     }
 }
-
+//redraw all canvas
 function redrawCanvas(){
   ctx.fillStyle = canvas_color
   ctx.fillRect(0, 0, game.width, game.height)
 }
-
+//draw all traps
 function drawTraps(width,heigth){
   for(let i = 0;  i < traps.length;  i++){
 		ctx.font = "30px Poppins"
@@ -221,11 +220,13 @@ function drawTraps(width,heigth){
 		}
   }
 }
+//for debug only
 function drawPlayerDebug(){
 	if(debug){
 		ctx.fillText(Math.round(Player.posY),Player.posX,Player.posY-10)
 	}
 }
+//draw asteroids on traps position
 function drawAsteroid(traps){
 	ctx.save()
 	ctx.beginPath()
@@ -251,7 +252,7 @@ function drawAsteroid(traps){
 	ctx.fill()
 	ctx.restore()
 }
-
+//draw boost
 function drawBoost(boost){
   ctx.save()
   ctx.fillStyle =  'white'
@@ -260,6 +261,7 @@ function drawBoost(boost){
   ctx.fillRect(boost.posX, boost.posY + boost.size/1.5, boost.width, boost.size - boost.size/1.5)
   ctx.restore()
 }
+//draw start & finish line
 function drawLines(traps){
   ctx.save()
   ctx.fillStyle = 'white'
@@ -268,12 +270,14 @@ function drawLines(traps){
   ctx.fillRect(traps.posX+40, traps.posY, traps.width-15, traps.size)
 	ctx.restore()
 }
+//draw xp
 function drawPoints(){
 	ctx.fillStyle = "white"
 	ctx.fillText('Difficulty : ' + Math.abs(Math.round(getDifficulty())),game.width-300,75)
 	ctx.fillText('xp : ' + Player.xp, game.width-500,75)
   ctx.fillText(min + ' : ' + sec + ' : ' + msec , game.width-700,75)
 }
+//Draw all elements
 function drawAllElements(curve, curve_speed){
    drawBG()
 	 drawTraps()
@@ -287,7 +291,7 @@ function drawAllElements(curve, curve_speed){
    drawParticle(particlesArray, game.width - 500, 100)
    drawLaser(arrayLaser)
 }
-
+//detect traps
 function trapDetectionPlayer(){
   for(let i = 0;  i < traps.length;  i++){
     if((traps[i].posX < Player.posX) && (traps[i].posX + traps[i].width > Player.posX) && Player.life >= 0 ){
@@ -320,7 +324,7 @@ function trapDetectionPlayer(){
     }
   }
 }
-
+//check if player is dead
 function playerLifeHandler(){
   if(Player.life <= 0){
     VELOCITY = 0.1
@@ -336,7 +340,7 @@ function playerLifeHandler(){
     chronoStop()
   }
 }
-
+//handles death
 function playerDeathHandler(directionDeath){
   Player.speed = Player.directionDeath/2
   Player.posX += 5

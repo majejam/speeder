@@ -34,18 +34,20 @@ const laserPrices = document.querySelectorAll('.laser-bonus-price')
 const boostPrices = document.querySelectorAll('.boost-bonus-price')
 const trailPrices = document.querySelectorAll('.trail-bonus-price')
 const playerXPContainer = document.querySelector('.custom-xp-span')
+//Generate bg stars
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
   }
 }
-
+const starSingleElement = document.querySelectorAll('.single-star-element')
+//Clear all custom buttons
 function clearButtons(elements, type) {
   for (let i = 0; i < elements.length; i++) {
     elements[i].classList.remove(type);
   }
 }
-
+//Clear all color button
 function clearButtonsColor(elements) {
   for (let i = 0; i < elements.length; i++) {
     elements[i].classList.remove('selected-color-blue');
@@ -54,7 +56,7 @@ function clearButtonsColor(elements) {
     elements[i].classList.remove('selected-color-yelow');
   }
 }
-
+//Handler of the laser bonus
 for (let i = 0; i < laserCustomButton.length; i++) {
   laserCustomButton[i].addEventListener('click', () => {
     if (i == 0) {
@@ -100,6 +102,7 @@ for (let i = 0; i < laserCustomButton.length; i++) {
   });
 }
 
+//hendler of the boost bonus
 for (let i = 0; i < boostCustomButton.length; i++) {
   boostCustomButton[i].addEventListener('click', () => {
     if (i == 0) {
@@ -145,7 +148,7 @@ for (let i = 0; i < boostCustomButton.length; i++) {
   });
 }
 
-
+//handler of the trails color
 for (let i = 0; i < trailCustomButton.length; i++) {
   trailCustomButton[i].addEventListener('click', () => {
     if (i == 0) {
@@ -186,29 +189,28 @@ for (let i = 0; i < trailCustomButton.length; i++) {
     playerXPContainer.innerHTML = 'xp : '+ Player.xp
   });
 }
-
+//Add player xp to custom menu & open menu
 customButton.addEventListener('click', function() {
   customContainer.classList.toggle('custom-main-container-selected')
   playerXPContainer.innerHTML = 'xp : '+ Player.xp
 }, false)
-
+//Close custom menu
 returnCustomButton.addEventListener('click', function() {
   customContainer.classList.toggle('custom-main-container-selected')
 }, false)
-
+//Open controls menu
 controlsButton.addEventListener('click', function() {
   controlsContainer.classList.toggle('controls-main-container-selected')
 }, false)
-
+//Close controls menu
 returnControlsButton.addEventListener('click', function() {
   controlsContainer.classList.toggle('controls-main-container-selected')
 }, false)
-
-const starSingleElement = document.querySelectorAll('.single-star-element')
+//Close options menu on pause
 menuButton.addEventListener('click', () => {
   optionShow()
 })
-
+//Handler of sounds, if true play else no
 for(let i = 0; i < soundButtons.length; i++){
   soundButtons[i].addEventListener('click', () => {
     if(!soundPlay){
@@ -225,7 +227,7 @@ for(let i = 0; i < soundButtons.length; i++){
     }
   })
 }
-
+//handler of particles, if true show else no
 for(let i = 0; i < particlesButtons.length; i++){
   particlesButtons[i].addEventListener('click', () => {
     if(!particles_display){
@@ -242,6 +244,7 @@ for(let i = 0; i < particlesButtons.length; i++){
     }
   })
 }
+//generate button, close everything & play without story
 playGenerateButtton.addEventListener('click', () => {
   story = false
   homeContainer.classList.toggle('menu-container-unselected')
@@ -256,24 +259,23 @@ playGenerateButtton.addEventListener('click', () => {
     autoRun = true
   }
 })
-
+//Show generate menu
 generateMenu.addEventListener('click', function() {
   generateContainer.classList.toggle('generate-main-container-selected')
 }, false)
-
+//close generate menu
 generateReturn.addEventListener('click', function() {
   generateContainer.classList.toggle('generate-main-container-selected')
 }, false)
-
-
+//show options menu
 mainOptionButton.addEventListener('click', function() {
   mainOptionContainer.classList.toggle('option-main-container-unselected')
 }, false)
-
+//close options menu
 mainOptionInnerButton.addEventListener('click', function() {
   mainOptionContainer.classList.toggle('option-main-container-unselected')
 }, false)
-
+//show in game option, pause the game & resume
 function optionShow(){
   thrustSound.stop()
   menuButton.classList.toggle('button-open-animation')
@@ -296,6 +298,7 @@ function optionShow(){
     chronoContinue()
   }
 }
+//old play button, still here if debugging, don't pay attention
 document.getElementById('Play').addEventListener('click', function() {
   nextLevel()
   resetLevel()
@@ -308,7 +311,7 @@ document.getElementById('Play').addEventListener('click', function() {
 		autoRun = false
 	}
 }, false)
-
+//motion blur options
 for(let i = 0; i < motionBlurButtons.length; i++){
   motionBlurButtons[i].addEventListener('click', () => {
     if(canvas_color == 'rgba(23, 41, 48, 1)'){
@@ -325,11 +328,11 @@ for(let i = 0; i < motionBlurButtons.length; i++){
     }
   })
 }
-
-
+//close in game option
 returnHome.addEventListener('click', () => {
   homeContainer.classList.toggle('menu-container-unselected')
 })
+//main play button w/ story true
 playButtton.addEventListener('click', () => {
   story = true
   homeContainer.classList.toggle('menu-container-unselected')
@@ -342,7 +345,7 @@ playButtton.addEventListener('click', () => {
     autoRun = true
   }
 })
-
+//generate stars for the menu
 function generateStarsMenu(starContainer) {
   let starElement = document.createElement('div')
   let random = 3000 + Math.ceil(Math.random() * 1000)
@@ -358,11 +361,7 @@ function generateStarsMenu(starContainer) {
   starElement.innerHTML = ' '
   starContainer.appendChild(starElement)
 }
-
-
-
-
-//game options
+//get generation options
 function getSeedLevel(){
   let seed = document.getElementById('seed').value
   return seed
@@ -371,6 +370,7 @@ function getSizeElement(){
   let size = parseInt(document.getElementById('size').value)
   return size
 }
+//get nb elements, but not more than 1000 else its a mess
 function getNumberOfElement(){
   let numberElements = parseInt(document.getElementById('numberElements').value)
   if(numberElements > 1000){
@@ -389,6 +389,7 @@ function getNumberOfSpacing(){
   let numberSpacing = parseInt(document.getElementById('numberSpacing').value)
   return numberSpacing
 }
+//set generation option
 function setNumberOfSpacing(element){
   document.getElementById('numberSpacing').value = element
 }
@@ -402,6 +403,7 @@ function setSeedLevel(element){
   document.getElementById('seed').value = element
   console.log(element)
 }
+//if click on generate button, reset everything
 document.getElementById('manualGenerate').addEventListener('click', function() {
   story = false
   nextLevel()
@@ -412,9 +414,7 @@ document.getElementById('manualGenerate').addEventListener('click', function() {
   }
   traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
 }, false)
-
-
-
+//if autoGenerate then auto generate
 document.getElementById('autoGenerate').addEventListener('click', function() {
   story = false
   if(autoGenerate == true){
@@ -427,19 +427,14 @@ document.getElementById('autoGenerate').addEventListener('click', function() {
     document.getElementById('autoGenerate').classList.toggle('selected')
   }
 }, false)
-
+//set all elements of generation in dom
 function setElementInDOM(){
   setSeedLevel(Math.ceil(Math.random()*10000))
   setSizeElement(0.5 + Math.ceil(Math.random()*200)/100)
   setNumberOfElement(Math.ceil(Math.random()*200))
   setNumberOfSpacing(50 + Math.ceil(Math.random()*2000))
 }
-
-
-
-
-/// finish
-
+// finish handler, if dead, show menu
 function finishLineHandler(){
   if(levelxp != 0 && Player.life > 0){
     xpContainer.innerHTML = `xp gained : ${levelxp}`
@@ -454,11 +449,11 @@ function finishLineHandler(){
   canvasButton.style.color = "white"
   chronoStop()
 }
-
+//continue button when dead or finish
 canvasButton.addEventListener('click', () => {
   nextLevel()
 })
-
+//generate new level
 function nextLevel(){
   Player.isFinished = false
   resetLevel()

@@ -26,7 +26,18 @@ function Star(){
 	this.size = Math.random()*2
 }
 
-
+function Explosionparticles(x,y, color){
+  this.posX= x
+  this.posY= y
+  this.speedX = -5+Math.random()*30
+  this.speedY = -15+Math.random()*30
+  this.radius= 0.5 + Math.random()*2
+  this.color= 'rgba(255,165,0,1)'
+  this.opacity = 1
+	this.originX = x
+	this.originY = y
+}
+//draw laser
 function drawLaser(Laser){
   for(let i = 0; i < Laser.length; i++){
     Laser[i].speedX *= Laser[i].velocity
@@ -41,6 +52,7 @@ function drawLaser(Laser){
     }
   }
 }
+//draw particles
 function drawParticle(Particles, posx, posy){
 	for(let i = 0; i < Particles.length; i++){
 		if(Particles[i].attractionSpeedX > 0.15){
@@ -71,7 +83,7 @@ function drawParticle(Particles, posx, posy){
 		}
 	}
 }
-
+//What to do when the player shoot
 function playerShoot(Player,nb){
   if(soundPlay){
     laserSound.play()
@@ -79,7 +91,7 @@ function playerShoot(Player,nb){
   arrayLaser.push(new Laser(Player,nb))
   Player.numberOfLaserGame--
 }
-
+//count the laser that still need to be shot
 function drawLaserCount(){
     ctx.save()
     ctx.fillStyle =  'white'
@@ -88,6 +100,7 @@ function drawLaserCount(){
     ctx.fillRect(70, 70, Player.numberOfLaserGame*15, 5)
     ctx.restore()
 }
+//detect traps for laser
 function trapDetectionLaser(trap, Laser){
   if(Laser.length>0){
     for(let j =  0; j < Laser.length; j++){
@@ -105,19 +118,7 @@ function trapDetectionLaser(trap, Laser){
     }
   }
 }
-
-function Explosionparticles(x,y, color){
-  this.posX= x
-  this.posY= y
-  this.speedX = -5+Math.random()*30
-  this.speedY = -15+Math.random()*30
-  this.radius= 0.5 + Math.random()*2
-  this.color= 'rgba(255,165,0,1)'
-  this.opacity = 1
-	this.originX = x
-	this.originY = y
-}
-
+//draw explosion if particle on
 function drawExplosion(){
   if(particles_display){
     for(let i = 0; i < explosionParticlesArray.length; i++){
@@ -147,7 +148,7 @@ function drawExplosion(){
     }
   }
 }
-
+//draw shield but never implemented
 function drawShield(){
   ctx.save()
   ctx.beginPath()
@@ -159,7 +160,7 @@ function drawShield(){
   ctx.stroke()
   ctx.restore()
 }
-
+//draw small xp
 function drawXP(traps){
   ctx.save()
   ctx.beginPath()
@@ -173,13 +174,14 @@ function drawXP(traps){
   ctx.fill()
   ctx.restore()
 }
-
+//init bg
 function initBG(){
   bgArray.splice(0,bgArray.length)
   for(let i = 0; i <100; i++){
     bgArray.push(new Star())
   }
 }
+//draw bg
 function drawBG(){
   for(let i = 0; i < bgArray.length; i++){
     ctx.save()
