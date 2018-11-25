@@ -36,8 +36,8 @@ const trailPrices = document.querySelectorAll('.trail-bonus-price')
 const playerXPContainer = document.querySelector('.custom-xp-span')
 //Generate bg stars
 for (let i = 0; i < 150; i++) {
-  for(let j =0; j < starContainers.length;j++){
-      generateStarsMenu(starContainers[j])
+  for (let j = 0; j < starContainers.length; j++) {
+    generateStarsMenu(starContainers[j])
   }
 }
 const starSingleElement = document.querySelectorAll('.single-star-element')
@@ -60,45 +60,45 @@ function clearButtonsColor(elements) {
 for (let i = 0; i < laserCustomButton.length; i++) {
   laserCustomButton[i].addEventListener('click', () => {
     if (i == 0) {
-        clearButtons(laserCustomButton, 'bonus-button-selected')
+      clearButtons(laserCustomButton, 'bonus-button-selected')
       Player.numberOfLaser = 1
       Player.bonus = 0
       laserCustomButton[i].classList.toggle('bonus-button-selected')
     }
-    if(i == 1 && (Player.xp >= 5000 || Player.laserBonus > 0)) {
+    if (i == 1 && (Player.xp >= 5000 || Player.laserBonus > 0)) {
       clearButtons(laserCustomButton, 'bonus-button-selected')
       Player.numberOfLaser = 3
       Player.bonus = 0
       laserCustomButton[i].classList.toggle('bonus-button-selected')
-      if(Player.laserBonus < 1){
-          laserPrices[i].innerHTML = '0 xp'
-          Player.laserBonus = 1
-          Player.xp = Player.xp - 5000
+      if (Player.laserBonus < 1) {
+        laserPrices[i].innerHTML = '0 xp'
+        Player.laserBonus = 1
+        Player.xp = Player.xp - 5000
       }
     }
-    if(i == 2 && (Player.xp >= 50000 || Player.laserBonus > 1)){
-        clearButtons(laserCustomButton, 'bonus-button-selected')
+    if (i == 2 && (Player.xp >= 50000 || Player.laserBonus > 1)) {
+      clearButtons(laserCustomButton, 'bonus-button-selected')
       Player.numberOfLaser = 6
       Player.bonus = 1
       laserCustomButton[i].classList.toggle('bonus-button-selected')
-      if(Player.laserBonus < 2){
-          laserPrices[i].innerHTML = '0 xp'
-          Player.laserBonus = 2
-          Player.xp = Player.xp - 50000
+      if (Player.laserBonus < 2) {
+        laserPrices[i].innerHTML = '0 xp'
+        Player.laserBonus = 2
+        Player.xp = Player.xp - 50000
       }
     }
-    if(i == 3 && (Player.xp >= 500000 || Player.laserBonus > 2)) {
-        clearButtons(laserCustomButton, 'bonus-button-selected')
+    if (i == 3 && (Player.xp >= 500000 || Player.laserBonus > 2)) {
+      clearButtons(laserCustomButton, 'bonus-button-selected')
       Player.numberOfLaser = 12
       Player.bonus = 1
       laserCustomButton[i].classList.toggle('bonus-button-selected')
-      if(Player.laserBonus < 3){
-          laserPrices[i].innerHTML = '0 xp'
-          Player.laserBonus = 3
-          Player.xp = Player.xp - 500000
+      if (Player.laserBonus < 3) {
+        laserPrices[i].innerHTML = '0 xp'
+        Player.laserBonus = 3
+        Player.xp = Player.xp - 500000
       }
     }
-    playerXPContainer.innerHTML = 'xp : '+ Player.xp
+    playerXPContainer.innerHTML = 'xp : ' + Player.xp
   });
 }
 
@@ -111,40 +111,40 @@ for (let i = 0; i < boostCustomButton.length; i++) {
       Player.boostNumberOfTime = 0
       boostCustomButton[i].classList.toggle('bonus-button-selected')
     }
-    if(i == 1 && (Player.xp >= 5000 || Player.boost > 0)) {
+    if (i == 1 && (Player.xp >= 5000 || Player.boost > 0)) {
       clearButtons(boostCustomButton, 'bonus-button-selected')
       Player.boostPower = 10
       Player.boostNumberOfTime = 1
       boostCustomButton[i].classList.toggle('bonus-button-selected')
-      if(Player.boost < 1){
-          boostPrices[i].innerHTML = '0 xp'
-          Player.boost = 1
-          Player.xp = Player.xp - 5000
+      if (Player.boost < 1) {
+        boostPrices[i].innerHTML = '0 xp'
+        Player.boost = 1
+        Player.xp = Player.xp - 5000
       }
     }
-    if(i == 2 && (Player.xp >= 50000 || Player.boost > 1)){
+    if (i == 2 && (Player.xp >= 50000 || Player.boost > 1)) {
       clearButtons(boostCustomButton, 'bonus-button-selected')
       Player.boostPower = 20
       Player.boostNumberOfTime = 1
       boostCustomButton[i].classList.toggle('bonus-button-selected')
-      if(Player.boost < 2){
-          boostPrices[i].innerHTML = '0 xp'
-          Player.boost = 2
-          Player.xp = Player.xp - 50000
+      if (Player.boost < 2) {
+        boostPrices[i].innerHTML = '0 xp'
+        Player.boost = 2
+        Player.xp = Player.xp - 50000
       }
     }
-    if(i == 3 && (Player.xp >= 500000 || Player.boost > 2)) {
+    if (i == 3 && (Player.xp >= 500000 || Player.boost > 2)) {
       clearButtons(boostCustomButton, 'bonus-button-selected')
       Player.boostPower = 40
       Player.boostNumberOfTime = 1
       boostCustomButton[i].classList.toggle('bonus-button-selected')
-      if(Player.boost < 3){
-          boostPrices[i].innerHTML = '0 xp'
-          Player.boost = 3
-          Player.xp = Player.xp - 500000
+      if (Player.boost < 3) {
+        boostPrices[i].innerHTML = '0 xp'
+        Player.boost = 3
+        Player.xp = Player.xp - 500000
       }
     }
-    playerXPContainer.innerHTML = 'xp : '+ Player.xp
+    playerXPContainer.innerHTML = 'xp : ' + Player.xp
   });
 }
 
@@ -156,43 +156,43 @@ for (let i = 0; i < trailCustomButton.length; i++) {
       Player.trail_color = 'rgb(66, 223, 244)'
       trailCustomButton[i].classList.toggle('selected-color-blue')
     }
-    if(i == 1 && (Player.xp >= 5000 || Player.trail_color_number > 0)) {
+    if (i == 1 && (Player.xp >= 5000 || Player.trail_color_number > 0)) {
       clearButtonsColor(trailCustomButton)
       Player.trail_color = 'rgb(255, 56, 81)'
       trailCustomButton[i].classList.toggle('selected-color-red')
-      if(Player.trail_color_number < 1){
-          trailPrices[i].innerHTML = '0 xp'
-          Player.trail_color_number = 1
-          Player.xp = Player.xp - 5000
+      if (Player.trail_color_number < 1) {
+        trailPrices[i].innerHTML = '0 xp'
+        Player.trail_color_number = 1
+        Player.xp = Player.xp - 5000
       }
     }
-    if(i == 2 && (Player.xp >= 50000 || Player.trail_color_number > 1)){
+    if (i == 2 && (Player.xp >= 50000 || Player.trail_color_number > 1)) {
       clearButtonsColor(trailCustomButton)
       Player.trail_color = 'rgb(233, 113, 255)'
       trailCustomButton[i].classList.toggle('selected-color-rose')
-      if(Player.trail_color_number < 2){
-          trailPrices[i].innerHTML = '0 xp'
-          Player.trail_color_number = 2
-          Player.xp = Player.xp - 50000
+      if (Player.trail_color_number < 2) {
+        trailPrices[i].innerHTML = '0 xp'
+        Player.trail_color_number = 2
+        Player.xp = Player.xp - 50000
       }
     }
-    if(i == 3 && (Player.xp >= 500000 || Player.trail_color_number > 2)) {
+    if (i == 3 && (Player.xp >= 500000 || Player.trail_color_number > 2)) {
       clearButtonsColor(trailCustomButton)
       Player.trail_color = 'rgb(255, 250, 114)'
       trailCustomButton[i].classList.toggle('selected-color-yellow')
-      if(Player.trail_color_number < 3){
-          trailPrices[i].innerHTML = '0 xp'
-          Player.trail_color_number = 3
-          Player.xp = Player.xp - 500000
+      if (Player.trail_color_number < 3) {
+        trailPrices[i].innerHTML = '0 xp'
+        Player.trail_color_number = 3
+        Player.xp = Player.xp - 500000
       }
     }
-    playerXPContainer.innerHTML = 'xp : '+ Player.xp
+    playerXPContainer.innerHTML = 'xp : ' + Player.xp
   });
 }
 //Add player xp to custom menu & open menu
 customButton.addEventListener('click', function() {
   customContainer.classList.toggle('custom-main-container-selected')
-  playerXPContainer.innerHTML = 'xp : '+ Player.xp
+  playerXPContainer.innerHTML = 'xp : ' + Player.xp
 }, false)
 //Close custom menu
 returnCustomButton.addEventListener('click', function() {
@@ -211,36 +211,34 @@ menuButton.addEventListener('click', () => {
   optionShow()
 })
 //Handler of sounds, if true play else no
-for(let i = 0; i < soundButtons.length; i++){
+for (let i = 0; i < soundButtons.length; i++) {
   soundButtons[i].addEventListener('click', () => {
-    if(!soundPlay){
-      for(let j = 0; j < soundButtons.length; j++){
+    if (!soundPlay) {
+      for (let j = 0; j < soundButtons.length; j++) {
         soundButtons[j].classList.add('sound-on')
       }
       soundPlay = true
-    }
-    else{
-        for(let j = 0; j < soundButtons.length; j++){
-          soundButtons[j].classList.remove('sound-on')
-        }
-          soundPlay = false
+    } else {
+      for (let j = 0; j < soundButtons.length; j++) {
+        soundButtons[j].classList.remove('sound-on')
+      }
+      soundPlay = false
     }
   })
 }
 //handler of particles, if true show else no
-for(let i = 0; i < particlesButtons.length; i++){
+for (let i = 0; i < particlesButtons.length; i++) {
   particlesButtons[i].addEventListener('click', () => {
-    if(!particles_display){
-      for(let j = 0; j < particlesButtons.length; j++){
+    if (!particles_display) {
+      for (let j = 0; j < particlesButtons.length; j++) {
         particlesButtons[j].classList.add('particles-on')
       }
       particles_display = true
-    }
-    else{
-        for(let j = 0; j < particlesButtons.length; j++){
-          particlesButtons[j].classList.remove('particles-on')
-        }
-          particles_display = false
+    } else {
+      for (let j = 0; j < particlesButtons.length; j++) {
+        particlesButtons[j].classList.remove('particles-on')
+      }
+      particles_display = false
     }
   })
 }
@@ -255,7 +253,7 @@ playGenerateButtton.addEventListener('click', () => {
   optionShow()
   chronoStop()
   chronoReset()
-  if(!autoRun){
+  if (!autoRun) {
     autoRun = true
   }
 })
@@ -276,7 +274,7 @@ mainOptionInnerButton.addEventListener('click', function() {
   mainOptionContainer.classList.toggle('option-main-container-unselected')
 }, false)
 //show in game option, pause the game & resume
-function optionShow(){
+function optionShow() {
   thrustSound.stop()
   menuButton.classList.toggle('button-open-animation')
   menuButton.classList.toggle('button-close-animation')
@@ -287,13 +285,12 @@ function optionShow(){
     starSingleElement[i].classList.toggle('single-star-element-show')
     starSingleElement[i].classList.toggle('shining-star')
   }
-  for(let i =0; i<menuButtonBar.length; i++){
+  for (let i = 0; i < menuButtonBar.length; i++) {
     menuButtonBar[i].classList.toggle('hidding-bar-effect-show')
   }
-  if(playingState){
+  if (playingState) {
     playingState = false
-  }
-  else{
+  } else {
     playingState = true
     chronoContinue()
   }
@@ -304,27 +301,25 @@ document.getElementById('Play').addEventListener('click', function() {
   resetLevel()
   chronoStop()
   chronoReset()
-	if(autoRun == false){
-		autoRun = true
-	}
-	else{
-		autoRun = false
-	}
+  if (autoRun == false) {
+    autoRun = true
+  } else {
+    autoRun = false
+  }
 }, false)
 //motion blur options
-for(let i = 0; i < motionBlurButtons.length; i++){
+for (let i = 0; i < motionBlurButtons.length; i++) {
   motionBlurButtons[i].addEventListener('click', () => {
-    if(canvas_color == 'rgba(23, 41, 48, 1)'){
-      for(let j = 0; j < motionBlurButtons.length; j++){
+    if (canvas_color == 'rgba(23, 41, 48, 1)') {
+      for (let j = 0; j < motionBlurButtons.length; j++) {
         motionBlurButtons[j].classList.add('motion-blur-on')
       }
       canvas_color = 'rgba(23, 41, 48, 0.5)'
-    }
-    else{
-        for(let j = 0; j < motionBlurButtons.length; j++){
-          motionBlurButtons[j].classList.remove('motion-blur-on')
-        }
-        canvas_color = 'rgba(23, 41, 48, 1)'
+    } else {
+      for (let j = 0; j < motionBlurButtons.length; j++) {
+        motionBlurButtons[j].classList.remove('motion-blur-on')
+      }
+      canvas_color = 'rgba(23, 41, 48, 1)'
     }
   })
 }
@@ -341,7 +336,7 @@ playButtton.addEventListener('click', () => {
   optionShow()
   chronoStop()
   chronoReset()
-  if(!autoRun){
+  if (!autoRun) {
     autoRun = true
   }
 })
@@ -355,51 +350,56 @@ function generateStarsMenu(starContainer) {
   starElement.style.left = `${Math.ceil(Math.random() * 100)}%`
   starElement.style.top = `${Math.ceil(Math.random() * 100)}%`
   starElement.style.width = `${Math.ceil(Math.random() * 10)}px`
-  starElement.style.opacity = 50+ Math.ceil(Math.random() * 49)/100
+  starElement.style.opacity = 50 + Math.ceil(Math.random() * 49) / 100
   starElement.style.height = starElement.style.width
-  starElement.style.animationDelay =`${random}ms`
+  starElement.style.animationDelay = `${random}ms`
   starElement.innerHTML = ' '
   starContainer.appendChild(starElement)
 }
 //get generation options
-function getSeedLevel(){
+function getSeedLevel() {
   let seed = document.getElementById('seed').value
   return seed
 }
-function getSizeElement(){
+
+function getSizeElement() {
   let size = parseInt(document.getElementById('size').value)
   return size
 }
 //get nb elements, but not more than 1000 else its a mess
-function getNumberOfElement(){
+function getNumberOfElement() {
   let numberElements = parseInt(document.getElementById('numberElements').value)
-  if(numberElements > 1000){
+  if (numberElements > 1000) {
     numberElements = 1000
   }
-  if(numberElements < 0){
+  if (numberElements < 0) {
     numberElements = 1
   }
-  if( isNaN(numberElements) ){
+  if (isNaN(numberElements)) {
     numberElements = 1
   }
   setNumberOfElement(numberElements)
   return numberElements
 }
-function getNumberOfSpacing(){
+
+function getNumberOfSpacing() {
   let numberSpacing = parseInt(document.getElementById('numberSpacing').value)
   return numberSpacing
 }
 //set generation option
-function setNumberOfSpacing(element){
+function setNumberOfSpacing(element) {
   document.getElementById('numberSpacing').value = element
 }
-function setNumberOfElement(element){
+
+function setNumberOfElement(element) {
   document.getElementById('numberElements').value = element
 }
-function setSizeElement(element){
+
+function setSizeElement(element) {
   document.getElementById('size').value = element
 }
-function setSeedLevel(element){
+
+function setSeedLevel(element) {
   document.getElementById('seed').value = element
   console.log(element)
 }
@@ -408,35 +408,35 @@ document.getElementById('manualGenerate').addEventListener('click', function() {
   story = false
   nextLevel()
   resetLevel()
-  if(autoGenerate == true){
+  if (autoGenerate == true) {
     console.clear()
     setElementInDOM()
   }
-  traps = generateTraps(autoGenerate, getNumberOfElement(),getSizeElement(),getNumberOfSpacing())
+  traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
 }, false)
 //if autoGenerate then auto generate
 document.getElementById('autoGenerate').addEventListener('click', function() {
   story = false
-  if(autoGenerate == true){
+  if (autoGenerate == true) {
     document.getElementById('autoGenerate').classList.toggle('unselected')
     document.getElementById('autoGenerate').classList.toggle('selected')
     autoGenerate = false
-  }else{
+  } else {
     autoGenerate = true
     document.getElementById('autoGenerate').classList.toggle('unselected')
     document.getElementById('autoGenerate').classList.toggle('selected')
   }
 }, false)
 //set all elements of generation in dom
-function setElementInDOM(){
-  setSeedLevel(Math.ceil(Math.random()*10000))
-  setSizeElement(0.5 + Math.ceil(Math.random()*200)/100)
-  setNumberOfElement(Math.ceil(Math.random()*200))
-  setNumberOfSpacing(50 + Math.ceil(Math.random()*2000))
+function setElementInDOM() {
+  setSeedLevel(Math.ceil(Math.random() * 10000))
+  setSizeElement(0.5 + Math.ceil(Math.random() * 200) / 100)
+  setNumberOfElement(Math.ceil(Math.random() * 200))
+  setNumberOfSpacing(50 + Math.ceil(Math.random() * 2000))
 }
 // finish handler, if dead, show menu
-function finishLineHandler(){
-  if(levelxp != 0 && Player.life > 0){
+function finishLineHandler() {
+  if (levelxp != 0 && Player.life > 0) {
     xpContainer.innerHTML = `xp gained : ${levelxp}`
     Player.xp += levelxp
     levelxp = 0
@@ -454,7 +454,7 @@ canvasButton.addEventListener('click', () => {
   nextLevel()
 })
 //generate new level
-function nextLevel(){
+function nextLevel() {
   Player.isFinished = false
   resetLevel()
   resetPlayer()
@@ -465,7 +465,7 @@ function nextLevel(){
   finishContainer.classList.remove('finishing-container-show')
   variablesContainer.classList.remove('finishing-variables-show')
   //traps = generateTraps(autoGenerate, getNumberOfElement(), getSizeElement(), getNumberOfSpacing())
-  for(let i = 0; i<traps.length; i++){
-    traps[i].posX +=2000
+  for (let i = 0; i < traps.length; i++) {
+    traps[i].posX += 2000
   }
 }
