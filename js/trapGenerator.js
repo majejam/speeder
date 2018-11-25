@@ -46,7 +46,7 @@ function Trap(startingPoint,spacing,number, sizeOfTraps, start, finish){
   if(this.type == 4){
     this.size = game.height*4
     this.posY = 0
-    this.width = 20;
+    this.width = 30;
     this.color = "blue";
   }
   this.posX = startingPoint + this.width + parseInt(-spacing/2 + Math.random()*(spacing))

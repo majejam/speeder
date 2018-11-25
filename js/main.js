@@ -176,7 +176,9 @@ function keyManagement(e) {
            break
         case 39:
         case 69:
+        if(parcouringLevel){
           boost()
+        }
           break
         case 27: //space
         optionShow()

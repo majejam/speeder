@@ -134,7 +134,7 @@ for (let i = 0; i < boostCustomButton.length; i++) {
       clearButtons(boostCustomButton, 'bonus-button-selected')
       Player.boostPower = 40
       Player.boostNumberOfTime = 1
-      laserCustomButton[i].classList.toggle('bonus-button-selected')
+      boostCustomButton[i].classList.toggle('bonus-button-selected')
       if(Player.boost < 3){
           boostPrices[i].innerHTML = '0 xp'
           Player.boost = 3
