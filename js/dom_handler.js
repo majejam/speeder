@@ -23,6 +23,7 @@ const xpContainer = document.querySelector('.xp-container')
 const totalXpContainer = document.querySelector('.total-xp-container')
 const motionBlurButtons = document.querySelectorAll('.motion-blur-button')
 const particlesButtons = document.querySelectorAll('.particles-button')
+const soundButtons = document.querySelectorAll('.sound-button')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -41,6 +42,24 @@ const starSingleElement = document.querySelectorAll('.single-star-element')
 menuButton.addEventListener('click', () => {
   optionShow()
 })
+
+for(let i = 0; i < soundButtons.length; i++){
+  soundButtons[i].addEventListener('click', () => {
+    if(!soundPlay){
+      for(let j = 0; j < soundButtons.length; j++){
+        soundButtons[j].classList.add('sound-on')
+      }
+      soundPlay = true
+    }
+    else{
+        for(let j = 0; j < soundButtons.length; j++){
+          soundButtons[j].classList.remove('sound-on')
+        }
+          soundPlay = false
+    }
+  })
+}
+
 for(let i = 0; i < particlesButtons.length; i++){
   particlesButtons[i].addEventListener('click', () => {
     if(!particles_display){
@@ -89,6 +108,7 @@ mainOptionInnerButton.addEventListener('click', function() {
 }, false)
 
 function optionShow(){
+  thrustSound.stop()
   menuButton.classList.toggle('button-open-animation')
   menuButton.classList.toggle('button-close-animation')
   menuContainer.classList.toggle('option-menu-container-selected')
@@ -257,7 +277,7 @@ function finishLineHandler(){
   }
   finishContainer.classList.add('finishing-container-show')
   variablesContainer.classList.add('finishing-variables-show')
-  timerContaier.innerHTML = `Timer taken : ${min}:${sec}:${msec}`
+  timerContaier.innerHTML = `Time taken : ${min}:${sec}:${msec}`
   totalXpContainer.innerHTML = `Total xp : ${Player.xp}`
   canvasButton.style.backgroundColor = "rgba(23, 41, 48, 1)"
   canvasButton.style.color = "white"

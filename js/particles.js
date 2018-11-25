@@ -73,9 +73,21 @@ function drawParticle(Particles, posx, posy){
 }
 
 function playerShoot(Player,nb){
+  if(soundPlay){
+    laserSound.play()
+  }
   arrayLaser.push(new Laser(Player,nb))
+  Player.numberOfLaser--
 }
 
+function drawLaserCount(){
+    ctx.save()
+    ctx.fillStyle =  'white'
+    ctx.shadowColor   =  'red' // Couleur de l'ombre
+    ctx.shadowBlur    = 10       // Largeur du flou
+    ctx.fillRect(70, 70, Player.numberOfLaser*15, 5)
+    ctx.restore()
+}
 function trapDetectionLaser(trap, Laser){
   if(Laser.length>0){
     for(let j =  0; j < Laser.length; j++){
@@ -125,6 +137,9 @@ function drawExplosion(){
         ctx.stroke()
         ctx.fill()
         ctx.restore()
+        if(soundPlay){
+          explosionSound.play()
+        }
       }
       else{
         explosionParticlesArray.splice(0,explosionParticlesArray.length)

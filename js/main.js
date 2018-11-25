@@ -23,7 +23,7 @@ let parcouringLevel = false
 let levelxp = 0
 let canvas_color = 'rgba(23, 41, 48, 0.5)';
 let particles_display = true
-
+let soundPlay = true
 
 //Resize
 const resize = () => {
@@ -91,9 +91,15 @@ function gameLoop(){
   }
   if(autoRun){
     trapsMouvement(-1,VELOCITY)
+    if(Player.life > 0 && soundPlay){
+      thrustSound.play()
+    }
   }
   else{
     VELOCITY = 0
+  }
+  if(Player.life < 1){
+    thrustSound.stop()
   }
   if(Player.isFinished){
     finishLineHandler()
@@ -255,6 +261,7 @@ function drawAllElements(curve, curve_speed){
      //drawShield()
      drawPlayer(curve,curve_speed)
    }
+    drawLaserCount()
 	 drawPlayerDebug()
    drawParticle(particlesArray, game.width - 500, 100)
    drawLaser(arrayLaser)

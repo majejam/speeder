@@ -15,8 +15,9 @@ const Player = {}
   Player.xp = 0
   Player.trail_color = 'rgba(233,167,250,1)'
   Player.trail_size = 20
-  Player.bonus = 0
-  Player.bonusNumber = 33
+  Player.bonus = 1
+  Player.numberOfLaser = 6
+  Player.bonusNumber = 3
   Player.rotation = 1
   Player.directionPlayer = true
   Player.directionDeath = 0
@@ -40,17 +41,12 @@ function playerMouvement(){
  if ((Player.keys[40]||Player.keys[83]) && Player.mouvement) {
    Player.speed += 0.5*1.2
  }
- if ((Player.keys[32]||Player.keys[65]) && Player.life > 0 && parcouringLevel) {
-   if(!keyPressed && Player.bonus != 2 ){
+ if ((Player.keys[32]||Player.keys[65]) && Player.life > 0 && parcouringLevel && Player.numberOfLaser > 0) {
+   if(!keyPressed && Player.bonus == 0){
       playerShoot(Player,0)
       keyPressed = true
    }
-   if(Player.bonus == 1 ){
-     for(let i = 0; i <Player.bonusNumber; i++){
-      playerShoot(Player, (Player.bonusNumber/2 - i))
-     }
-   }
-   if(!keyPressed && Player.bonus == 2){
+   if(!keyPressed && Player.bonus == 1){
      for(let i = 0; i <Player.bonusNumber; i++){
       playerShoot(Player, (Player.bonusNumber/2 - i))
      }
