@@ -22,6 +22,7 @@ let playingState = false
 let parcouringLevel = false
 let levelxp = 0
 let canvas_color = 'rgba(23, 41, 48, 0.5)';
+let particles_display = true
 
 
 //Resize
@@ -85,6 +86,9 @@ function gameLoop(){
   trapDetectionLaser(traps, arrayLaser)
 	playerMouvement()
   playerLifeHandler()
+  if(particles_display){
+    drawExplosion()
+  }
   if(autoRun){
     trapsMouvement(-1,VELOCITY)
   }
@@ -252,7 +256,7 @@ function drawAllElements(curve, curve_speed){
      drawPlayer(curve,curve_speed)
    }
 	 drawPlayerDebug()
-	 drawParticle(particlesArray, game.width - 500, 100)
+   drawParticle(particlesArray, game.width - 500, 100)
    drawLaser(arrayLaser)
 }
 
@@ -301,10 +305,7 @@ function playerLifeHandler(){
     }
     levelxp = 0
     parcouringLevel = false
-    drawExplosion()
     chronoStop()
-    //finishLineHandler()
-    //playerDeathHandler(Player.directionDeath)
   }
 }
 

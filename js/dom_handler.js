@@ -11,10 +11,14 @@ const canvasButton = document.querySelector('.canvas-button')
 const mainOptionButton = document.querySelector('.principal-option-button')
 const mainOptionInnerButton = document.querySelector('.principal-option-inner-button')
 const mainOptionContainer = document.querySelector('.option-main-container')
+const generateContainer = document.querySelector('.generate-main-container')
+const generateReturn = document.querySelector('.principal-generate-button')
+const generateMenu = document.querySelector('.generate-button')
 const timerContaier = document.querySelector('.timer-container')
 const xpContainer = document.querySelector('.xp-container')
 const totalXpContainer = document.querySelector('.total-xp-container')
 const motionBlurButton = document.querySelector('.motion-blur-button')
+const particlesButton = document.querySelector('.particles-button')
 for (let i = 0; i < 150; i++) {
   for(let j =0; j < starContainers.length;j++){
       generateStarsMenu(starContainers[j])
@@ -24,6 +28,25 @@ const starSingleElement = document.querySelectorAll('.single-star-element')
 menuButton.addEventListener('click', () => {
   optionShow()
 })
+
+particlesButton.addEventListener('click', () => {
+  if(!particles_display){
+    particles_display = true
+    particlesButton.classList.add('particles-on')
+  }
+  else{
+      particles_display = false
+      particlesButton.classList.remove('particles-on')
+  }
+})
+
+generateMenu.addEventListener('click', function() {
+  generateContainer.classList.toggle('generate-main-container-selected')
+}, false)
+
+generateReturn.addEventListener('click', function() {
+  generateContainer.classList.toggle('generate-main-container-selected')
+}, false)
 
 
 mainOptionButton.addEventListener('click', function() {

@@ -83,6 +83,9 @@ function trapDetectionLaser(trap, Laser){
         if((traps[i].posX < Laser[j].posX + Laser[j].size) &&(traps[i].posX + traps[i].width > Laser[j].posX + Laser[j].size) && traps[i].type == 1){
           if(((traps[i].posY + traps[i].size > (Laser[j].posY + Laser[j].size/2)) && ((Laser[j].posY + Laser[j].size/2) > traps[i].posY))){
             traps[i].posY = 9000
+            for(let k =0;  k <20;  k++){
+              explosionParticlesArray.push(new Explosionparticles(Laser[j].posX,Laser[j].posY))
+            }
             Laser[j].posY = 9000
           }
         }
@@ -96,7 +99,7 @@ function Explosionparticles(x,y, color){
   this.posY= y
   this.speedX = -5+Math.random()*30
   this.speedY = -15+Math.random()*30
-  this.radius= 1 + Math.random()*5
+  this.radius= 0.5 + Math.random()*2
   this.color= 'rgba(255,165,0,1)'
   this.opacity = 1
 	this.originX = x
@@ -104,23 +107,28 @@ function Explosionparticles(x,y, color){
 }
 
 function drawExplosion(){
-  for(let i = 0; i < explosionParticlesArray.length; i++){
-    if(explosionParticlesArray[0].opacity > 0.05){
-      explosionParticlesArray[i].speedX *= 0.91 + Math.random()/10
-      explosionParticlesArray[i].speedY *= 0.91 + Math.random()/10
-      explosionParticlesArray[i].posY += explosionParticlesArray[i].speedY
-      explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
-      explosionParticlesArray[i].opacity *= 0.94
-      explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
-      ctx.save()
-      ctx.beginPath()
-      ctx.shadowColor   =  explosionParticlesArray[i].color
-      ctx.shadowBlur    = 1
-      ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false)
-      ctx.fillStyle =  explosionParticlesArray[i].color
-      ctx.stroke()
-      ctx.fill()
-      ctx.restore()
+  if(particles_display){
+    for(let i = 0; i < explosionParticlesArray.length; i++){
+      if(explosionParticlesArray[explosionParticlesArray.length-1].opacity > 0.05){
+        explosionParticlesArray[i].speedX *= 0.91 + Math.random()/10
+        explosionParticlesArray[i].speedY *= 0.91 + Math.random()/10
+        explosionParticlesArray[i].posY += explosionParticlesArray[i].speedY
+        explosionParticlesArray[i].posX += explosionParticlesArray[i].speedX
+        explosionParticlesArray[i].opacity *= 0.94
+        explosionParticlesArray[i].color = `rgba(255,165,0,${explosionParticlesArray[i].opacity})`
+        ctx.save()
+        ctx.beginPath()
+        ctx.shadowColor   =  explosionParticlesArray[i].color
+        ctx.shadowBlur    = 1
+        ctx.arc(explosionParticlesArray[i].posX,  explosionParticlesArray[i].posY,  explosionParticlesArray[i].radius, 0, 2 * Math.PI, false)
+        ctx.fillStyle =  explosionParticlesArray[i].color
+        ctx.stroke()
+        ctx.fill()
+        ctx.restore()
+      }
+      else{
+        explosionParticlesArray.splice(0,explosionParticlesArray.length)
+      }
     }
   }
 }
