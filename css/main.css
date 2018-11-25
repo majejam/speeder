@@ -498,6 +498,11 @@ body{
   color: rgba(23, 41, 48, 1);
 }
 
+.sound-on{
+  background-color: white;
+  color: rgba(23, 41, 48, 1);
+}
+
 .generate-buttons-container{
   display: flex;
   justify-content: space-between;
