@@ -13,8 +13,12 @@ This is speeder, a js spaceship game made with the HTML5 <canvas>. You can shoot
 * You can shoot and explode asteroids, but there's a limit
 * Generate your own level, try things, careful, it might get buggy ¯\ _(ツ )_/¯
 * Turn off & on motion blur
-* Buy new weapons and looks
-* The ship rotates while moving ! 
+* Turn off & on particles
+* Buy new weapons and trail color
+* Boost your spaceship !
+* The ship rotates while moving !
+* there's sound that you can turn off
+* The menu stars are shinning (look closely)
 
 ## Ressources
 I used the [Borg typeface](https://www.behance.net/gallery/12578815/Borg-Typeface-(FREE)) and the [Poppins typeface](https://fonts.adobe.com/fonts/poppins) for this project.
@@ -23,6 +27,7 @@ I also used [seedrandom.js](https://www.npmjs.com/package/seedrandom) to generat
 
 ## Usage
 You can go see the project on my [website](https://thomaslacroix.fr/speeder).
+* The controls are in the menu
 
 ## Versioning
 See on [github](https://github.com/majejam/speeder/)
