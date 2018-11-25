@@ -21,7 +21,7 @@ This is speeder, a js spaceship game made with the HTML5 <canvas>. You can shoot
 * The menu stars are shinning (look closely)
 
 ## Remarks for correction
-I didn't minimize the js/css in order to help the correction, I hope it's okay ! 
+I didn't minimize the js/css in order to help the correction, I hope it's okay !
 
 ## Ressources
 I used the [Borg typeface](https://www.behance.net/gallery/12578815/Borg-Typeface-(FREE)) and the [Poppins typeface](https://fonts.adobe.com/fonts/poppins) for this project.
@@ -43,6 +43,7 @@ I want to thank everyone that helped me debug my game (and also because I'm forc
 - Romain Maillot
 - Sébastien Zambernardi
 - Paul Mercié
+- Yoan Gross
 
 [//]: # (Hello)
     and many more <3
