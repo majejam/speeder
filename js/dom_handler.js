@@ -65,7 +65,7 @@ for (let i = 0; i < laserCustomButton.length; i++) {
       Player.bonus = 0
       laserCustomButton[i].classList.toggle('bonus-button-selected')
     }
-    if (i == 1 && (Player.xp >= 5000 || Player.laserBonus > 0)) {
+    if (i == 1 && (Player.xp >= 100 || Player.laserBonus > 0)) {
       clearButtons(laserCustomButton, 'bonus-button-selected')
       Player.numberOfLaser = 3
       Player.bonus = 0
@@ -73,10 +73,10 @@ for (let i = 0; i < laserCustomButton.length; i++) {
       if (Player.laserBonus < 1) {
         laserPrices[i].innerHTML = '0 xp'
         Player.laserBonus = 1
-        Player.xp = Player.xp - 5000
+        Player.xp = Player.xp - 100
       }
     }
-    if (i == 2 && (Player.xp >= 50000 || Player.laserBonus > 1)) {
+    if (i == 2 && (Player.xp >= 200 || Player.laserBonus > 1)) {
       clearButtons(laserCustomButton, 'bonus-button-selected')
       Player.numberOfLaser = 6
       Player.bonus = 1
@@ -84,10 +84,10 @@ for (let i = 0; i < laserCustomButton.length; i++) {
       if (Player.laserBonus < 2) {
         laserPrices[i].innerHTML = '0 xp'
         Player.laserBonus = 2
-        Player.xp = Player.xp - 50000
+        Player.xp = Player.xp - 200
       }
     }
-    if (i == 3 && (Player.xp >= 500000 || Player.laserBonus > 2)) {
+    if (i == 3 && (Player.xp >= 500 || Player.laserBonus > 2)) {
       clearButtons(laserCustomButton, 'bonus-button-selected')
       Player.numberOfLaser = 12
       Player.bonus = 1
@@ -95,7 +95,7 @@ for (let i = 0; i < laserCustomButton.length; i++) {
       if (Player.laserBonus < 3) {
         laserPrices[i].innerHTML = '0 xp'
         Player.laserBonus = 3
-        Player.xp = Player.xp - 500000
+        Player.xp = Player.xp - 500
       }
     }
     playerXPContainer.innerHTML = 'xp : ' + Player.xp
@@ -111,7 +111,7 @@ for (let i = 0; i < boostCustomButton.length; i++) {
       Player.boostNumberOfTime = 0
       boostCustomButton[i].classList.toggle('bonus-button-selected')
     }
-    if (i == 1 && (Player.xp >= 5000 || Player.boost > 0)) {
+    if (i == 1 && (Player.xp >= 100 || Player.boost > 0)) {
       clearButtons(boostCustomButton, 'bonus-button-selected')
       Player.boostPower = 10
       Player.boostNumberOfTime = 1
@@ -119,10 +119,10 @@ for (let i = 0; i < boostCustomButton.length; i++) {
       if (Player.boost < 1) {
         boostPrices[i].innerHTML = '0 xp'
         Player.boost = 1
-        Player.xp = Player.xp - 5000
+        Player.xp = Player.xp - 100
       }
     }
-    if (i == 2 && (Player.xp >= 50000 || Player.boost > 1)) {
+    if (i == 2 && (Player.xp >= 200 || Player.boost > 1)) {
       clearButtons(boostCustomButton, 'bonus-button-selected')
       Player.boostPower = 20
       Player.boostNumberOfTime = 1
@@ -130,10 +130,10 @@ for (let i = 0; i < boostCustomButton.length; i++) {
       if (Player.boost < 2) {
         boostPrices[i].innerHTML = '0 xp'
         Player.boost = 2
-        Player.xp = Player.xp - 50000
+        Player.xp = Player.xp - 200
       }
     }
-    if (i == 3 && (Player.xp >= 500000 || Player.boost > 2)) {
+    if (i == 3 && (Player.xp >= 500 || Player.boost > 2)) {
       clearButtons(boostCustomButton, 'bonus-button-selected')
       Player.boostPower = 40
       Player.boostNumberOfTime = 1
@@ -141,7 +141,7 @@ for (let i = 0; i < boostCustomButton.length; i++) {
       if (Player.boost < 3) {
         boostPrices[i].innerHTML = '0 xp'
         Player.boost = 3
-        Player.xp = Player.xp - 500000
+        Player.xp = Player.xp - 500
       }
     }
     playerXPContainer.innerHTML = 'xp : ' + Player.xp
@@ -156,34 +156,34 @@ for (let i = 0; i < trailCustomButton.length; i++) {
       Player.trail_color = 'rgb(66, 223, 244)'
       trailCustomButton[i].classList.toggle('selected-color-blue')
     }
-    if (i == 1 && (Player.xp >= 5000 || Player.trail_color_number > 0)) {
+    if (i == 1 && (Player.xp >= 50 || Player.trail_color_number > 0)) {
       clearButtonsColor(trailCustomButton)
       Player.trail_color = 'rgb(255, 56, 81)'
       trailCustomButton[i].classList.toggle('selected-color-red')
       if (Player.trail_color_number < 1) {
         trailPrices[i].innerHTML = '0 xp'
         Player.trail_color_number = 1
-        Player.xp = Player.xp - 5000
+        Player.xp = Player.xp - 50
       }
     }
-    if (i == 2 && (Player.xp >= 50000 || Player.trail_color_number > 1)) {
+    if (i == 2 && (Player.xp >= 100 || Player.trail_color_number > 1)) {
       clearButtonsColor(trailCustomButton)
       Player.trail_color = 'rgb(233, 113, 255)'
       trailCustomButton[i].classList.toggle('selected-color-rose')
       if (Player.trail_color_number < 2) {
         trailPrices[i].innerHTML = '0 xp'
         Player.trail_color_number = 2
-        Player.xp = Player.xp - 50000
+        Player.xp = Player.xp - 100
       }
     }
-    if (i == 3 && (Player.xp >= 500000 || Player.trail_color_number > 2)) {
+    if (i == 3 && (Player.xp >= 200 || Player.trail_color_number > 2)) {
       clearButtonsColor(trailCustomButton)
       Player.trail_color = 'rgb(255, 250, 114)'
       trailCustomButton[i].classList.toggle('selected-color-yellow')
       if (Player.trail_color_number < 3) {
         trailPrices[i].innerHTML = '0 xp'
         Player.trail_color_number = 3
-        Player.xp = Player.xp - 500000
+        Player.xp = Player.xp - 200
       }
     }
     playerXPContainer.innerHTML = 'xp : ' + Player.xp
